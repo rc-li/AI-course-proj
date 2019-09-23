@@ -233,6 +233,13 @@ public class homework {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
 			if (!neighbor.visited && Math.abs(neighbor.elevation-node.elevation) <= maxElevation ) {
+				try {
+					Node duplicate = (Node)neighbor.clone();
+					System.out.println("I made a duplicate!" + duplicate);
+				} catch (CloneNotSupportedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				neighbor.pathNodes.addAll(node.pathNodes);
 				neighbor.pathNodes.add(node);
 				neighbor.visited = true;
