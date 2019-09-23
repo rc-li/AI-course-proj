@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-
 public class homework {
 	String algo;
 	int width;
@@ -23,29 +22,29 @@ public class homework {
 	int[][] coordinates;
 	Node[][] map;
 
-	private class Node {
+	private class Node implements Cloneable{
 		boolean fail;
 		int elevation;
 		int x;
 		int y;
 		boolean visited;
 		int pathCost;
-		
+
 		ArrayList<Node> pathNodes;
 
 		Node(int elevation) {
 			this.elevation = elevation;
 			this.pathNodes = new ArrayList<Node>();
 		}
-		
+
 		protected Node clone() throws CloneNotSupportedException {
 			return (Node) super.clone();
 		}
-		
+
 	}
 
-	public static void main(String args[]) throws FileNotFoundException {
-		File file = new File("input_BFS_3.txt");
+	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
+		File file = new File("input_BFS_1.txt");
 		homework obj = new homework();
 		obj.readInput(file);
 		if (obj.algo.equals("BFS")) {
@@ -53,30 +52,35 @@ public class homework {
 //			obj.printOutput();
 			obj.output(res);
 		}
-    }
-	
-	private void output(Node node) throws FileNotFoundException {
-			ArrayList<Node> path = node.pathNodes;
-	//			System.out.println(path.toString());
-	//			int[][] sample = {{1,1},{1,1}};
-	//			System.out.println(Arrays.deepToString(sample));
-			
-	//			System.out.println(Arrays.deepToString(path));
-	//			error: deepToString not applicable to a list of Nodes
-			
-			String writePath = "output.txt";
-			PrintWriter printer = new PrintWriter(writePath);
-			if (node.fail) {
-				printer.write("FAIL");
-			}
-			for (Node n: path) {
-				printer.write(n.x + "," + n.y + " ");
-			}
-			printer.close();
-			
-		}
+		
+		Node test = obj.new Node(0);
+		Node duplicate = test.clone();
+		System.out.println("duplicate created!");
+		System.out.println(duplicate.elevation);
+	}
 
-	private void readInput(File file){
+	private void output(Node node) throws FileNotFoundException {
+		ArrayList<Node> path = node.pathNodes;
+		// System.out.println(path.toString());
+		// int[][] sample = {{1,1},{1,1}};
+		// System.out.println(Arrays.deepToString(sample));
+
+		// System.out.println(Arrays.deepToString(path));
+		// error: deepToString not applicable to a list of Nodes
+
+		String writePath = "output.txt";
+		PrintWriter printer = new PrintWriter(writePath);
+		if (node.fail) {
+			printer.write("FAIL");
+		}
+		for (Node n : path) {
+			printer.write(n.x + "," + n.y + " ");
+		}
+		printer.close();
+
+	}
+
+	private void readInput(File file) {
 
 		try {
 			Scanner scanner = new Scanner(file);
@@ -93,7 +97,7 @@ public class homework {
 			maxElevation = Integer.parseInt(temp);
 			temp = scanner.next();
 			numTargets = Integer.parseInt(temp);
-			
+
 //			read the target coordinates
 			coordinates = new int[numTargets][2];
 			for (int i = 0; i < numTargets; i++) {
@@ -101,7 +105,7 @@ public class homework {
 					coordinates[i][j] = Integer.parseInt(scanner.next());
 				}
 			}
-			
+
 //			read the map
 			int elevation;
 			map = new Node[height][width];
@@ -120,10 +124,9 @@ public class homework {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 //	Function General-Search(problem, Queuing-Fn) returns a solution, or failure
 //	nodes  make-queue(make-node(initial-state[problem]))
 //	loop do
@@ -132,7 +135,7 @@ public class homework {
 //		if Goal-Test[problem] applied to State(node) succeeds then return node
 //		nodes  Queuing-Fn(nodes, Expand(node, Operators[problem]))
 //	end
-	
+
 //	**actually this part is not necessary
 //	private boolean allVisited(Node[][] map) {
 //		for (int i = 0; i < height; i++) {
@@ -143,8 +146,7 @@ public class homework {
 //		}
 //		return true;
 //	}
-	
-	
+
 	private Node BFS() {
 		LinkedList<Node> queue = new LinkedList<Node>();
 //		map[y][x].pathNodes.add(map[y][x]);
@@ -158,14 +160,46 @@ public class homework {
 				return node;
 			}
 			Node node = queue.removeFirst();
-			if (node.x == coordinates[0][0] && node.y == coordinates[0][1]){
+			if (node.x == coordinates[0][0] && node.y == coordinates[0][1]) {
 				node.pathNodes.add(node);
 				return node;
 			}
-			queuing(node, queue);
+			expandNeighborhood_BFS(node, queue);
 		}
 	}
-	
+
+	private void expandOneNode_BFS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
+		if (x >= 0 && x < width && y >= 0 && y < height) {
+			Node neighbor = map[y][x];
+			if (!neighbor.visited && Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
+				neighbor.pathNodes.addAll(node.pathNodes);
+				neighbor.pathNodes.add(node);
+				neighbor.visited = true;
+				if (isDiagonal) {
+					neighbor.pathCost = node.pathCost + 14;
+				} else {
+					neighbor.pathCost = node.pathCost + 10;
+				}
+				queue.add(neighbor);
+			}
+		}
+	}
+
+	// !!!>>>> actually the x, y here are never used, too lazy to get rid of them
+	// private void queuing(int x, int y, Node node, Queue<Node> queue) {
+	// actually i should get rid of them!! too verbose
+	private void expandNeighborhood_BFS(Node node, Queue<Node> queue) {
+		expandOneNode_BFS(node.x - 1, node.y - 1, node, queue, true);
+		expandOneNode_BFS(node.x - 1, node.y, node, queue, false);
+		expandOneNode_BFS(node.x - 1, node.y + 1, node, queue, true);
+		expandOneNode_BFS(node.x, node.y - 1, node, queue, false);
+		expandOneNode_BFS(node.x, node.y + 1, node, queue, false);
+		expandOneNode_BFS(node.x + 1, node.y - 1, node, queue, true);
+		expandOneNode_BFS(node.x + 1, node.y, node, queue, false);
+		expandOneNode_BFS(node.x + 1, node.y + 1, node, queue, true);
+
+	}
+
 	private Node UCS() {
 		LinkedList<Node> openNodes = new LinkedList<homework.Node>();
 		openNodes.add(map[landingY][landingX]);
@@ -183,78 +217,68 @@ public class homework {
 				curNode.pathNodes.add(curNode);
 				return curNode;
 			}
-			queuing(curNode, childreNodes);
+			expandNeighborhood_UCS(curNode, childreNodes);
 			while (!childreNodes.isEmpty()) {
 				child = childreNodes.removeFirst();
 				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
-					queuing(child, openNodes);
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						expandOneNode_UCS(child.x, child.y, curNode, openNodes, true);
+						child.pathCost = curNode.pathCost + 14;
+					} else {
+						expandOneNode_UCS(child.x, child.y, curNode, openNodes, false);
+						child.pathCost = curNode.pathCost + 10;
+					}
+				} else if (openNodes.contains(child)) {
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						if (curNode.pathCost + 14 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 14;
+						}
+					}
+					else {
+						if (curNode.pathCost + 10 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 10;
+						}
+					}
+				} else if (closedNodes.contains(child)) {
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						if (curNode.pathCost + 14 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 14;
+						}
+					}
+					else {
+						if (curNode.pathCost + 10 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 10;
+						}
+					}
 				}
-				else if (openNodes.contains(child)) {
-					
-				}
-					
-					
-					
-//					children  Expand(currnode, Operators[problem])
-//					while children not empty
-//						child  Remove-Front(children)
-//						if no node in open or closed has child’s state
-//							open  Queuing-Fn(open, child)
-//						else if there exists node in open that has child’s state
-//							if PathCost(child) < PathCost(node)
-//								open  Delete-Node(open, node)
-//								open  Queuing-Fn(open, child)
-//						else if there exists node in closed that has child’s state
-//							if PathCost(child) < PathCost(node)
-//								closed  Delete-Node(closed, node)
-//								open  Queuing-Fn(open, child)
-//					end
 
 			}
 		}
 	}
-	
-//	!!!>>>> actually the x, y here are never used, too lazy to get rid of them
-//	private void queuing(int x, int y, Node node, Queue<Node> queue) {
-//	actually i should get rid of them!! too verbose 
-	private void queuing(Node node, Queue<Node> queue) {
-		queueOneNode(node.x-1, node.y-1, node, queue, true);
-		queueOneNode(node.x-1, node.y, node, queue, false);
-		queueOneNode(node.x-1, node.y+1, node, queue, true);
-		queueOneNode(node.x, node.y-1, node, queue, false);
-		queueOneNode(node.x, node.y+1, node, queue, false);
-		queueOneNode(node.x+1, node.y-1, node, queue, true);
-		queueOneNode(node.x+1, node.y, node, queue, false);
-		queueOneNode(node.x+1, node.y+1, node, queue, true);
-		
-	}
-	
-	private void queueOneNode(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
+
+	private void expandOneNode_UCS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
-			if (!neighbor.visited && Math.abs(neighbor.elevation-node.elevation) <= maxElevation ) {
-				try {
-					Node duplicate = (Node)neighbor.clone();
-					System.out.println("I made a duplicate!" + duplicate);
-				} catch (CloneNotSupportedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if (Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 				neighbor.pathNodes.addAll(node.pathNodes);
 				neighbor.pathNodes.add(node);
-				neighbor.visited = true;
-				if (isDiagonal) {
-					neighbor.pathCost = node.pathCost + 14;
-				}
-				else {
-					neighbor.pathCost = node.pathCost + 10;
-				}
 				queue.add(neighbor);
 			}
 		}
 	}
-	
-	
+
+	private void expandNeighborhood_UCS(Node node, Queue<Node> queue) {
+		expandOneNode_BFS(node.x - 1, node.y - 1, node, queue, true);
+		expandOneNode_BFS(node.x - 1, node.y, node, queue, false);
+		expandOneNode_BFS(node.x - 1, node.y + 1, node, queue, true);
+		expandOneNode_BFS(node.x, node.y - 1, node, queue, false);
+		expandOneNode_BFS(node.x, node.y + 1, node, queue, false);
+		expandOneNode_BFS(node.x + 1, node.y - 1, node, queue, true);
+		expandOneNode_BFS(node.x + 1, node.y, node, queue, false);
+		expandOneNode_BFS(node.x + 1, node.y + 1, node, queue, true);
+
+	}
+
 //	private void printOutput() {
 //		File file = new File("output.txt");
 //		
