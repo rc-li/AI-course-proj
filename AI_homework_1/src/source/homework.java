@@ -1,5 +1,5 @@
 package source;
-
+// just completed an EGit checkout! it was fun!
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
