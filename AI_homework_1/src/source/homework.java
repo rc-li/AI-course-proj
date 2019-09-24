@@ -226,9 +226,13 @@ public class homework {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						openNodes.add(child);
 						child.pathCost = curNode.pathCost + 14;
+						child.pathNodes.addAll(curNode.pathNodes);
+						child.pathNodes.add(child);
 					} else {
 						openNodes.add(child);
 						child.pathCost = curNode.pathCost + 10;
+						child.pathNodes.addAll(curNode.pathNodes);
+						child.pathNodes.add(child);
 					}
 				} else if (openNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
@@ -274,23 +278,11 @@ public class homework {
 			Node neighbor = map[y][x];
 			if (Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 //				neighbor.pathNodes = node.pathNodes;
+//				neighbor.pathNodes.addAll(node.pathNodes);
+//				neighbor.pathNodes.add(node);
+				queue.add(neighbor);
 				
-				if (Math.abs(neighbor.x - node.x) + Math.abs(neighbor.y - node.y) == 2) {
-					if (node.pathCost + 14 < neighbor.pathCost || node.pathCost == 0) {
-						neighbor.pathCost = node.pathCost + 14;
-						neighbor.pathNodes.addAll(node.pathNodes);
-						neighbor.pathNodes.add(neighbor);
-						queue.add(neighbor);
-					}
-				}
-				else {
-					if (node.pathCost + 10 < neighbor.pathCost || node.pathCost == 0) {
-						neighbor.pathCost = node.pathCost + 10;
-						neighbor.pathNodes.addAll(node.pathNodes);
-						neighbor.pathNodes.add(neighbor);
-						queue.add(neighbor);
-					}
-				}
+				
 			}
 		}
 	}
