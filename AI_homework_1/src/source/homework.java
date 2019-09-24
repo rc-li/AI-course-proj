@@ -51,7 +51,7 @@ public class homework {
 	}
 
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
-		File file = new File("input_BFS_3.txt");
+		File file = new File("input_BFS_1.txt");
 		homework obj = new homework();
 		obj.readInput(file);
 		if (obj.algo.equals("BFS")) {
@@ -204,7 +204,9 @@ public class homework {
 
 	private Node UCS() {
 		LinkedList<Node> openNodes = new LinkedList<homework.Node>();
-		openNodes.add(map[landingY][landingX]);
+		Node landingPoint = map[landingY][landingX];
+		landingPoint.pathNodes.add(landingPoint);
+		openNodes.add(landingPoint);
 		LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
 		LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
 		Node child;
@@ -216,7 +218,7 @@ public class homework {
 			}
 			Node curNode = openNodes.removeFirst();
 			if (curNode.x == coordinates[0][0] && curNode.y == coordinates[0][1]) {
-				curNode.pathNodes.add(curNode);
+//				curNode.pathNodes.add(curNode);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
