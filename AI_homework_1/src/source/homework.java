@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class homework {
 	int[][] coordinates;
 	Node[][] map;
 
-	private class Node implements Cloneable{
+	private class Node implements Comparable<Node>, Cloneable{
 		boolean fail;
 		int elevation;
 		int x;
@@ -41,22 +42,23 @@ public class homework {
 			return (Node) super.clone();
 		}
 
+		@Override
+		public int compareTo(Node n) {
+			// TODO Auto-generated method stub
+			return Integer.valueOf(this.pathCost).compareTo(n.pathCost);
+		}
+
 	}
 
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
-		File file = new File("input_BFS_1.txt");
+		File file = new File("input_BFS_3.txt");
 		homework obj = new homework();
 		obj.readInput(file);
 		if (obj.algo.equals("BFS")) {
-			Node res = obj.BFS();
+			Node res = obj.UCS();
 //			obj.printOutput();
 			obj.output(res);
 		}
-		
-		Node test = obj.new Node(0);
-		Node duplicate = test.clone();
-		System.out.println("duplicate created!");
-		System.out.println(duplicate.elevation);
 	}
 
 	private void output(Node node) throws FileNotFoundException {
@@ -222,37 +224,48 @@ public class homework {
 				child = childreNodes.removeFirst();
 				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						expandOneNode_UCS(child.x, child.y, curNode, openNodes, true);
+						openNodes.add(child);
 						child.pathCost = curNode.pathCost + 14;
 					} else {
-						expandOneNode_UCS(child.x, child.y, curNode, openNodes, false);
+						openNodes.add(child);
 						child.pathCost = curNode.pathCost + 10;
 					}
 				} else if (openNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
 						}
 					}
 					else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
 						}
 					}
 				} else if (closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
+							openNodes.add(child);
 						}
 					}
 					else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
+							openNodes.add(child);
 						}
 					}
 				}
-
 			}
+			closedNodes.add(curNode);
+			Collections.sort(openNodes);
 		}
 	}
 
@@ -261,6 +274,7 @@ public class homework {
 			Node neighbor = map[y][x];
 			if (Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 				neighbor.pathNodes.addAll(node.pathNodes);
+//				neighbor.pathNodes = node.pathNodes;
 				neighbor.pathNodes.add(node);
 				queue.add(neighbor);
 			}
@@ -268,14 +282,14 @@ public class homework {
 	}
 
 	private void expandNeighborhood_UCS(Node node, Queue<Node> queue) {
-		expandOneNode_BFS(node.x - 1, node.y - 1, node, queue, true);
-		expandOneNode_BFS(node.x - 1, node.y, node, queue, false);
-		expandOneNode_BFS(node.x - 1, node.y + 1, node, queue, true);
-		expandOneNode_BFS(node.x, node.y - 1, node, queue, false);
-		expandOneNode_BFS(node.x, node.y + 1, node, queue, false);
-		expandOneNode_BFS(node.x + 1, node.y - 1, node, queue, true);
-		expandOneNode_BFS(node.x + 1, node.y, node, queue, false);
-		expandOneNode_BFS(node.x + 1, node.y + 1, node, queue, true);
+		expandOneNode_UCS(node.x - 1, node.y - 1, node, queue, true);
+		expandOneNode_UCS(node.x - 1, node.y, node, queue, false);
+		expandOneNode_UCS(node.x - 1, node.y + 1, node, queue, true);
+		expandOneNode_UCS(node.x, node.y - 1, node, queue, false);
+		expandOneNode_UCS(node.x, node.y + 1, node, queue, false);
+		expandOneNode_UCS(node.x + 1, node.y - 1, node, queue, true);
+		expandOneNode_UCS(node.x + 1, node.y, node, queue, false);
+		expandOneNode_UCS(node.x + 1, node.y + 1, node, queue, true);
 
 	}
 
