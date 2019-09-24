@@ -273,10 +273,24 @@ public class homework {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
 			if (Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
-				neighbor.pathNodes.addAll(node.pathNodes);
 //				neighbor.pathNodes = node.pathNodes;
-				neighbor.pathNodes.add(node);
-				queue.add(neighbor);
+				
+				if (Math.abs(neighbor.x - node.x) + Math.abs(neighbor.y - node.y) == 2) {
+					if (node.pathCost + 14 < neighbor.pathCost || node.pathCost == 0) {
+						neighbor.pathCost = node.pathCost + 14;
+						neighbor.pathNodes.addAll(node.pathNodes);
+						neighbor.pathNodes.add(neighbor);
+						queue.add(neighbor);
+					}
+				}
+				else {
+					if (node.pathCost + 10 < neighbor.pathCost || node.pathCost == 0) {
+						neighbor.pathCost = node.pathCost + 10;
+						neighbor.pathNodes.addAll(node.pathNodes);
+						neighbor.pathNodes.add(neighbor);
+						queue.add(neighbor);
+					}
+				}
 			}
 		}
 	}
