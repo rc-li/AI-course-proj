@@ -51,12 +51,16 @@ public class homework {
 	}
 
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
-		File file = new File("input_BFS_1.txt");
+		File file = new File("input.txt");
 		homework obj = new homework();
 		obj.readInput(file);
 		if (obj.algo.equals("BFS")) {
-			Node res = obj.UCS();
+			Node res = obj.BFS();
 //			obj.printOutput();
+			obj.output(res);
+		}
+		if (obj.algo.equals("UCS")) {
+			Node res = obj.UCS();
 			obj.output(res);
 		}
 	}
@@ -177,11 +181,11 @@ public class homework {
 				neighbor.pathNodes.addAll(node.pathNodes);
 				neighbor.pathNodes.add(node);
 				neighbor.visited = true;
-				if (isDiagonal) {
-					neighbor.pathCost = node.pathCost + 14;
-				} else {
-					neighbor.pathCost = node.pathCost + 10;
-				}
+//				if (isDiagonal) {
+//					neighbor.pathCost = node.pathCost + 14;
+//				} else {
+//					neighbor.pathCost = node.pathCost + 10;
+//				}
 				queue.add(neighbor);
 			}
 		}
