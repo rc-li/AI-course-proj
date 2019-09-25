@@ -1,5 +1,5 @@
 package source;
-// just completed an EGit checkout! it was fun!
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,6 +60,10 @@ public class homework {
 			obj.output(res);
 		}
 		if (obj.algo.equals("UCS")) {
+			Node res = obj.UCS();
+			obj.output(res);
+		}
+		if (obj.algo.equals("A*")) {
 			Node res = obj.UCS();
 			obj.output(res);
 		}
