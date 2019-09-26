@@ -273,11 +273,13 @@ public class homework {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						openNodes.offer(child);
 						child.pathCost = curNode.pathCost + 14;
+						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
 					} else {
 						openNodes.offer(child);
 						child.pathCost = curNode.pathCost + 10;
+						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
 					}
@@ -285,14 +287,16 @@ public class homework {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
-							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
 							openNodes.offer(child);
 						}
 					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
-							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
 							openNodes.offer(child);
 						}
@@ -301,14 +305,16 @@ public class homework {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
-							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
 							openNodes.offer(child);
 						}
 					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
-							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
 							openNodes.offer(child);
 						}
