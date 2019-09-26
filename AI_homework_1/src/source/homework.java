@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -68,6 +69,7 @@ public class homework {
 			}
 		}
 		if (obj.algo.equals("UCS")) {
+			System.out.println("UCS started at " + new Timestamp(System.currentTimeMillis()));
 			for (int n = 0; n < obj.numTargets; n++) {
 				boolean isLastLine = false;
 				if (n == obj.numTargets - 1)
@@ -101,6 +103,7 @@ public class homework {
 
 	private void output(Node node, PrintWriter printer, boolean isLastLine) throws FileNotFoundException {
 		ArrayList<Node> path = node.pathNodes;
+		System.out.println("found node: " + node.x + "," + node.y + "\n");
 		// System.out.println(path.toString());
 		// int[][] sample = {{1,1},{1,1}};
 		// System.out.println(Arrays.deepToString(sample));
@@ -111,9 +114,12 @@ public class homework {
 		if (node.fail) {
 			printer.write("FAIL");
 		}
+		System.out.println("at "+ new Timestamp(System.currentTimeMillis()) + " found path ");
 		for (Node n : path) {
 			printer.write(n.x + "," + n.y + " ");
+			System.out.print(n.x + "," + n.y + " ");
 		}
+		System.out.println("Done Printing\n");
 		if (!isLastLine)
 			printer.write("\n");
 	}
@@ -243,12 +249,13 @@ public class homework {
 		PriorityQueue<Node> openNodes = new PriorityQueue<homework.Node>();
 		Node landingPoint = map[landingY][landingX];
 		landingPoint.pathNodes.add(landingPoint);
-		openNodes.add(landingPoint);
+		openNodes.offer(landingPoint);
 		LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
 		LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
 		Node child;
 		while (true) {
 			if (openNodes.isEmpty()) {
+				System.out.println("oops");
 				Node node = new Node(0);
 				node.fail = true;
 				return node;
@@ -256,6 +263,7 @@ public class homework {
 			Node curNode = openNodes.poll();
 			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
 //				curNode.pathNodes.add(curNode);
+				System.out.println("Found node at ucs: "+ curNode.x + ", " + curNode.y);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
@@ -263,12 +271,12 @@ public class homework {
 				child = childreNodes.removeFirst();
 				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						openNodes.add(child);
+						openNodes.offer(child);
 						child.pathCost = curNode.pathCost + 14;
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
 					} else {
-						openNodes.add(child);
+						openNodes.offer(child);
 						child.pathCost = curNode.pathCost + 10;
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
@@ -279,12 +287,14 @@ public class homework {
 							child.pathCost = curNode.pathCost + 14;
 							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
+							openNodes.offer(child);
 						}
 					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
 							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
+							openNodes.offer(child);
 						}
 					}
 				} else if (closedNodes.contains(child)) {
@@ -293,14 +303,14 @@ public class homework {
 							child.pathCost = curNode.pathCost + 14;
 							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
-							openNodes.add(child);
+							openNodes.offer(child);
 						}
 					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
 							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
-							openNodes.add(child);
+							openNodes.offer(child);
 						}
 					}
 				}
