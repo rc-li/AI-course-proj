@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class homework {
 	int[][] coordinates;
 	Node[][] map;
 
-	private class Node implements Comparable<Node>, Cloneable{
+	private class Node implements Comparable<Node>, Cloneable {
 		boolean fail;
 		int elevation;
 		int x;
@@ -54,22 +55,51 @@ public class homework {
 		File file = new File("input.txt");
 		homework obj = new homework();
 		obj.readInput(file);
+		String writePath = "output.txt";
+		PrintWriter printer = new PrintWriter(writePath);
 		if (obj.algo.equals("BFS")) {
-			Node res = obj.BFS();
-//			obj.printOutput();
-			obj.output(res);
+			for (int n = 0; n < obj.numTargets; n++) {
+				boolean isLastLine = false;
+				if (n == obj.numTargets - 1)
+					isLastLine = true;
+				Node res = obj.BFS(n);
+				obj.output(res, printer, isLastLine);
+				obj.resetMap();
+			}
 		}
 		if (obj.algo.equals("UCS")) {
-			Node res = obj.UCS();
-			obj.output(res);
+			for (int n = 0; n < obj.numTargets; n++) {
+				boolean isLastLine = false;
+				if (n == obj.numTargets - 1)
+					isLastLine = true;
+				Node res = obj.UCS(n);
+				obj.output(res, printer, isLastLine);
+				obj.resetMap();
+			}
 		}
 		if (obj.algo.equals("A*")) {
-			Node res = obj.UCS();
-			obj.output(res);
+			for (int n = 0; n < obj.numTargets; n++) {
+				boolean isLastLine = false;
+				if (n == obj.numTargets - 1)
+					isLastLine = true;
+				Node res = obj.UCS(n);
+				obj.output(res, printer, isLastLine);
+				obj.resetMap();
+			}
+		}
+		printer.close();
+	}
+
+	private void resetMap() {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				map[i][j].visited = false;
+				map[i][j].pathNodes.clear();
+			}
 		}
 	}
 
-	private void output(Node node) throws FileNotFoundException {
+	private void output(Node node, PrintWriter printer, boolean isLastLine) throws FileNotFoundException {
 		ArrayList<Node> path = node.pathNodes;
 		// System.out.println(path.toString());
 		// int[][] sample = {{1,1},{1,1}};
@@ -78,16 +108,14 @@ public class homework {
 		// System.out.println(Arrays.deepToString(path));
 		// error: deepToString not applicable to a list of Nodes
 
-		String writePath = "output.txt";
-		PrintWriter printer = new PrintWriter(writePath);
 		if (node.fail) {
 			printer.write("FAIL");
 		}
 		for (Node n : path) {
 			printer.write(n.x + "," + n.y + " ");
 		}
-		printer.close();
-
+		if (!isLastLine)
+			printer.write("\n");
 	}
 
 	private void readInput(File file) {
@@ -157,7 +185,7 @@ public class homework {
 //		return true;
 //	}
 
-	private Node BFS() {
+	private Node BFS(int landSiteNO) {
 		LinkedList<Node> queue = new LinkedList<Node>();
 //		map[y][x].pathNodes.add(map[y][x]);
 		map[landingY][landingX].visited = true;
@@ -170,11 +198,12 @@ public class homework {
 				return node;
 			}
 			Node node = queue.removeFirst();
-			if (node.x == coordinates[0][0] && node.y == coordinates[0][1]) {
+			if (node.x == coordinates[landSiteNO][0] && node.y == coordinates[landSiteNO][1]) {
 				node.pathNodes.add(node);
 				return node;
 			}
 			expandNeighborhood_BFS(node, queue);
+//			reset the map
 		}
 	}
 
@@ -210,8 +239,8 @@ public class homework {
 
 	}
 
-	private Node UCS() {
-		LinkedList<Node> openNodes = new LinkedList<homework.Node>();
+	private Node UCS(int landSiteNO) {
+		PriorityQueue<Node> openNodes = new PriorityQueue<homework.Node>();
 		Node landingPoint = map[landingY][landingX];
 		landingPoint.pathNodes.add(landingPoint);
 		openNodes.add(landingPoint);
@@ -224,8 +253,8 @@ public class homework {
 				node.fail = true;
 				return node;
 			}
-			Node curNode = openNodes.removeFirst();
-			if (curNode.x == coordinates[0][0] && curNode.y == coordinates[0][1]) {
+			Node curNode = openNodes.poll();
+			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
 //				curNode.pathNodes.add(curNode);
 				return curNode;
 			}
@@ -251,8 +280,7 @@ public class homework {
 							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
 						}
-					}
-					else {
+					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
 							child.pathNodes = curNode.pathNodes;
@@ -267,8 +295,7 @@ public class homework {
 							child.pathNodes.add(child);
 							openNodes.add(child);
 						}
-					}
-					else {
+					} else {
 						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
 							child.pathNodes = curNode.pathNodes;
@@ -279,10 +306,10 @@ public class homework {
 				}
 			}
 			closedNodes.add(curNode);
-			Collections.sort(openNodes);
+//			Collections.sort(openNodes);
 		}
 	}
-
+	
 	private void expandOneNode_UCS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
@@ -291,8 +318,7 @@ public class homework {
 //				neighbor.pathNodes.addAll(node.pathNodes);
 //				neighbor.pathNodes.add(node);
 				queue.add(neighbor);
-				
-				
+
 			}
 		}
 	}
@@ -308,6 +334,77 @@ public class homework {
 		expandOneNode_UCS(node.x + 1, node.y + 1, node, queue, true);
 
 	}
+
+	private Node A_Star(int landSiteNO) {
+			LinkedList<Node> openNodes = new LinkedList<homework.Node>();
+			Node landingPoint = map[landingY][landingX];
+			landingPoint.pathNodes.add(landingPoint);
+			openNodes.add(landingPoint);
+			LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
+			LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
+			Node child;
+			while (true) {
+				if (openNodes.isEmpty()) {
+					Node node = new Node(0);
+					node.fail = true;
+					return node;
+				}
+				Node curNode = openNodes.removeFirst();
+				if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
+	//				curNode.pathNodes.add(curNode);
+					return curNode;
+				}
+				expandNeighborhood_UCS(curNode, childreNodes);
+				while (!childreNodes.isEmpty()) {
+					child = childreNodes.removeFirst();
+					if (!openNodes.contains(child) && !closedNodes.contains(child)) {
+						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+							openNodes.add(child);
+							child.pathCost = curNode.pathCost + 14;
+							child.pathNodes.addAll(curNode.pathNodes);
+							child.pathNodes.add(child);
+						} else {
+							openNodes.add(child);
+							child.pathCost = curNode.pathCost + 10;
+							child.pathNodes.addAll(curNode.pathNodes);
+							child.pathNodes.add(child);
+						}
+					} else if (openNodes.contains(child)) {
+						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+							if (curNode.pathCost + 14 < child.pathCost) {
+								child.pathCost = curNode.pathCost + 14;
+								child.pathNodes = curNode.pathNodes;
+								child.pathNodes.add(child);
+							}
+						} else {
+							if (curNode.pathCost + 10 < child.pathCost) {
+								child.pathCost = curNode.pathCost + 10;
+								child.pathNodes = curNode.pathNodes;
+								child.pathNodes.add(child);
+							}
+						}
+					} else if (closedNodes.contains(child)) {
+						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+							if (curNode.pathCost + 14 < child.pathCost) {
+								child.pathCost = curNode.pathCost + 14;
+								child.pathNodes = curNode.pathNodes;
+								child.pathNodes.add(child);
+								openNodes.add(child);
+							}
+						} else {
+							if (curNode.pathCost + 10 < child.pathCost) {
+								child.pathCost = curNode.pathCost + 10;
+								child.pathNodes = curNode.pathNodes;
+								child.pathNodes.add(child);
+								openNodes.add(child);
+							}
+						}
+					}
+				}
+				closedNodes.add(curNode);
+				Collections.sort(openNodes);
+			}
+		}
 
 //	private void printOutput() {
 //		File file = new File("output.txt");
