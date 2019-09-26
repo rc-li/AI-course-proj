@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -114,7 +115,7 @@ public class homework {
 		if (node.fail) {
 			printer.write("FAIL");
 		}
-		System.out.println("at "+ new Timestamp(System.currentTimeMillis()) + " found path ");
+		System.out.println("at " + new Timestamp(System.currentTimeMillis()) + " found path ");
 		for (Node n : path) {
 			printer.write(n.x + "," + n.y + " ");
 			System.out.print(n.x + "," + n.y + " ");
@@ -250,7 +251,7 @@ public class homework {
 		Node landingPoint = map[landingY][landingX];
 		landingPoint.pathNodes.add(landingPoint);
 		openNodes.offer(landingPoint);
-		LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
+		LinkedHashSet<Node> closedNodes = new LinkedHashSet<homework.Node>();
 		LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
 		Node child;
 		while (true) {
@@ -263,7 +264,7 @@ public class homework {
 			Node curNode = openNodes.poll();
 			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
 //				curNode.pathNodes.add(curNode);
-				System.out.println("Found node at ucs: "+ curNode.x + ", " + curNode.y);
+				System.out.println("Found node at ucs: " + curNode.x + ", " + curNode.y);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
@@ -271,17 +272,17 @@ public class homework {
 				child = childreNodes.removeFirst();
 				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						openNodes.offer(child);
 						child.pathCost = curNode.pathCost + 14;
 						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
-					} else {
 						openNodes.offer(child);
+					} else {
 						child.pathCost = curNode.pathCost + 10;
 						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
+						openNodes.offer(child);
 					}
 				} else if (openNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
@@ -301,13 +302,15 @@ public class homework {
 							openNodes.offer(child);
 						}
 					}
-				} else if (closedNodes.contains(child)) {
+				} 
+				else if (closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
 							child.pathNodes.clear();
 							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
+							closedNodes.remove(child);
 							openNodes.offer(child);
 						}
 					} else {
@@ -316,6 +319,7 @@ public class homework {
 							child.pathNodes.clear();
 							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
+							closedNodes.remove(child);
 							openNodes.offer(child);
 						}
 					}
@@ -325,7 +329,7 @@ public class homework {
 //			Collections.sort(openNodes);
 		}
 	}
-	
+
 	private void expandOneNode_UCS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
@@ -352,75 +356,75 @@ public class homework {
 	}
 
 	private Node A_Star(int landSiteNO) {
-			LinkedList<Node> openNodes = new LinkedList<homework.Node>();
-			Node landingPoint = map[landingY][landingX];
-			landingPoint.pathNodes.add(landingPoint);
-			openNodes.add(landingPoint);
-			LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
-			LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
-			Node child;
-			while (true) {
-				if (openNodes.isEmpty()) {
-					Node node = new Node(0);
-					node.fail = true;
-					return node;
-				}
-				Node curNode = openNodes.removeFirst();
-				if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
-	//				curNode.pathNodes.add(curNode);
-					return curNode;
-				}
-				expandNeighborhood_UCS(curNode, childreNodes);
-				while (!childreNodes.isEmpty()) {
-					child = childreNodes.removeFirst();
-					if (!openNodes.contains(child) && !closedNodes.contains(child)) {
-						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-							openNodes.add(child);
+		LinkedList<Node> openNodes = new LinkedList<homework.Node>();
+		Node landingPoint = map[landingY][landingX];
+		landingPoint.pathNodes.add(landingPoint);
+		openNodes.add(landingPoint);
+		LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
+		LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
+		Node child;
+		while (true) {
+			if (openNodes.isEmpty()) {
+				Node node = new Node(0);
+				node.fail = true;
+				return node;
+			}
+			Node curNode = openNodes.removeFirst();
+			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
+				// curNode.pathNodes.add(curNode);
+				return curNode;
+			}
+			expandNeighborhood_UCS(curNode, childreNodes);
+			while (!childreNodes.isEmpty()) {
+				child = childreNodes.removeFirst();
+				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						openNodes.add(child);
+						child.pathCost = curNode.pathCost + 14;
+						child.pathNodes.addAll(curNode.pathNodes);
+						child.pathNodes.add(child);
+					} else {
+						openNodes.add(child);
+						child.pathCost = curNode.pathCost + 10;
+						child.pathNodes.addAll(curNode.pathNodes);
+						child.pathNodes.add(child);
+					}
+				} else if (openNodes.contains(child)) {
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
-							child.pathNodes.addAll(curNode.pathNodes);
+							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
-						} else {
-							openNodes.add(child);
+						}
+					} else {
+						if (curNode.pathCost + 10 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 10;
-							child.pathNodes.addAll(curNode.pathNodes);
+							child.pathNodes = curNode.pathNodes;
 							child.pathNodes.add(child);
 						}
-					} else if (openNodes.contains(child)) {
-						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-							if (curNode.pathCost + 14 < child.pathCost) {
-								child.pathCost = curNode.pathCost + 14;
-								child.pathNodes = curNode.pathNodes;
-								child.pathNodes.add(child);
-							}
-						} else {
-							if (curNode.pathCost + 10 < child.pathCost) {
-								child.pathCost = curNode.pathCost + 10;
-								child.pathNodes = curNode.pathNodes;
-								child.pathNodes.add(child);
-							}
+					}
+				} else if (closedNodes.contains(child)) {
+					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
+						if (curNode.pathCost + 14 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 14;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
+							openNodes.add(child);
 						}
-					} else if (closedNodes.contains(child)) {
-						if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-							if (curNode.pathCost + 14 < child.pathCost) {
-								child.pathCost = curNode.pathCost + 14;
-								child.pathNodes = curNode.pathNodes;
-								child.pathNodes.add(child);
-								openNodes.add(child);
-							}
-						} else {
-							if (curNode.pathCost + 10 < child.pathCost) {
-								child.pathCost = curNode.pathCost + 10;
-								child.pathNodes = curNode.pathNodes;
-								child.pathNodes.add(child);
-								openNodes.add(child);
-							}
+					} else {
+						if (curNode.pathCost + 10 < child.pathCost) {
+							child.pathCost = curNode.pathCost + 10;
+							child.pathNodes = curNode.pathNodes;
+							child.pathNodes.add(child);
+							openNodes.add(child);
 						}
 					}
 				}
-				closedNodes.add(curNode);
-				Collections.sort(openNodes);
 			}
+			closedNodes.add(curNode);
+			Collections.sort(openNodes);
 		}
+	}
 
 //	private void printOutput() {
 //		File file = new File("output.txt");
