@@ -106,13 +106,6 @@ public class homework {
 
 	private void output(Node node, PrintWriter printer, boolean isLastLine) throws FileNotFoundException {
 		ArrayList<Node> path = node.pathNodes;
-		// System.out.println(path.toString());
-		// int[][] sample = {{1,1},{1,1}};
-		// System.out.println(Arrays.deepToString(sample));
-
-		// System.out.println(Arrays.deepToString(path));
-		// error: deepToString not applicable to a list of Nodes
-
 		if (node.fail) {
 			printer.write("FAIL");
 		}
@@ -120,11 +113,11 @@ public class homework {
 		StringWriter stringwriter = new StringWriter();
 		for (Node n : path) {
 			stringwriter.append(n.x + "," + n.y + " ");
-			System.out.print(n.x + "," + n.y + " ");
 		}
 		String temp = stringwriter.toString();
 		temp = temp.trim();
 		printer.write(temp);
+		System.out.println(temp);
 		if (!isLastLine)
 			printer.write("\n");
 	}
@@ -176,32 +169,10 @@ public class homework {
 
 	}
 
-//	Function General-Search(problem, Queuing-Fn) returns a solution, or failure
-//	nodes  make-queue(make-node(initial-state[problem]))
-//	loop do
-//		if nodes is empty then return failure
-//		node  Remove-Front(nodes)
-//		if Goal-Test[problem] applied to State(node) succeeds then return node
-//		nodes  Queuing-Fn(nodes, Expand(node, Operators[problem]))
-//	end
-
-//	**actually this part is not necessary
-//	private boolean allVisited(Node[][] map) {
-//		for (int i = 0; i < height; i++) {
-//			for (int j = 0; j < width; j++) {
-//				if (!map[i][j].visited)
-//					return false;
-//			}
-//		}
-//		return true;
-//	}
-
 	private Node BFS(int landSiteNO) {
 		LinkedList<Node> queue = new LinkedList<Node>();
-//		map[y][x].pathNodes.add(map[y][x]);
 		map[landingY][landingX].visited = true;
 		queue.add(map[landingY][landingX]);
-//		while (!allVisited(map)) {
 		while (true) {
 			if (queue.isEmpty()) {
 				Node node = new Node(0);
@@ -214,23 +185,16 @@ public class homework {
 				return node;
 			}
 			expandNeighborhood_BFS(node, queue);
-//			reset the map
 		}
 	}
 
 	private void expandOneNode_BFS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
-//			if (!neighbor.visited && Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 			if (!neighbor.visited && Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 				neighbor.pathNodes.addAll(node.pathNodes);
 				neighbor.pathNodes.add(node);
 				neighbor.visited = true;
-//				if (isDiagonal) {
-//					neighbor.pathCost = node.pathCost + 14;
-//				} else {
-//					neighbor.pathCost = node.pathCost + 10;
-//				}
 				queue.add(neighbor);
 			}
 		}
@@ -327,7 +291,6 @@ public class homework {
 				}
 			}
 			closedNodes.add(curNode);
-//			Collections.sort(openNodes);
 		}
 	}
 
@@ -335,9 +298,6 @@ public class homework {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
 			if (Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
-//				neighbor.pathNodes = node.pathNodes;
-//				neighbor.pathNodes.addAll(node.pathNodes);
-//				neighbor.pathNodes.add(node);
 				queue.add(neighbor);
 
 			}
@@ -433,23 +393,8 @@ public class homework {
 				}
 			}
 			closedNodes.add(curNode);
-			// Collections.sort(openNodes);
 		}
 	}
 
-//	private void printOutput() {
-//		File file = new File("output.txt");
-//		
-//		try {
-//			if (file.createNewFile())
-//				System.out.println("output file successfully created!");
-//			else
-//				System.out.println("was not created :(");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
 
 }
