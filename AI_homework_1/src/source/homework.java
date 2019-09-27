@@ -81,11 +81,12 @@ public class homework {
 			}
 		}
 		if (obj.algo.equals("A*")) {
+			System.out.println("A* started at " + new Timestamp(System.currentTimeMillis()));
 			for (int n = 0; n < obj.numTargets; n++) {
 				boolean isLastLine = false;
 				if (n == obj.numTargets - 1)
 					isLastLine = true;
-				Node res = obj.UCS(n);
+				Node res = obj.A_Star(n);
 				obj.output(res, printer, isLastLine);
 				obj.resetMap();
 			}
@@ -217,6 +218,7 @@ public class homework {
 	private void expandOneNode_BFS(int x, int y, Node node, Queue<Node> queue, boolean isDiagonal) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			Node neighbor = map[y][x];
+//			if (!neighbor.visited && Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 			if (!neighbor.visited && Math.abs(neighbor.elevation - node.elevation) <= maxElevation) {
 				neighbor.pathNodes.addAll(node.pathNodes);
 				neighbor.pathNodes.add(node);
@@ -302,8 +304,7 @@ public class homework {
 							openNodes.offer(child);
 						}
 					}
-				} 
-				else if (closedNodes.contains(child)) {
+				} else if (closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
 						if (curNode.pathCost + 14 < child.pathCost) {
 							child.pathCost = curNode.pathCost + 14;
@@ -356,22 +357,24 @@ public class homework {
 	}
 
 	private Node A_Star(int landSiteNO) {
-		LinkedList<Node> openNodes = new LinkedList<homework.Node>();
+		PriorityQueue<Node> openNodes = new PriorityQueue<homework.Node>();
 		Node landingPoint = map[landingY][landingX];
 		landingPoint.pathNodes.add(landingPoint);
-		openNodes.add(landingPoint);
-		LinkedList<Node> closedNodes = new LinkedList<homework.Node>();
+		openNodes.offer(landingPoint);
+		LinkedHashSet<Node> closedNodes = new LinkedHashSet<homework.Node>();
 		LinkedList<Node> childreNodes = new LinkedList<homework.Node>();
 		Node child;
 		while (true) {
 			if (openNodes.isEmpty()) {
+				System.out.println("oops");
 				Node node = new Node(0);
 				node.fail = true;
 				return node;
 			}
-			Node curNode = openNodes.removeFirst();
+			Node curNode = openNodes.poll();
 			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
 				// curNode.pathNodes.add(curNode);
+				System.out.println("Found node at ucs: " + curNode.x + ", " + curNode.y);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
@@ -379,50 +382,60 @@ public class homework {
 				child = childreNodes.removeFirst();
 				if (!openNodes.contains(child) && !closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						openNodes.add(child);
-						child.pathCost = curNode.pathCost + 14;
+						child.pathCost = curNode.pathCost + 14 + Math.abs(curNode.elevation - child.elevation);
+						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
+						openNodes.offer(child);
 					} else {
-						openNodes.add(child);
-						child.pathCost = curNode.pathCost + 10;
+						child.pathCost = curNode.pathCost + 10 + Math.abs(curNode.elevation - child.elevation);
+						child.pathNodes.clear();
 						child.pathNodes.addAll(curNode.pathNodes);
 						child.pathNodes.add(child);
+						openNodes.offer(child);
 					}
 				} else if (openNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						if (curNode.pathCost + 14 < child.pathCost) {
-							child.pathCost = curNode.pathCost + 14;
-							child.pathNodes = curNode.pathNodes;
+						if (curNode.pathCost + 14 + Math.abs(curNode.elevation - child.elevation) < child.pathCost) {
+							child.pathCost = curNode.pathCost + 14 + Math.abs(curNode.elevation - child.elevation);
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
+							openNodes.offer(child);
 						}
 					} else {
-						if (curNode.pathCost + 10 < child.pathCost) {
-							child.pathCost = curNode.pathCost + 10;
-							child.pathNodes = curNode.pathNodes;
+						if (curNode.pathCost + 10 + Math.abs(curNode.elevation - child.elevation) < child.pathCost) {
+							child.pathCost = curNode.pathCost + 10 + Math.abs(curNode.elevation - child.elevation);
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
+							openNodes.offer(child);
 						}
 					}
 				} else if (closedNodes.contains(child)) {
 					if (Math.abs(child.x - curNode.x) + Math.abs(child.y - curNode.y) == 2) {
-						if (curNode.pathCost + 14 < child.pathCost) {
-							child.pathCost = curNode.pathCost + 14;
-							child.pathNodes = curNode.pathNodes;
+						if (curNode.pathCost + 14 + Math.abs(curNode.elevation - child.elevation) < child.pathCost) {
+							child.pathCost = curNode.pathCost + 14 + Math.abs(curNode.elevation - child.elevation);
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
-							openNodes.add(child);
+							closedNodes.remove(child);
+							openNodes.offer(child);
 						}
 					} else {
-						if (curNode.pathCost + 10 < child.pathCost) {
-							child.pathCost = curNode.pathCost + 10;
-							child.pathNodes = curNode.pathNodes;
+						if (curNode.pathCost + 10 + Math.abs(curNode.elevation - child.elevation) < child.pathCost) {
+							child.pathCost = curNode.pathCost + 10 + Math.abs(curNode.elevation - child.elevation);
+							child.pathNodes.clear();
+							child.pathNodes.addAll(curNode.pathNodes);
 							child.pathNodes.add(child);
-							openNodes.add(child);
+							closedNodes.remove(child);
+							openNodes.offer(child);
 						}
 					}
 				}
 			}
 			closedNodes.add(curNode);
-			Collections.sort(openNodes);
+			// Collections.sort(openNodes);
 		}
 	}
 
