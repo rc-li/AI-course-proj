@@ -1,15 +1,10 @@
 package source;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -54,7 +49,7 @@ public class homework {
 
 	}
 
-	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
+	public static void main(String args[]) throws CloneNotSupportedException, IOException {
 		File file = new File("input.txt");
 		homework obj = new homework();
 		obj.readInput(file);
@@ -71,7 +66,7 @@ public class homework {
 			}
 		}
 		if (obj.algo.equals("UCS")) {
-			System.out.println("UCS started at " + new Timestamp(System.currentTimeMillis()));
+//			System.out.println("UCS started at " + new Timestamp(System.currentTimeMillis()));
 			for (int n = 0; n < obj.numTargets; n++) {
 				boolean isLastLine = false;
 				if (n == obj.numTargets - 1)
@@ -82,7 +77,7 @@ public class homework {
 			}
 		}
 		if (obj.algo.equals("A*")) {
-			System.out.println("A* started at " + new Timestamp(System.currentTimeMillis()));
+//			System.out.println("A* started at " + new Timestamp(System.currentTimeMillis()));
 			for (int n = 0; n < obj.numTargets; n++) {
 				boolean isLastLine = false;
 				if (n == obj.numTargets - 1)
@@ -104,12 +99,12 @@ public class homework {
 		}
 	}
 
-	private void output(Node node, PrintWriter printer, boolean isLastLine) throws FileNotFoundException {
+	private void output(Node node, PrintWriter printer, boolean isLastLine) throws IOException {
 		ArrayList<Node> path = node.pathNodes;
 		if (node.fail) {
 			printer.write("FAIL");
 		}
-		System.out.println("at " + new Timestamp(System.currentTimeMillis()) + " found path ");
+//		System.out.println("at " + new Timestamp(System.currentTimeMillis()) + " found path ");
 		StringWriter stringwriter = new StringWriter();
 		for (Node n : path) {
 			stringwriter.append(n.x + "," + n.y + " ");
@@ -117,9 +112,10 @@ public class homework {
 		String temp = stringwriter.toString();
 		temp = temp.trim();
 		printer.write(temp);
-		System.out.println(temp);
+//		System.out.println(temp);
 		if (!isLastLine)
 			printer.write("\n");
+		stringwriter.close();
 	}
 
 	private void readInput(File file) {
@@ -326,7 +322,6 @@ public class homework {
 		Node child;
 		while (true) {
 			if (openNodes.isEmpty()) {
-				System.out.println("oops");
 				Node node = new Node(0);
 				node.fail = true;
 				return node;
