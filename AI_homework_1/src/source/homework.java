@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,7 +106,6 @@ public class homework {
 
 	private void output(Node node, PrintWriter printer, boolean isLastLine) throws FileNotFoundException {
 		ArrayList<Node> path = node.pathNodes;
-		System.out.println("found node: " + node.x + "," + node.y + "\n");
 		// System.out.println(path.toString());
 		// int[][] sample = {{1,1},{1,1}};
 		// System.out.println(Arrays.deepToString(sample));
@@ -117,11 +117,14 @@ public class homework {
 			printer.write("FAIL");
 		}
 		System.out.println("at " + new Timestamp(System.currentTimeMillis()) + " found path ");
+		StringWriter stringwriter = new StringWriter();
 		for (Node n : path) {
-			printer.write(n.x + "," + n.y + " ");
+			stringwriter.append(n.x + "," + n.y + " ");
 			System.out.print(n.x + "," + n.y + " ");
 		}
-		System.out.println("Done Printing\n");
+		String temp = stringwriter.toString();
+		temp = temp.trim();
+		printer.write(temp);
 		if (!isLastLine)
 			printer.write("\n");
 	}
@@ -258,15 +261,12 @@ public class homework {
 		Node child;
 		while (true) {
 			if (openNodes.isEmpty()) {
-				System.out.println("oops");
 				Node node = new Node(0);
 				node.fail = true;
 				return node;
 			}
 			Node curNode = openNodes.poll();
 			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
-//				curNode.pathNodes.add(curNode);
-				System.out.println("Found node at ucs: " + curNode.x + ", " + curNode.y);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
@@ -373,8 +373,6 @@ public class homework {
 			}
 			Node curNode = openNodes.poll();
 			if (curNode.x == coordinates[landSiteNO][0] && curNode.y == coordinates[landSiteNO][1]) {
-				// curNode.pathNodes.add(curNode);
-				System.out.println("Found node at ucs: " + curNode.x + ", " + curNode.y);
 				return curNode;
 			}
 			expandNeighborhood_UCS(curNode, childreNodes);
