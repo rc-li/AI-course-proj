@@ -2,20 +2,35 @@ package halmaGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class homework {
 	static class State {
 		String gameMode;
 		String colorUPlay;
+		String colorOpponent;
 		float timeRemaining;
 		char[][] board = new char[16][16];
+		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
+		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
 		int eval_value;
 		
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			// TODO Auto-generated method stub
+			return super.clone();
+		}
 	}
 	
-	public static void main(String args[]) throws FileNotFoundException {
+	static class Node {
+		int x;
+		int y;
+	}
+	
+	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
+		State[] actions = actions(state);
 		System.out.println("hw2 terminated");
 	}
 	
@@ -26,11 +41,29 @@ public class homework {
 		state.gameMode = s.next();
 		state.colorUPlay = s.next();
 		state.timeRemaining = Float.parseFloat(s.next());
-		String temp;
+		String currString;
+		char curr;
 		for (int i = 0; i < 16; i++) {
-			temp = s.next();
+			currString = s.next();
 			for (int j = 0; j < 16; j++) {
-				state.board[i][j] = temp.charAt(j);
+				curr = currString.charAt(j);
+				if (curr == 'B' && state.colorUPlay.equals("BLACK")) {
+					int[] coordinate = {j,i};
+					state.yourMinions.add(coordinate);
+				}
+				if (curr == 'B' && state.colorUPlay.equals("WHITE")) {
+					int[] coordinate = {j,i};
+					state.opponentMinions.add(coordinate);
+				}
+				if (curr == 'W' && state.colorUPlay.equals("WHITE")) {
+					int[] coordinate = {j,i};
+					state.yourMinions.add(coordinate);
+				}
+				if (curr == 'W' && state.colorUPlay.equals("BLACK")) {
+					int[] coordinate = {j,i};
+					state.opponentMinions.add(coordinate);
+				}
+				state.board[i][j] = curr;
 			}
 		}
 		s.close();
@@ -45,8 +78,9 @@ public class homework {
 //	For each piece, 
 //	For each direction
 //	if the adjacent is empty, 
-//		make a new state like that and add that to collection
+//		make a new state like that 
 //		Evaluate it and put the eval value inside the state
+//		and add that to collection
 //	Else (if the adjacent is occupied)
 //	If the other side is empty
 //		Jump(state) 
@@ -58,8 +92,24 @@ public class homework {
 //		Jump(new state, new otherside)
 //	wow, just played with git checkout
 	
-	private static State[] actions(State state) {
-		
+	private static State[] actions(State state) throws CloneNotSupportedException {
+		int[][] directions = {{1,1},{1,0},{1,-1},{0,1},{0,-1},{-1,1},{-1,0},{-1,-1}};
+		for (int[] minion : state.yourMinions) {
+			for (int[] direction : directions) {
+				int neighborX = minion[0]+direction[0];
+				int neighborY = minion[1]+direction[1];
+				if (0 < neighborX && neighborX < 16 && 0 < neighborY && neighborY < 16 ) {
+					char neighbor = state.board[neighborX][neighborY];
+					if (neighbor == '.') {
+						State newState = (State) state.clone();
+						newState.board[neighborX][neighborY] = state.board[minion[0]][minion[1]];
+						newState.board[minion[0]][minion[1]] = '.';
+					}
+					
+				}
+				
+			}
+		}
 		return null;
 	}
 	
