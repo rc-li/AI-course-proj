@@ -56,6 +56,7 @@ public class homework {
 //	Evaluate it and put the eval value inside the state
 //	If (an adjacent spot that has not been jumped over is jumpable)
 //		Jump(new state, new otherside)
+//	wow, just played with git checkout
 	
 	private static State[] actions(State state) {
 		
