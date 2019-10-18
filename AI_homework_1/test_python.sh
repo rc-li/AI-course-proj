@@ -8,7 +8,7 @@ do
 	rm -rf input.txt output.txt
 	cp testcases/input$i.txt ./input.txt
 
-	java homework.java
+	java.exe homework.java
 	
 	RES=$(python3 test.py --input input.txt --output output.txt --answers testcases/output$i.txt)
 	if [[ $RES == "True" ]]; then
