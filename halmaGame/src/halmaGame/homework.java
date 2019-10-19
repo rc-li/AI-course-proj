@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class homework {
-	static class State {
+	static class State implements Cloneable{
 		String gameMode;
 		String colorUPlay;
 		String colorOpponent;
@@ -16,10 +16,36 @@ public class homework {
 		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
 		int eval_value;
 		
+		@SuppressWarnings("unchecked")
 		@Override
-		protected Object clone() throws CloneNotSupportedException {
+		protected Object clone() throws CloneNotSupportedException  {
 			// TODO Auto-generated method stub
-			return super.clone();
+			State cloned = (State) super.clone();
+			cloned.board = cloned.board.clone();
+//			for (char[] line : cloned.board) {
+//				char[] temp = line.clone();
+//				line = temp;
+//			}
+			for (int i = 0; i < 16; i++) {
+				cloned.board[i] = cloned.board[i].clone();
+			}
+			cloned.yourMinions = (ArrayList<int[]>) cloned.yourMinions.clone();
+//			for (int[] minion : cloned.yourMinions) {
+//				minion = minion.clone();
+//			}
+			for (int i =0; i < 16; i++) {
+				int[] minion = cloned.yourMinions.get(i);
+				minion = minion.clone();
+			}
+			cloned.opponentMinions = (ArrayList<int[]>) cloned.opponentMinions.clone();
+//			for (int[] minion : cloned.opponentMinions) {
+//				minion = minion.clone();
+//			}
+			for (int i = 0; i < 16; i++) {
+				int[] minion = cloned.opponentMinions.get(i);
+				minion = minion.clone();
+			}
+			return cloned;
 		}
 	}
 	
@@ -102,8 +128,13 @@ public class homework {
 					char neighbor = state.board[neighborX][neighborY];
 					if (neighbor == '.') {
 						State newState = (State) state.clone();
-						newState.board[neighborX][neighborY] = state.board[minion[0]][minion[1]];
-						newState.board[minion[0]][minion[1]] = '.';
+						newState.board[neighborY][neighborX] = state.board[minion[1]][minion[0]];
+						newState.board[minion[1]][minion[0]] = '.';
+						
+						System.out.println("the old board");
+						printBoard(state);
+						System.out.println("the new board");
+						printBoard(newState);
 					}
 					
 				}
@@ -111,6 +142,12 @@ public class homework {
 			}
 		}
 		return null;
+	}
+	
+	private static void printBoard(State state) {
+		for (char[] line : state.board) {
+			System.out.println(line);
+		}
 	}
 	
 	private static int maxValue(State state, int a, int b) {
