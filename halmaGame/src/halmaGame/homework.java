@@ -190,9 +190,11 @@ public class homework {
 	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states) throws CloneNotSupportedException {
 		int currentX = state.currentX;
 		int currentY = state.currentY;
+		int neiborX = state.neighborX;
+		int neiborY = state.neighborY;
 		int minionExamined = state.minionExamined;
 		if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
-			if (state.board[jumpY][jumpX] == '.') {
+			if (state.board[jumpY][jumpX] == '.' && state.board[neiborY][neiborX]!='.') {
 				State newState = (State) state.clone();
 				newState.board[jumpY][jumpX] = state.board[currentY][currentX];
 				newState.board[currentY][currentX] = '.';
