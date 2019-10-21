@@ -3,6 +3,8 @@ package halmaGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class homework {
@@ -22,6 +24,9 @@ public class homework {
 		int neighborY;
 		int jumpX;
 		int jumpY;
+		int previousX;
+		int previousY;
+		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		int minionExamined;
 		
 		@SuppressWarnings("unchecked")
@@ -158,6 +163,8 @@ public class homework {
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
 						
+						newState.previousX = currentX;
+						newState.previousY = currentY;
 						newState.currentX = neighborX;
 						newState.currentY = neighborY;
 						newState.neighborX = -1;
@@ -210,12 +217,16 @@ public class homework {
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = {jumpX,jumpY};
 				newState.yourMinions.set(minionExamined, yourNewMinion);
+				newState.previousX = currentX;
+				newState.previousY = currentY;
 				newState.currentX = jumpX;
 				newState.currentY = jumpY;
 				newState.neighborX = -1;
 				newState.neighborY = -1;
 				newState.jumpX = -1;
 				newState.jumpY = -1;
+				int[] previousLocation = {newState.previousX,newState.previousY};
+				newState.jumped.add(previousLocation);
 				states.add(newState);
 				
 				System.out.println("jumped from "+currentX+","+currentY+" to "+jumpX+","+jumpY);
@@ -232,26 +243,43 @@ public class homework {
 				neighborY = state.currentY + direction[1];
 				jumpX = state.currentX + direction[0]*2;
 				jumpY = state.currentY + direction[1]*2;
-				if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
-					if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX]!='.') {
-						State newState = (State) state.clone();
-						newState.board[jumpY][jumpX] = state.board[currentY][currentX];
-						newState.board[currentY][currentX] = '.';
-						int[] yourNewMinion = {jumpX,jumpY};
-						newState.yourMinions.set(minionExamined, yourNewMinion);
-						newState.currentX = jumpX;
-						newState.currentY = jumpY;
-						newState.neighborX = -1;
-						newState.neighborY = -1;
-						newState.jumpX = -1;
-						newState.jumpY = -1;
-						states.add(newState);
-						
-						System.out.println("jumped from "+currentX+","+currentY+" to "+jumpX+","+jumpY);
-						jumps++;
-						
-						jump(newState, jumpX, jumpY, states);
+				int[] currentJump = {jumpX,jumpY};
+				boolean skipDirection = false;
+				for (int[] jump : state.jumped) {
+					if (Arrays.equals(jump, currentJump)) {
+						skipDirection = true;
 					}
+				}
+				if (skipDirection) {
+					continue;
+				}
+				if (!(jumpX == state.previousX && jumpY == state.previousY)) {
+					if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
+						if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX]!='.') {
+							State newState = (State) state.clone();
+							newState.board[jumpY][jumpX] = state.board[currentY][currentX];
+							newState.board[currentY][currentX] = '.';
+							int[] yourNewMinion = {jumpX,jumpY};
+							newState.yourMinions.set(minionExamined, yourNewMinion);
+							newState.previousX = currentX;
+							newState.previousY = currentY;
+							newState.currentX = jumpX;
+							newState.currentY = jumpY;
+							newState.neighborX = -1;
+							newState.neighborY = -1;
+							newState.jumpX = -1;
+							newState.jumpY = -1;
+							int[] previousLocation = {newState.previousX,newState.previousY};
+							newState.jumped.add(previousLocation);
+							states.add(newState);
+							
+							System.out.println("jumped from "+currentX+","+currentY+" to "+jumpX+","+jumpY);
+							jumps++;
+							
+							jump(newState, jumpX, jumpY, states);
+						}
+					}
+					
 				}
 			}
 		}
