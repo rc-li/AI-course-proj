@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class homework {
+	private static int jumps = 0;
 	static class State implements Cloneable{
 		String gameMode;
 		String colorUPlay;
@@ -68,6 +69,7 @@ public class homework {
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
 		ArrayList<State> actions = actions(state);
+		System.out.println("jumped " + jumps+" times" );;
 		System.out.println("hw2 terminated");
 	}
 	
@@ -155,6 +157,14 @@ public class homework {
 //						yourNewMinion[0] = neighborX;
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
+						
+						newState.currentX = neighborX;
+						newState.currentY = neighborY;
+						newState.neighborX = -1;
+						newState.neighborY = -1;
+						newState.jumpX = -1;
+						newState.jumpY = -1;
+						
 						states.add(newState);
 						
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
@@ -190,20 +200,28 @@ public class homework {
 	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states) throws CloneNotSupportedException {
 		int currentX = state.currentX;
 		int currentY = state.currentY;
-		int neiborX = state.neighborX;
-		int neiborY = state.neighborY;
+		int neighborX = state.neighborX;
+		int neighborY = state.neighborY;
 		int minionExamined = state.minionExamined;
 		if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
-			if (state.board[jumpY][jumpX] == '.' && state.board[neiborY][neiborX]!='.') {
+			if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX]!='.') {
 				State newState = (State) state.clone();
 				newState.board[jumpY][jumpX] = state.board[currentY][currentX];
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = {jumpX,jumpY};
 				newState.yourMinions.set(minionExamined, yourNewMinion);
+				newState.currentX = jumpX;
+				newState.currentY = jumpY;
+				newState.neighborX = -1;
+				newState.neighborY = -1;
+				newState.jumpX = -1;
+				newState.jumpY = -1;
 				states.add(newState);
 				
 				System.out.println("jumped from "+currentX+","+currentY+" to "+jumpX+","+jumpY);
+				jumps++;
 				
+				jump(newState, jumpX, jumpY, states);
 			}
 		}
 		
