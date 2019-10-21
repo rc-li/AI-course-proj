@@ -141,6 +141,7 @@ public class homework {
 //						yourNewMinion[0] = neighborX;
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
+						states.add(newState);
 						
 						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
 						
@@ -174,6 +175,9 @@ public class homework {
 		return null;
 	}
 	
+	private static void jump() {
+		
+	}
 	
 	private static void printBoard(State state) {
 		for (char[] line : state.board) {
