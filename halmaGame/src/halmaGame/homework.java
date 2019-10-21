@@ -15,6 +15,13 @@ public class homework {
 		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
 		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
 		int eval_value;
+		int currentX;
+		int currentY;
+		int neighborX;
+		int neighborY;
+		int jumpX;
+		int jumpY;
+		int minionExamined;
 		
 		@SuppressWarnings("unchecked")
 		@Override
@@ -113,13 +120,20 @@ public class homework {
 //		for (int[] minion : state.yourMinions) {
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
+			state.minionExamined = i;
 			for (int[] direction : directions) {
 				int currentX = minion[0];
 				int currentY = minion[1];
 				int neighborX = minion[0]+direction[0];
 				int neighborY = minion[1]+direction[1];
-				int jumpX = neighborX+1;
-				int jumpY = neighborY+1;
+				int jumpX = currentX + direction[0]*2;
+				int jumpY = currentY + direction[1]*2;
+				state.currentX = minion[0];
+				state.currentY = minion[1];
+				state.neighborX = minion[0]+direction[0];
+				state.neighborY = minion[1]+direction[1];
+				state.jumpX = state.currentX + direction[0]*2;
+				state.jumpY = state.currentY + direction[1]*2;
 				
 //	For each piece, 
 //	For each direction
@@ -143,7 +157,7 @@ public class homework {
 						newState.yourMinions.set(i, yourNewMinion);
 						states.add(newState);
 						
-						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
+//						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
 						
 //						System.out.println("the old board");
 //						printBoard(state);
@@ -163,11 +177,7 @@ public class homework {
 //		Jump(new state, new otherside)
 //	wow, just played with git checkout
 //				($$$) i can actually use try catch to do this condition, if it saves time
-				else if (0 <= jumpX && jumpX <= 16 && 0 < jumpY && jumpY <= 16) {
-					if (state.board[jumpY][jumpX] == '.') {
-						jump();
-					}
-				}
+				jump(state, jumpX, jumpY, states);
 				
 			}
 		}
@@ -175,7 +185,25 @@ public class homework {
 		return null;
 	}
 	
-	private static void jump() {
+//	($$$) here jumpx and jumpY were passed as duplicate
+//	($$$) i can actually make jump into a subclass of state
+	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states) throws CloneNotSupportedException {
+		int currentX = state.currentX;
+		int currentY = state.currentY;
+		int minionExamined = state.minionExamined;
+		if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
+			if (state.board[jumpY][jumpX] == '.') {
+				State newState = (State) state.clone();
+				newState.board[jumpY][jumpX] = state.board[currentY][currentX];
+				newState.board[currentY][currentX] = '.';
+				int[] yourNewMinion = {jumpX,jumpY};
+				newState.yourMinions.set(minionExamined, yourNewMinion);
+				states.add(newState);
+				
+				System.out.println("jumped from "+currentX+","+currentY+" to "+jumpX+","+jumpY);
+				
+			}
+		}
 		
 	}
 	
