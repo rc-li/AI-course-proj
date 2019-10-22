@@ -120,7 +120,9 @@ public class homework {
 	private static State abSearch(State state) throws CloneNotSupportedException {
 		int v = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		ArrayList<State> states = actions(state);
-		for (State oneState : states) {
+//		for (State oneState : states) {
+		for (int i = 0; i < states.size(); i++) {
+			State oneState = states.get(i);
 			if (oneState.eval_value == v) {
 				return oneState;
 			}
@@ -134,8 +136,10 @@ public class homework {
 		}
 		int v = Integer.MIN_VALUE;
 		ArrayList<State> states = actions(state);
-		for (State nextState : states) {
+//		for (State nextState : states) {
 //		for (State nextState : actions(state)) {
+		for (int i = 0; i < states.size(); i++) {
+			State nextState = states.get(i);
 			v = Math.max(v, minValue(nextState, a, b));
 			if (v >= b) {
 				return v;
@@ -151,8 +155,10 @@ public class homework {
 		}
 		int v = Integer.MAX_VALUE;
 		ArrayList<State> states = actions(state);
-		for (State nextState : states) {
+//		for (State nextState : states) {
 //			for (State nextState : actions(state)) {
+		for (int i = 0; i < states.size(); i++) {
+			State nextState = states.get(i);
 			v = Math.min(v, maxValue(nextState, a, b));
 			if (v <= a) {
 				return v;
@@ -213,6 +219,7 @@ public class homework {
 						newState.neighborY = -1;
 						newState.jumpX = -1;
 						newState.jumpY = -1;
+						newState.depthSearched++;
 						states.add(newState);
 
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
@@ -240,7 +247,7 @@ public class homework {
 			}
 		}
 		System.out.println("minion " + counter + " completed!");
-		return null;
+		return states;
 	}
 
 //	($$$) here jumpx and jumpY were passed as duplicate
@@ -268,6 +275,7 @@ public class homework {
 				newState.neighborY = -1;
 				newState.jumpX = -1;
 				newState.jumpY = -1;
+				newState.depthSearched++;
 				int[] previousLocation = { newState.previousX, newState.previousY };
 				newState.jumped.add(previousLocation);
 				states.add(newState);
@@ -315,6 +323,7 @@ public class homework {
 							newState.neighborY = -1;
 							newState.jumpX = -1;
 							newState.jumpY = -1;
+							newState.depthSearched++;
 							int[] previousLocation = { newState.previousX, newState.previousY };
 							newState.jumped.add(previousLocation);
 							states.add(newState);
