@@ -2,6 +2,7 @@ package halmaGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
+	private static int searchDepth = 2;
 
 	static class State implements Cloneable {
 		String gameMode;
@@ -27,6 +29,9 @@ public class homework {
 		int jumpY;
 		int previousX;
 		int previousY;
+		int jumpStartX;
+		int jumpStartY;
+		char moveMode;
 		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		int minionExamined;
 		int depthSearched;
@@ -77,7 +82,8 @@ public class homework {
 		State state = readInput();
 //		ArrayList<State> actions = actions(state);
 		State output = abSearch(state);
-		printBoard(output);
+//		printBoard(output);
+		output(output);
 		System.out.println("jumped " + jumps + " times");
 		System.out.println("hw2 terminated");
 	}
@@ -118,6 +124,34 @@ public class homework {
 		return state;
 	}
 
+	private static void printBoard(State state) {
+		for (char[] line : state.board) {
+			System.out.println(line);
+		}
+	}
+
+	private static void output(State state) throws FileNotFoundException {
+		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
+		PrintWriter printer = new PrintWriter(file);
+		int currentX = state.currentX;
+		int currentY = state.currentY;
+		char moveMode = state.moveMode;
+		printer.write(moveMode+" "+state.jumpStartX+","+state.jumpStartY+" "+currentX+","+currentY);
+		
+//		printer.write(state.gameMode + "\n");
+//		printer.write(state.colorUPlay + "\n");
+//		printer.write(Float.toString(state.timeRemaining) + "\n");
+//		for (int i = 0; i < 15; i++) {
+//			char[] line = state.board[i];
+//			String temp = new String(line);
+//			printer.write(temp + "\n");
+//		}
+//		char[] line = state.board[15];
+//		printer.write(line);
+		printer.close();
+		
+	}
+
 	private static State abSearch(State state) throws CloneNotSupportedException {
 		int v = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		ArrayList<State> states = actions(state);
@@ -132,7 +166,7 @@ public class homework {
 	}
 
 	private static int maxValue(State state, int a, int b) throws CloneNotSupportedException {
-		if (state.depthSearched >= 3) {
+		if (state.depthSearched >= searchDepth) {
 			return state.eval_value;
 		}
 		int v = Integer.MIN_VALUE;
@@ -151,7 +185,7 @@ public class homework {
 	}
 
 	private static int minValue(State state, int a, int b) throws CloneNotSupportedException {
-		if (state.depthSearched >= 3) {
+		if (state.depthSearched >= searchDepth) {
 			return state.eval_value;
 		}
 		int v = Integer.MAX_VALUE;
@@ -171,7 +205,7 @@ public class homework {
 	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
-		int counter = 0;
+//		int counter = 0;
 //		for (int[] minion : state.yourMinions) {
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
@@ -189,6 +223,8 @@ public class homework {
 				state.neighborY = minion[1] + direction[1];
 				state.jumpX = state.currentX + direction[0] * 2;
 				state.jumpY = state.currentY + direction[1] * 2;
+				state.jumpStartX = currentX;
+				state.jumpStartY = currentY;
 
 //	For each piece, 
 //	For each direction
@@ -221,6 +257,9 @@ public class homework {
 						newState.jumpX = -1;
 						newState.jumpY = -1;
 						newState.depthSearched++;
+						newState.moveMode = 'E';
+						newState.colorUPlay = state.colorOpponent;
+						newState.colorOpponent = state.colorUPlay;
 						states.add(newState);
 
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
@@ -229,7 +268,7 @@ public class homework {
 //						printBoard(state);
 //						System.out.println("the new board");
 //						printBoard(newState);
-						counter++;
+//						counter++;
 					}
 				}
 //	Else (if the adjacent is occupied)
@@ -276,7 +315,10 @@ public class homework {
 				newState.neighborY = -1;
 				newState.jumpX = -1;
 				newState.jumpY = -1;
+				newState.moveMode = 'J';
 				newState.depthSearched++;
+				newState.colorUPlay = state.colorOpponent;
+				newState.colorOpponent = state.colorUPlay;
 				int[] previousLocation = { newState.previousX, newState.previousY };
 				newState.jumped.add(previousLocation);
 				states.add(newState);
@@ -324,7 +366,10 @@ public class homework {
 							newState.neighborY = -1;
 							newState.jumpX = -1;
 							newState.jumpY = -1;
+							newState.moveMode = 'J';
 							newState.depthSearched++;
+							newState.colorUPlay = state.colorOpponent;
+							newState.colorOpponent = state.colorUPlay;
 							int[] previousLocation = { newState.previousX, newState.previousY };
 							newState.jumped.add(previousLocation);
 							states.add(newState);
@@ -341,16 +386,6 @@ public class homework {
 				}
 			}
 		}
-
-	}
-
-	private static void printBoard(State state) {
-		for (char[] line : state.board) {
-			System.out.println(line);
-		}
-	}
-
-	private static void output() {
 
 	}
 }
