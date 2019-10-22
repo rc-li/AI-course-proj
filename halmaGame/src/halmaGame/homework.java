@@ -76,7 +76,8 @@ public class homework {
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
 //		ArrayList<State> actions = actions(state);
-		abSearch(state);
+		State output = abSearch(state);
+		printBoard(output);
 		System.out.println("jumped " + jumps + " times");
 		System.out.println("hw2 terminated");
 	}
@@ -131,7 +132,7 @@ public class homework {
 	}
 
 	private static int maxValue(State state, int a, int b) throws CloneNotSupportedException {
-		if (state.depthSearched > 5) {
+		if (state.depthSearched >= 3) {
 			return state.eval_value;
 		}
 		int v = Integer.MIN_VALUE;
@@ -150,7 +151,7 @@ public class homework {
 	}
 
 	private static int minValue(State state, int a, int b) throws CloneNotSupportedException {
-		if (state.depthSearched > 5) {
+		if (state.depthSearched >= 3) {
 			return state.eval_value;
 		}
 		int v = Integer.MAX_VALUE;
@@ -246,7 +247,7 @@ public class homework {
 
 			}
 		}
-		System.out.println("minion " + counter + " completed!");
+//		System.out.println("minion " + counter + " completed!");
 		return states;
 	}
 
@@ -280,8 +281,8 @@ public class homework {
 				newState.jumped.add(previousLocation);
 				states.add(newState);
 
-				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
-						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+//				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
+//						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 				jumps++;
 
 				jump(newState, jumpX, jumpY, states);
@@ -328,9 +329,9 @@ public class homework {
 							newState.jumped.add(previousLocation);
 							states.add(newState);
 
-							System.out.println(
-									"minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
-											+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+//							System.out.println(
+//									"minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
+//											+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 							jumps++;
 
 							jump(newState, jumpX, jumpY, states);
