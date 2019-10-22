@@ -33,5 +33,12 @@ public class testHashSet {
 		for (int[] is : list) {
 			System.out.println(is);
 		}
+//		
+//		int e = 10;
+//		int f = -e;
+//		System.out.println(f);
+		
+		int[] g = {1,2};
+		
 	}
 }

@@ -29,6 +29,7 @@ public class homework {
 		int previousY;
 		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		int minionExamined;
+		int depthSearched;
 
 		@SuppressWarnings("unchecked")
 		@Override
@@ -74,9 +75,9 @@ public class homework {
 
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
-		ArrayList<State> actions = actions(state);
+//		ArrayList<State> actions = actions(state);
+		abSearch(state);
 		System.out.println("jumped " + jumps + " times");
-		;
 		System.out.println("hw2 terminated");
 	}
 
@@ -116,9 +117,48 @@ public class homework {
 		return state;
 	}
 
-	private static State abSearch(State state) {
+	private static State abSearch(State state) throws CloneNotSupportedException {
 		int v = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		ArrayList<State> states = actions(state);
+		for (State oneState : states) {
+			if (oneState.eval_value == v) {
+				return oneState;
+			}
+		}
 		return state;
+	}
+
+	private static int maxValue(State state, int a, int b) throws CloneNotSupportedException {
+		if (state.depthSearched > 5) {
+			return state.eval_value;
+		}
+		int v = Integer.MIN_VALUE;
+		ArrayList<State> states = actions(state);
+		for (State nextState : states) {
+//		for (State nextState : actions(state)) {
+			v = Math.max(v, minValue(nextState, a, b));
+			if (v >= b) {
+				return v;
+			}
+			a = Math.max(a, v);
+		}
+		return v;
+	}
+
+	private static int minValue(State state, int a, int b) throws CloneNotSupportedException {
+		if (state.depthSearched > 5) {
+			return state.eval_value;
+		}
+		int v = Integer.MAX_VALUE;
+		ArrayList<State> states = actions(state);
+		for (State nextState : states) {
+//			for (State nextState : actions(state)) {
+			v = Math.min(v, maxValue(nextState, a, b));
+			if (v <= a) {
+				return v;
+			}
+		}
+		return v;
 	}
 
 	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
@@ -298,16 +338,6 @@ public class homework {
 		for (char[] line : state.board) {
 			System.out.println(line);
 		}
-	}
-
-	private static int maxValue(State state, int a, int b) {
-		int v = Integer.MAX_VALUE;
-		return v;
-	}
-
-	private static int minValue(State state, int a, int b) {
-		int v = Integer.MAX_VALUE;
-		return v;
 	}
 
 	private static void output() {
