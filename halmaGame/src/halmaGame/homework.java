@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 2;
+	private static int searchDepth = 1;
 
 	static class State implements Cloneable {
 		String gameMode;
@@ -247,7 +247,7 @@ public class homework {
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
 
-						newState.eval_value = state.eval_value + (neighborX - currentX) + (neighborY - currentY);
+						newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
 						newState.previousX = currentX;
 						newState.previousY = currentY;
 						newState.currentX = neighborX;
@@ -306,7 +306,7 @@ public class homework {
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = { jumpX, jumpY };
 				newState.yourMinions.set(minionExamined, yourNewMinion);
-				newState.eval_value = state.eval_value + (jumpX - currentX) + (jumpY - currentY);
+				newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
 				newState.previousX = currentX;
 				newState.previousY = currentY;
 				newState.currentX = jumpX;
@@ -357,7 +357,7 @@ public class homework {
 							newState.board[currentY][currentX] = '.';
 							int[] yourNewMinion = { jumpX, jumpY };
 							newState.yourMinions.set(minionExamined, yourNewMinion);
-							newState.eval_value = state.eval_value + (jumpX - currentX) + (jumpY - currentY);
+							newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
 							newState.previousX = currentX;
 							newState.previousY = currentY;
 							newState.currentX = jumpX;
