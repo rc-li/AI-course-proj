@@ -255,8 +255,11 @@ public class homework {
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
 
-						if (state.colorUPlay.equals(whichPlayer)) {
+						if (state.colorUPlay.equals("WHITE")) {
 							newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+						}
+						if (state.colorUPlay.equals("BLACK")) {
+							newState.eval_value = state.eval_value + ((neighborX + neighborY) - (currentX + currentY));
 						}
 						newState.previousX = currentX;
 						newState.previousY = currentY;
@@ -319,8 +322,11 @@ public class homework {
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = { jumpX, jumpY };
 				newState.yourMinions.set(minionExamined, yourNewMinion);
-				if (state.colorUPlay.equals(whichPlayer)) {
+				if (state.colorUPlay.equals("WHITE") && state.colorUPlay.equals(whichPlayer)) {
 					newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+				}
+				if (state.colorUPlay.equals("BLACK") && state.colorUPlay.equals(whichPlayer)) {
+					newState.eval_value = state.eval_value + ((neighborX + neighborY) - (currentX + currentY));
 				}
 				newState.previousX = currentX;
 				newState.previousY = currentY;
@@ -375,8 +381,11 @@ public class homework {
 							newState.board[currentY][currentX] = '.';
 							int[] yourNewMinion = { jumpX, jumpY };
 							newState.yourMinions.set(minionExamined, yourNewMinion);
-							if (state.colorUPlay.equals(whichPlayer)) {
+							if (state.colorUPlay.equals("WHITE") && state.colorUPlay.equals(whichPlayer)) {
 								newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+							}
+							if (state.colorUPlay.equals("BLACK") && state.colorUPlay.equals(whichPlayer)) {
+								newState.eval_value = state.eval_value + ((neighborX + neighborY) - (currentX + currentY));
 							}
 							newState.previousX = currentX;
 							newState.previousY = currentY;
