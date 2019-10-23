@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 1;
+	private static int searchDepth = 2;
+	private static String whichPlayer;
 
 	static class State implements Cloneable {
 		String gameMode;
@@ -94,6 +95,13 @@ public class homework {
 		Scanner s = new Scanner(file);
 		state.gameMode = s.next();
 		state.colorUPlay = s.next();
+		if (state.colorUPlay.equals("WHITE")) {
+			state.colorOpponent = "BLACK";
+		}
+		else {
+			state.colorOpponent = "WHITE";
+		}
+		whichPlayer = state.colorUPlay;
 		state.timeRemaining = Float.parseFloat(s.next());
 		String currString;
 		char curr;
@@ -235,7 +243,7 @@ public class homework {
 
 //				move directly to an adjacent spot
 //				if (0 < neighborX && neighborX < 16 && 0 < neighborY && neighborY < 16 ) {
-				if (0 <= neighborX && neighborX <= 16 && 0 <= neighborY && neighborY <= 16) {
+				if (0 <= neighborX && neighborX < 16 && 0 <= neighborY && neighborY < 16) {
 					char neighbor = state.board[neighborY][neighborX];
 					if (neighbor == '.') {
 						State newState = (State) state.clone();
@@ -247,7 +255,9 @@ public class homework {
 //						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
 
-						newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+						if (state.colorUPlay.equals(whichPlayer)) {
+							newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+						}
 						newState.previousX = currentX;
 						newState.previousY = currentY;
 						newState.currentX = neighborX;
@@ -260,6 +270,9 @@ public class homework {
 						newState.moveMode = 'E';
 						newState.colorUPlay = state.colorOpponent;
 						newState.colorOpponent = state.colorUPlay;
+						ArrayList<int[]> temp = newState.yourMinions;
+						newState.yourMinions = newState.opponentMinions;
+						newState.opponentMinions = temp;
 						states.add(newState);
 
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
@@ -299,14 +312,16 @@ public class homework {
 		int neighborX = state.neighborX;
 		int neighborY = state.neighborY;
 		int minionExamined = state.minionExamined;
-		if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
+		if (0 <= jumpX && jumpX < 16 && 0 <= jumpY && jumpY < 16) {
 			if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX] != '.') {
 				State newState = (State) state.clone();
 				newState.board[jumpY][jumpX] = state.board[currentY][currentX];
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = { jumpX, jumpY };
 				newState.yourMinions.set(minionExamined, yourNewMinion);
-				newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+				if (state.colorUPlay.equals(whichPlayer)) {
+					newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+				}
 				newState.previousX = currentX;
 				newState.previousY = currentY;
 				newState.currentX = jumpX;
@@ -321,6 +336,9 @@ public class homework {
 				newState.colorOpponent = state.colorUPlay;
 				int[] previousLocation = { newState.previousX, newState.previousY };
 				newState.jumped.add(previousLocation);
+				ArrayList<int[]> temp = newState.yourMinions;
+				newState.yourMinions = newState.opponentMinions;
+				newState.opponentMinions = temp;
 				states.add(newState);
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
@@ -350,14 +368,16 @@ public class homework {
 					continue;
 				}
 				if (!(jumpX == state.previousX && jumpY == state.previousY)) {
-					if (0 <= jumpX && jumpX <= 16 && 0 <= jumpY && jumpY <= 16) {
+					if (0 <= jumpX && jumpX < 16 && 0 <= jumpY && jumpY < 16) {
 						if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX] != '.') {
 							State newState = (State) state.clone();
 							newState.board[jumpY][jumpX] = state.board[currentY][currentX];
 							newState.board[currentY][currentX] = '.';
 							int[] yourNewMinion = { jumpX, jumpY };
 							newState.yourMinions.set(minionExamined, yourNewMinion);
-							newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+							if (state.colorUPlay.equals(whichPlayer)) {
+								newState.eval_value = state.eval_value - ((neighborX + neighborY) - (currentX + currentY));
+							}
 							newState.previousX = currentX;
 							newState.previousY = currentY;
 							newState.currentX = jumpX;
@@ -372,6 +392,9 @@ public class homework {
 							newState.colorOpponent = state.colorUPlay;
 							int[] previousLocation = { newState.previousX, newState.previousY };
 							newState.jumped.add(previousLocation);
+							ArrayList<int[]> temp = newState.yourMinions;
+							newState.yourMinions = newState.opponentMinions;
+							newState.opponentMinions = temp;
 							states.add(newState);
 
 //							System.out.println(

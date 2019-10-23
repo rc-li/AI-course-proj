@@ -40,5 +40,14 @@ public class testHashSet {
 		
 		int[] g = {1,2};
 		
+		String str = "hello";
+		System.out.println(str=="hello");
+		
+		int[] obj1 = {1,2};
+		int[] obj2 = obj1;
+		obj1[1] = 100;
+		System.out.println("value of obj2 is "+ obj2[1]);
+		
+		System.out.println("c equals d? "+ c.equals(d));
 	}
 }
