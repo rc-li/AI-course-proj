@@ -264,6 +264,9 @@ public class homework {
 								newState.eval_value = state.eval_value + ((neighborX + neighborY) - (currentX + currentY));
 							}
 						}
+						if (state.eval_value == 8) {
+							System.out.println("I'M HERE!!!!!!!!!!");
+						}
 						newState.previousX = currentX;
 						newState.previousY = currentY;
 						newState.currentX = neighborX;
@@ -333,6 +336,9 @@ public class homework {
 						newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 					}
 				}
+				if (state.eval_value == 8) {
+					System.out.println("I'M HERE!!!!!!!!!!");
+				}
 				newState.previousX = currentX;
 				newState.previousY = currentY;
 				newState.currentX = jumpX;
@@ -393,6 +399,9 @@ public class homework {
 								else if (state.colorUPlay.equals("BLACK")) {
 									newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 								}
+							}
+							if (state.eval_value == 8) {
+								System.out.println("I'M HERE!!!!!!!!!!");
 							}
 							newState.previousX = currentX;
 							newState.previousY = currentY;
