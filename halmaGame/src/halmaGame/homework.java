@@ -5,12 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 2;
+	private static int searchDepth = 5;
 	private static String whichPlayer;
 
 	static class State implements Cloneable {
@@ -50,44 +49,23 @@ public class homework {
 			for (int i = 0; i < 16; i++) {
 				cloned.board[i] = cloned.board[i].clone();
 			}
-//			for (char[] line : cloned.board) {
-//				char[] temp = line.clone();
-//				line = temp;
-//			}
 
 			cloned.yourMinions = (ArrayList<int[]>) cloned.yourMinions.clone();
 			for (int i = 0; i < 16; i++) {
 				cloned.yourMinions.set(i, cloned.yourMinions.get(i).clone());
-//				int[] minion = cloned.yourMinions.get(i);
-//				minion = minion.clone();
 			}
-//			for (int[] minion : cloned.yourMinions) {
-//				minion = minion.clone();
-//			}
 
 			cloned.opponentMinions = (ArrayList<int[]>) cloned.opponentMinions.clone();
 			for (int i = 0; i < 16; i++) {
 				cloned.opponentMinions.set(i, cloned.opponentMinions.get(i).clone());
-//				int[] minion = cloned.opponentMinions.get(i);
-//				minion = minion.clone();
 			}
-//			for (int[] minion : cloned.opponentMinions) {
-//				minion = minion.clone();
-//			}
 			return cloned;
 		}
 	}
 
-//	static class Node {
-//		int x;
-//		int y;
-//	}
-
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
-//		ArrayList<State> actions = actions(state);
 		State output = abSearch(state);
-//		printBoard(output);
 		output(output);
 		System.out.println("jumped " + jumps + " times");
 		System.out.println("hw2 terminated");
@@ -145,36 +123,14 @@ public class homework {
 	private static void output(State state) throws FileNotFoundException {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
 		PrintWriter printer = new PrintWriter(file);
-		int currentX = state.currentX;
-		int currentY = state.currentY;
 		char moveMode = state.moveMode;
 		printer.write(moveMode+" "+state.previousX+","+state.previousY+" "+state.previousDestX+","+state.previousDestY);
-		
-//		printer.write(state.gameMode + "\n");
-//		printer.write(state.colorUPlay + "\n");
-//		printer.write(Float.toString(state.timeRemaining) + "\n");
-//		for (int i = 0; i < 15; i++) {
-//			char[] line = state.board[i];
-//			String temp = new String(line);
-//			printer.write(temp + "\n");
-//		}
-//		char[] line = state.board[15];
-//		printer.write(line);
 		printer.close();
 		
 	}
 
 	private static State abSearch(State state) throws CloneNotSupportedException {
 		State ret = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
-//		ArrayList<State> states = actions(state);
-////		for (State oneState : states) {
-//		for (int i = 0; i < states.size(); i++) {
-//			State oneState = states.get(i);
-//			System.out.println(oneState.eval_value);
-//			if (oneState.eval_value == v) {
-//				return oneState;
-//			}
-//		}
 		return ret.child;
 	}
 
@@ -185,8 +141,6 @@ public class homework {
 		}
 		state.v = Integer.MIN_VALUE;
 		ArrayList<State> states = actions(state);
-//		for (State nextState : states) {
-//		for (State nextState : actions(state)) {
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = minValue(nextState, a, b);
@@ -218,8 +172,6 @@ public class homework {
 		}
 		state.v = Integer.MAX_VALUE;
 		ArrayList<State> states = actions(state);
-//		for (State nextState : states) {
-//			for (State nextState : actions(state)) {
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = maxValue(nextState, a, b);
@@ -247,8 +199,6 @@ public class homework {
 	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
-//		int counter = 0;
-//		for (int[] minion : state.yourMinions) {
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
 			state.minionExamined = i;
@@ -268,25 +218,13 @@ public class homework {
 				state.jumpStartX = currentX;
 				state.jumpStartY = currentY;
 
-//	For each piece, 
-//	For each direction
-//	if the adjacent is empty, 
-//		make a new state like that 
-//		Evaluate it and put the eval value inside the state
-//		and add that to collection
-
-//				move directly to an adjacent spot
-//				if (0 < neighborX && neighborX < 16 && 0 < neighborY && neighborY < 16 ) {
 				if (0 <= neighborX && neighborX < 16 && 0 <= neighborY && neighborY < 16) {
 					char neighbor = state.board[neighborY][neighborX];
 					if (neighbor == '.') {
 						State newState = (State) state.clone();
 						newState.board[neighborY][neighborX] = state.board[minion[1]][minion[0]];
 						newState.board[minion[1]][minion[0]] = '.';
-//						int[] yourNewMinion = newState.yourMinions.get(i);
 						int[] yourNewMinion = { neighborX, neighborY };
-//						yourNewMinion[0] = neighborX;
-//						yourNewMinion[1] = neighborY;
 						newState.yourMinions.set(i, yourNewMinion);
 
 						if (state.colorUPlay.equals(whichPlayer)) {
@@ -297,21 +235,12 @@ public class homework {
 								newState.eval_value = state.eval_value + ((neighborX + neighborY) - (currentX + currentY));
 							}
 						}
-						if (state.eval_value == 8) {
-							System.out.println("I'M HERE!!!!!!!!!!");
-						}
 						newState.previousX = currentX;
 						newState.previousY = currentY;
-						newState.currentX = neighborX;
-						newState.currentY = neighborY;
-						newState.neighborX = -1;
-						newState.neighborY = -1;
-						newState.jumpX = -1;
-						newState.jumpY = -1;
-						newState.depthSearched++;
-						newState.moveMode = 'E';
 						newState.previousDestX = neighborX;
 						newState.previousDestY = neighborY;
+						newState.depthSearched++;
+						newState.moveMode = 'E';
 						newState.colorUPlay = state.colorOpponent;
 						newState.colorOpponent = state.colorUPlay;
 						ArrayList<int[]> temp = newState.yourMinions;
@@ -320,24 +249,13 @@ public class homework {
 						states.add(newState);
 
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
-
+//
 //						System.out.println("the old board");
 //						printBoard(state);
 //						System.out.println("the new board");
 //						printBoard(newState);
-//						counter++;
 					}
 				}
-//	Else (if the adjacent is occupied)
-//	If the other side is empty
-//		Jump(state) 
-//
-//Jump(state, otherside)
-//	Make a new state of the other side and add that to collection
-//	Evaluate it and put the eval value inside the state
-//	If (an adjacent spot that has not been jumped over is jumpable)
-//		Jump(new state, new otherside)
-//	wow, just played with git checkout
 //				($$$) i can actually use try catch to do this condition, if it saves time
 				jump(state, jumpX, jumpY, states);
 
@@ -371,21 +289,12 @@ public class homework {
 						newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 					}
 				}
-				if (state.eval_value == 8) {
-					System.out.println("I'M HERE!!!!!!!!!!");
-				}
 				newState.previousX = currentX;
 				newState.previousY = currentY;
-				newState.currentX = jumpX;
-				newState.currentY = jumpY;
-				newState.neighborX = -1;
-				newState.neighborY = -1;
-				newState.jumpX = -1;
-				newState.jumpY = -1;
-				newState.moveMode = 'J';
-				newState.depthSearched++;
 				newState.previousDestX = jumpX;
 				newState.previousDestY = jumpY;
+				newState.moveMode = 'J';
+				newState.depthSearched++;
 				newState.colorUPlay = state.colorOpponent;
 				newState.colorOpponent = state.colorUPlay;
 				int[] previousLocation = { newState.previousX, newState.previousY };
@@ -437,21 +346,12 @@ public class homework {
 									newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 								}
 							}
-							if (state.eval_value == 8) {
-								System.out.println("I'M HERE!!!!!!!!!!");
-							}
 							newState.previousX = currentX;
 							newState.previousY = currentY;
-							newState.currentX = jumpX;
-							newState.currentY = jumpY;
-							newState.neighborX = -1;
-							newState.neighborY = -1;
-							newState.jumpX = -1;
-							newState.jumpY = -1;
-							newState.moveMode = 'J';
-							newState.depthSearched++;
 							newState.previousDestX = jumpX;
 							newState.previousDestY = jumpY;
+							newState.moveMode = 'J';
+							newState.depthSearched++;
 							newState.colorUPlay = state.colorOpponent;
 							newState.colorOpponent = state.colorUPlay;
 							int[] previousLocation = { newState.previousX, newState.previousY };
