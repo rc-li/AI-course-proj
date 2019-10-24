@@ -30,12 +30,16 @@ public class homework {
 		int jumpY;
 		int previousX;
 		int previousY;
+		int previousDestX;
+		int previousDestY;
 		int jumpStartX;
 		int jumpStartY;
 		char moveMode;
 		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		int minionExamined;
 		int depthSearched;
+		int v;
+		State child;
 
 		@SuppressWarnings("unchecked")
 		@Override
@@ -144,7 +148,7 @@ public class homework {
 		int currentX = state.currentX;
 		int currentY = state.currentY;
 		char moveMode = state.moveMode;
-		printer.write(moveMode+" "+state.jumpStartX+","+state.jumpStartY+" "+currentX+","+currentY);
+		printer.write(moveMode+" "+state.previousX+","+state.previousY+" "+state.previousDestX+","+state.previousDestY);
 		
 //		printer.write(state.gameMode + "\n");
 //		printer.write(state.colorUPlay + "\n");
@@ -161,54 +165,83 @@ public class homework {
 	}
 
 	private static State abSearch(State state) throws CloneNotSupportedException {
-		int v = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		ArrayList<State> states = actions(state);
-//		for (State oneState : states) {
-		for (int i = 0; i < states.size(); i++) {
-			State oneState = states.get(i);
-			System.out.println(oneState.eval_value);
-			if (oneState.eval_value == v) {
-				return oneState;
-			}
-		}
-		return state;
+		State ret = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
+//		ArrayList<State> states = actions(state);
+////		for (State oneState : states) {
+//		for (int i = 0; i < states.size(); i++) {
+//			State oneState = states.get(i);
+//			System.out.println(oneState.eval_value);
+//			if (oneState.eval_value == v) {
+//				return oneState;
+//			}
+//		}
+		return ret.child;
 	}
 
-	private static int maxValue(State state, int a, int b) throws CloneNotSupportedException {
+	private static State maxValue(State state, int a, int b) throws CloneNotSupportedException {
 		if (state.depthSearched >= searchDepth) {
-			return state.eval_value;
+			state.v = state.eval_value;
+			return state;
 		}
-		int v = Integer.MIN_VALUE;
+		state.v = Integer.MIN_VALUE;
 		ArrayList<State> states = actions(state);
 //		for (State nextState : states) {
 //		for (State nextState : actions(state)) {
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
-			v = Math.max(v, minValue(nextState, a, b));
-			if (v >= b) {
-				return v;
+			State retState = minValue(nextState, a, b);
+			int retV = retState.v;
+			state.v = Math.max(state.v, retV);
+			if (state.v >= b) {
+				for (State state2 : states) {
+					if (state2.v == state.v) {
+						state.child = state2;
+						return state;
+					}
+				}
 			}
-			a = Math.max(a, v);
+			a = Math.max(a, state.v);
 		}
-		return v;
+		for (State state2 : states) {
+			if (state2.v == state.v) {
+				state.child = state2;
+				return state;
+			}
+		}
+		return null;
 	}
 
-	private static int minValue(State state, int a, int b) throws CloneNotSupportedException {
+	private static State minValue(State state, int a, int b) throws CloneNotSupportedException {
 		if (state.depthSearched >= searchDepth) {
-			return state.eval_value;
+			state.v = state.eval_value;
+			return state;
 		}
-		int v = Integer.MAX_VALUE;
+		state.v = Integer.MAX_VALUE;
 		ArrayList<State> states = actions(state);
 //		for (State nextState : states) {
 //			for (State nextState : actions(state)) {
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
-			v = Math.min(v, maxValue(nextState, a, b));
-			if (v <= a) {
-				return v;
+			State retState = maxValue(nextState, a, b);
+			int retV = retState.v;
+			state.v = Math.min(state.v, retV);
+			if (state.v <= a) {
+				for (State state2 : states) {
+					if (state2.v == state.v) {
+						state.child = state2;
+						return state;
+					}
+				}
+			}
+			b = Math.min(b, state.v);
+		}
+		for (State state2 : states) {
+			if (state2.v == state.v) {
+				state.child = state2;
+				return state;
 			}
 		}
-		return v;
+		return null;
 	}
 
 	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
@@ -277,6 +310,8 @@ public class homework {
 						newState.jumpY = -1;
 						newState.depthSearched++;
 						newState.moveMode = 'E';
+						newState.previousDestX = neighborX;
+						newState.previousDestY = neighborY;
 						newState.colorUPlay = state.colorOpponent;
 						newState.colorOpponent = state.colorUPlay;
 						ArrayList<int[]> temp = newState.yourMinions;
@@ -349,6 +384,8 @@ public class homework {
 				newState.jumpY = -1;
 				newState.moveMode = 'J';
 				newState.depthSearched++;
+				newState.previousDestX = jumpX;
+				newState.previousDestY = jumpY;
 				newState.colorUPlay = state.colorOpponent;
 				newState.colorOpponent = state.colorUPlay;
 				int[] previousLocation = { newState.previousX, newState.previousY };
@@ -413,6 +450,8 @@ public class homework {
 							newState.jumpY = -1;
 							newState.moveMode = 'J';
 							newState.depthSearched++;
+							newState.previousDestX = jumpX;
+							newState.previousDestY = jumpY;
 							newState.colorUPlay = state.colorOpponent;
 							newState.colorOpponent = state.colorUPlay;
 							int[] previousLocation = { newState.previousX, newState.previousY };
