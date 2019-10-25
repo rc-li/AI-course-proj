@@ -40,6 +40,7 @@ public class homework {
 		int depthSearched;
 		int v;
 		State child;
+		ArrayList<int[]> path = new ArrayList<int[]>();
 
 		@SuppressWarnings("unchecked")
 		@Override
@@ -59,6 +60,12 @@ public class homework {
 			cloned.opponentMinions = (ArrayList<int[]>) cloned.opponentMinions.clone();
 			for (int i = 0; i < 16; i++) {
 				cloned.opponentMinions.set(i, cloned.opponentMinions.get(i).clone());
+			}
+			
+			cloned.jumped = (ArrayList<int[]>) cloned.jumped.clone();
+			int jumpedSize = jumped.size();
+			for (int i = 0; i < jumpedSize; i++) {
+				cloned.jumped.set(i, cloned.jumped.get(i).clone());
 			}
 			return cloned;
 		}
@@ -123,16 +130,26 @@ public class homework {
 	private static void output(State state) throws FileNotFoundException {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
 		PrintWriter printer = new PrintWriter(file);
-		char moveMode = state.moveMode;
-		printer.write(moveMode + " " + state.previousX + "," + state.previousY + " " + state.previousDestX + ","
-				+ state.previousDestY);
+//		while (state.child != null) {
+//			printer.write(state.child.moveMode + " " + state.currentX + "," + state.currentY + " " + state.child.currentX + ","
+//					+ state.child.currentY);
+//		}
+//		while (state.child != null) {
+//			System.out.println(state.child.moveMode + " " + state.currentX + "," + state.currentY + " " + state.child.currentX + ","
+//					+ state.child.currentY);
+//			state = state.child;
+//		}
+		for (int[] coordinate : state.child.jumped) {
+			System.out.println(coordinate[0] + "," + coordinate[1] + " ");
+			
+		}
 		printer.close();
 
 	}
 
 	private static State abSearch(State state) throws CloneNotSupportedException {
 		State ret = maxValue(state, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		return ret.child;
+		return ret;
 	}
 
 	private static State maxValue(State state, int a, int b) throws CloneNotSupportedException {
