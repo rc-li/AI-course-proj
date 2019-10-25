@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 5;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 
 	static class State implements Cloneable {
@@ -20,6 +20,7 @@ public class homework {
 		char[][] board = new char[16][16];
 		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
 		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
+		ArrayList<int[]> insideCamp = new ArrayList<int[]>();
 		int eval_value;
 		int currentX;
 		int currentY;
@@ -293,28 +294,37 @@ public class homework {
 				newState.previousY = currentY;
 				newState.previousDestX = jumpX;
 				newState.previousDestY = jumpY;
+				newState.currentX = jumpX;
+				newState.currentY = jumpY;
+				newState.jumpX = -1;
+				newState.jumpY = -1;
 				newState.moveMode = 'J';
 				newState.depthSearched++;
 				newState.colorUPlay = state.colorOpponent;
 				newState.colorOpponent = state.colorUPlay;
-				int[] previousLocation = { newState.previousX, newState.previousY };
+				int[] previousLocation = { currentX, currentY };
 				newState.jumped.add(previousLocation);
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
 				states.add(newState);
 
-//				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
-//						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
+						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 				jumps++;
 
-				jump(newState, jumpX, jumpY, states);
+//				jump(newState, jumpX, jumpY, states);
+				jump(newState, -1, -1, states);
 			}
 		}
-
+//		insdie the recursive jump call
 		if (state.jumpX == -1 && state.jumpY == -1) {
 			int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 },
 					{ -1, -1 } };
+			String t = state.colorUPlay;
+			state.colorUPlay = state.colorOpponent;
+			state.colorOpponent = t;
+			
 			for (int[] direction : directions) {
 				neighborX = state.currentX + direction[0];
 				neighborY = state.currentY + direction[1];
@@ -330,7 +340,8 @@ public class homework {
 				if (skipDirection) {
 					continue;
 				}
-				if (!(jumpX == state.previousX && jumpY == state.previousY)) {
+//				previous state checking failed, so there is infinite loop
+//				if (!(jumpX == state.previousX && jumpY == state.previousY)) {
 					if (0 <= jumpX && jumpX < 16 && 0 <= jumpY && jumpY < 16) {
 						if (state.board[jumpY][jumpX] == '.' && state.board[neighborY][neighborX] != '.') {
 							State newState = (State) state.clone();
@@ -354,23 +365,24 @@ public class homework {
 							newState.depthSearched++;
 							newState.colorUPlay = state.colorOpponent;
 							newState.colorOpponent = state.colorUPlay;
-							int[] previousLocation = { newState.previousX, newState.previousY };
+//							int[] previousLocation = { newState.previousX, newState.previousY };
+							int[] previousLocation = { currentX, currentY };
 							newState.jumped.add(previousLocation);
 							ArrayList<int[]> temp = newState.yourMinions;
 							newState.yourMinions = newState.opponentMinions;
 							newState.opponentMinions = temp;
 							states.add(newState);
 
-//							System.out.println(
-//									"minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
-//											+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+							System.out.println(
+									"minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
+											+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 							jumps++;
 
-							jump(newState, jumpX, jumpY, states);
+							jump(newState, -1, -1, states);
 						}
 					}
 
-				}
+//				}
 			}
 		}
 
