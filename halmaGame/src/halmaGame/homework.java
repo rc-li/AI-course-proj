@@ -61,7 +61,7 @@ public class homework {
 			for (int i = 0; i < 16; i++) {
 				cloned.opponentMinions.set(i, cloned.opponentMinions.get(i).clone());
 			}
-			
+
 			cloned.jumped = (ArrayList<int[]>) cloned.jumped.clone();
 			int jumpedSize = jumped.size();
 			for (int i = 0; i < jumpedSize; i++) {
@@ -75,8 +75,8 @@ public class homework {
 		State state = readInput();
 		State output = abSearch(state);
 		output(output);
-		System.out.println("jumped " + jumps + " times");
-		System.out.println("hw2 terminated");
+//		System.out.println("jumped " + jumps + " times");
+//		System.out.println("hw2 terminated");
 	}
 
 	private static State readInput() throws FileNotFoundException {
@@ -139,9 +139,19 @@ public class homework {
 //					+ state.child.currentY);
 //			state = state.child;
 //		}
-		for (int[] coordinate : state.child.jumped) {
-			System.out.println(coordinate[0] + "," + coordinate[1] + " ");
-			
+		ArrayList<int[]> jumped = state.child.jumped;
+		int[] lastPair = {state.child.previousDestX, state.child.previousDestY};
+		jumped.add(lastPair);
+		int jumpedSize = jumped.size();
+		for (int i = 0; i < jumpedSize - 1; i++) {
+			if (i < jumpedSize - 2) {
+				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + " " + jumped.get(i + 1)[1] + "\n");
+			}
+			else {
+				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + " " + jumped.get(i + 1)[1]);
+			}
+//			printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + state.currentX + "," + state.currentY + "\n");
+//			printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " +  + "\n");
 		}
 		printer.close();
 
@@ -339,9 +349,9 @@ public class homework {
 				newState.opponentMinions = temp;
 				states.add(newState);
 
-				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
-						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
-				jumps++;
+//				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
+//						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+//				jumps++;
 
 //				jump(newState, jumpX, jumpY, states);
 				jump(newState, -100, -100, states);
@@ -362,7 +372,7 @@ public class homework {
 			String t = state.colorUPlay;
 			state.colorUPlay = state.colorOpponent;
 			state.colorOpponent = t;
-			
+
 //			did i forget to switch the minions back?
 			ArrayList<int[]> temp = state.yourMinions;
 			state.yourMinions = state.opponentMinions;
@@ -401,7 +411,7 @@ public class homework {
 						}
 //						newState.previousX = currentX;
 //						newState.previousY = currentY;
-						
+
 //						update currentX is necessary for next recursive call of jump()
 						newState.currentX = jumpX;
 						newState.currentY = jumpY;
@@ -421,9 +431,9 @@ public class homework {
 						newState.opponentMinions = temp;
 						states.add(newState);
 
-						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
-								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
-						jumps++;
+//						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
+//								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
+//						jumps++;
 
 						jump(newState, -100, -100, states);
 					}
