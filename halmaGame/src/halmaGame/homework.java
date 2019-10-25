@@ -199,7 +199,13 @@ public class homework {
 
 	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
-		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
+//		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
+		if (whichPlayer == "WHITE") {
+			int[][] directions = { {-1,0}, {-1, -1}, {0,-1}};
+		}
+		else {
+			int[][] directions = { {1,0}, {1, 1}, {0,1}};
+		}
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
 			state.minionExamined = i;
