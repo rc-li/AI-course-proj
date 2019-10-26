@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 1;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 
 	static class State implements Cloneable {
@@ -145,10 +145,10 @@ public class homework {
 		int jumpedSize = jumped.size();
 		for (int i = 0; i < jumpedSize - 1; i++) {
 			if (i < jumpedSize - 2) {
-				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + " " + jumped.get(i + 1)[1] + "\n");
+				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + "," + jumped.get(i + 1)[1] + "\n");
 			}
 			else {
-				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + " " + jumped.get(i + 1)[1]);
+				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + jumped.get(i + 1)[0] + "," + jumped.get(i + 1)[1]);
 			}
 //			printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " + state.currentX + "," + state.currentY + "\n");
 //			printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " " +  + "\n");
