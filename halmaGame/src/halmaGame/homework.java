@@ -11,6 +11,14 @@ public class homework {
 	private static int jumps = 0;
 	private static int searchDepth = 3;
 	private static String whichPlayer;
+	private static int[][] campLocations = {
+			{0,1},{0,2},{0,3},{0,4},{0,5},
+			{1,1},{1,2},{1,3},{1,4},{1,5},
+			{1,1},{1,2},{1,3},{1,4},
+			{2,1},{2,2},{2,3},
+			{3,1},{3,2},
+			{4,1},{4,2},
+	};
 
 	static class State implements Cloneable {
 		String gameMode;
@@ -168,7 +176,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MIN_VALUE;
-		ArrayList<State> states = actions(state);
+		ArrayList<State> states = actions(state, true);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = minValue(nextState, a, b);
@@ -199,7 +207,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MAX_VALUE;
-		ArrayList<State> states = actions(state);
+		ArrayList<State> states = actions(state, true);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = maxValue(nextState, a, b);
@@ -224,17 +232,36 @@ public class homework {
 		return null;
 	}
 
-	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
+	private static ArrayList<State> actions(State state, boolean needCampCheck) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
-//		int[][] directions;
-//		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
-//		int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
-//		if (whichPlayer == "WHITE") {
-//			directions = directionWHITE;
-//		} else {
-//			directions = directionBLACK;
-//		}
+		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
+		int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
+		if (whichPlayer == "WHITE") {
+			directions = directionWHITE;
+		} else {
+			directions = directionBLACK;
+		}
+		
+		boolean campEmpty = true;
+		if (needCampCheck) {
+			
+//		check if there is still minion in camp
+			for (int[] minion : state.yourMinions) {
+				for (int[] camp : campLocations) {
+					if (minion[0] == camp[0] && minion[1] == camp[1]) {
+						campEmpty = false;
+						break;
+					}
+				}
+				if (campEmpty == false) {
+					break;
+				}
+			}
+		}
+		
+		
+		
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
 			state.minionExamined = i;
@@ -263,6 +290,27 @@ public class homework {
 						int[] yourNewMinion = { neighborX, neighborY };
 						newState.yourMinions.set(i, yourNewMinion);
 
+//						check if it's a crossing border move
+						boolean startInCamp = false;
+						for (int[] camp : campLocations) {
+							if (currentX == camp[0] && currentY == camp[1]) {
+								startInCamp = true;
+								break;
+							}
+						}
+						boolean endOutCamp = true;
+						for (int[] camp : campLocations) {
+							if (neighborX == camp[0] && neighborY == camp[1]) {
+								endOutCamp = false;
+								break;
+							}
+						}
+						boolean crossingBorder = false;
+						if (startInCamp && endOutCamp) {
+							crossingBorder = true;
+						}
+						
+//						update eval
 						if (state.colorUPlay.equals(whichPlayer)) {
 							if (state.colorUPlay.equals("WHITE")) {
 								newState.eval_value = state.eval_value
@@ -286,7 +334,14 @@ public class homework {
 						ArrayList<int[]> temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						states.add(newState);
+						if (campEmpty == false) {
+							if (crossingBorder) {
+								states.add(newState);
+							}
+						}
+						else {
+							states.add(newState);
+						}
 
 //						System.out.println("moved from "+currentX+","+currentY+" to "+neighborX+","+neighborY);
 //
@@ -297,9 +352,13 @@ public class homework {
 					}
 				}
 //				($$$) i can actually use try catch to do this condition, if it saves time
-				jump(state, jumpX, jumpY, states);
+				jump(state, jumpX, jumpY, states, campEmpty);
+				
 
 			}
+		}
+		if (states.isEmpty()) {
+			states = actions(state, false);
 		}
 //		System.out.println("minion " + counter + " completed!");
 		return states;
@@ -307,7 +366,7 @@ public class homework {
 
 //	($$$) here jumpx and jumpY were passed as duplicate
 //	($$$) i can actually make jump into a subclass of state
-	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states)
+	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states, boolean campEmpty)
 			throws CloneNotSupportedException {
 //		spawning states of of jumping from where we 'E'ed in actions()
 		int currentX = state.currentX;
@@ -323,6 +382,25 @@ public class homework {
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = { jumpX, jumpY };
 				newState.yourMinions.set(minionExamined, yourNewMinion);
+//				check if it's a crossing border move
+				boolean startInCamp = false;
+				for (int[] camp : campLocations) {
+					if (currentX == camp[0] && currentY == camp[1]) {
+						startInCamp = true;
+						break;
+					}
+				}
+				boolean endOutCamp = true;
+				for (int[] camp : campLocations) {
+					if (jumpX == camp[0] && jumpY == camp[1]) {
+						endOutCamp = false;
+						break;
+					}
+				}
+				boolean crossingBorder = false;
+				if (startInCamp && endOutCamp) {
+					crossingBorder = true;
+				}
 				if (state.colorUPlay.equals(whichPlayer)) {
 					if (state.colorUPlay.equals("WHITE")) {
 						newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY));
@@ -347,28 +425,34 @@ public class homework {
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
-				states.add(newState);
+				if (campEmpty == false) {
+					if (crossingBorder) {
+						states.add(newState);
+					}
+				}
+				else {
+					states.add(newState);
+				}
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
 //						+ " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 //				jumps++;
 
 //				jump(newState, jumpX, jumpY, states);
-				jump(newState, -100, -100, states);
+				jump(newState, -100, -100, states, campEmpty);
 			}
 		}
 //		insdie the recursive jump call
 		if (state.jumpX == -100 && state.jumpY == -100) {
 			int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 },
 					{ -1, -1 } };
-//			int[][] directions;
-//			int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
-//			int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
-//			if (whichPlayer == "WHITE") {
-//				directions = directionWHITE;
-//			} else {
-//				directions = directionBLACK;
-//			}
+			int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
+			int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
+			if (whichPlayer == "WHITE") {
+				directions = directionWHITE;
+			} else {
+				directions = directionBLACK;
+			}
 			String t = state.colorUPlay;
 			state.colorUPlay = state.colorOpponent;
 			state.colorOpponent = t;
@@ -409,6 +493,25 @@ public class homework {
 								newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 							}
 						}
+//						check if it's a crossing border move
+						boolean startInCamp = false;
+						for (int[] camp : campLocations) {
+							if (currentX == camp[0] && currentY == camp[1]) {
+								startInCamp = true;
+								break;
+							}
+						}
+						boolean endOutCamp = true;
+						for (int[] camp : campLocations) {
+							if (jumpX == camp[0] && jumpY == camp[1]) {
+								endOutCamp = false;
+								break;
+							}
+						}
+						boolean crossingBorder = false;
+						if (startInCamp && endOutCamp) {
+							crossingBorder = true;
+						}
 //						newState.previousX = currentX;
 //						newState.previousY = currentY;
 
@@ -421,7 +524,6 @@ public class homework {
 						newState.previousDestY = jumpY;
 						newState.moveMode = 'J';
 						newState.depthSearched++;
-//							int[] previousLocation = { newState.previousX, newState.previousY };
 						int[] previousLocation = { currentX, currentY };
 						newState.jumped.add(previousLocation);
 						newState.colorUPlay = state.colorOpponent;
@@ -429,13 +531,20 @@ public class homework {
 						temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						states.add(newState);
+						if (campEmpty == false) {
+							if (crossingBorder) {
+								states.add(newState);
+							}
+						}
+						else {
+							states.add(newState);
+						}
 
 //						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
 //								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 //						jumps++;
 
-						jump(newState, -100, -100, states);
+						jump(newState, -100, -100, states, campEmpty);
 					}
 				}
 
