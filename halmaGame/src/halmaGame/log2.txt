@@ -1,0 +1,310 @@
+=== 22:24:51.487 === Time Elapsed: 2.27 s ===
+
+=== 22:25:08.733 === Time Elapsed: 1.82 s ===
+
+=== 22:59:05.774 === Time Elapsed: 1.63 s ===
+
+=== 22:59:11.665 === Time Elapsed: 2.47 s ===
+
+=== 22:59:17.364 === Time Elapsed: 1.91 s ===
+
+=== 22:59:22.748 === Time Elapsed: 1.72 s ===
+
+=== 22:59:28.267 === Time Elapsed: 1.88 s ===
+
+=== 22:59:35.016 === Time Elapsed: 2.03 s ===
+
+=== 22:59:43.153 === Time Elapsed: 2.95 s ===
+
+=== 22:59:49.337 === Time Elapsed: 1.87 s ===
+
+=== 22:59:55.523 === Time Elapsed: 2.59 s ===
+
+=== 23:00:00.530 === Time Elapsed: 1.59 s ===
+
+=== 23:00:05.537 === Time Elapsed: 1.86 s ===
+
+=== 23:00:10.910 === Time Elapsed: 1.86 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:00:12.737 === Time Elapsed: 1.51 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:04:43.226 === Time Elapsed: 1.84 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:05:06.260 === Time Elapsed: 1.55 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:07:15.868 === Time Elapsed: 1.40 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:08:20.873 === Time Elapsed: 1.45 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:10:26.829 === Time Elapsed: 1.67 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:10:33.598 === Time Elapsed: 1.44 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 18 out of bounds for length 18
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.actions(homework.java:262)
+	at halmaGame.homework.minValue(homework.java:210)
+	at halmaGame.homework.maxValue(homework.java:182)
+	at halmaGame.homework.abSearch(homework.java:169)
+	at halmaGame.homework.main(homework.java:84)
+
+Output:
+
+
+=== 23:17:23.859 === Time Elapsed: 2.21 s ===
+
+=== 23:17:28.316 === Time Elapsed: 2.01 s ===
+
+=== 23:17:33.006 === Time Elapsed: 1.80 s ===
+
+=== 23:17:37.736 === Time Elapsed: 1.78 s ===
+
+=== 23:17:42.359 === Time Elapsed: 1.78 s ===
+
+=== 23:17:47.493 === Time Elapsed: 2.08 s ===
+
+=== 23:17:52.009 === Time Elapsed: 1.89 s ===
+
+=== 23:17:57.378 === Time Elapsed: 2.15 s ===
+
+=== 23:18:02.529 === Time Elapsed: 2.34 s ===
+
+=== 23:18:07.505 === Time Elapsed: 1.95 s ===
+
+=== 23:18:12.082 === Time Elapsed: 1.80 s ===
+
+=== 23:18:17.101 === Time Elapsed: 2.42 s ===
+
+=== 23:18:22.115 === Time Elapsed: 2.06 s ===
+
+=== 23:18:26.760 === Time Elapsed: 2.15 s ===
+
+=== 23:18:31.668 === Time Elapsed: 2.01 s ===
+
+=== 23:18:35.794 === Time Elapsed: 1.57 s ===
+
+=== 23:18:40.379 === Time Elapsed: 2.00 s ===
+
+=== 23:18:44.706 === Time Elapsed: 1.67 s ===
+
+=== 23:18:49.482 === Time Elapsed: 2.07 s ===
+
+=== 23:18:53.894 === Time Elapsed: 1.68 s ===
+
+=== 23:18:58.873 === Time Elapsed: 2.23 s ===
+
+=== 23:19:03.446 === Time Elapsed: 1.71 s ===
+
+=== 23:19:08.699 === Time Elapsed: 2.70 s ===
+
+=== 23:19:14.122 === Time Elapsed: 2.34 s ===
+
+=== 23:19:20.751 === Time Elapsed: 2.65 s ===
+
+=== 23:19:26.205 === Time Elapsed: 2.27 s ===
+
+=== 23:19:31.365 === Time Elapsed: 2.21 s ===
+
+=== 23:19:36.142 === Time Elapsed: 2.09 s ===
+
+=== 23:19:41.202 === Time Elapsed: 2.29 s ===
+
+=== 23:19:45.632 === Time Elapsed: 1.80 s ===
+
+=== 23:19:50.568 === Time Elapsed: 2.13 s ===
+
+=== 23:19:55.032 === Time Elapsed: 1.52 s ===
+
+=== 23:20:00.055 === Time Elapsed: 2.00 s ===
+
+=== 23:20:04.665 === Time Elapsed: 1.78 s ===
+
+=== 23:20:09.376 === Time Elapsed: 1.81 s ===
+
+=== 23:20:14.490 === Time Elapsed: 2.13 s ===
+
+=== 23:20:19.406 === Time Elapsed: 1.72 s ===
+
+=== 23:20:24.394 === Time Elapsed: 1.96 s ===
+
+=== 23:20:29.689 === Time Elapsed: 2.60 s ===
+
+=== 23:20:34.169 === Time Elapsed: 1.76 s ===
+
+=== 23:20:38.725 === Time Elapsed: 1.81 s ===
+
+=== 23:20:43.693 === Time Elapsed: 1.82 s ===
+
+=== 23:20:48.915 === Time Elapsed: 2.52 s ===
+
+=== 23:20:53.604 === Time Elapsed: 1.80 s ===
+
+=== 23:20:58.469 === Time Elapsed: 2.02 s ===
+
+=== 23:21:03.044 === Time Elapsed: 1.87 s ===
+
+=== 23:21:08.016 === Time Elapsed: 2.42 s ===
+
+=== 23:21:12.950 === Time Elapsed: 1.75 s ===
+
+=== 23:21:17.942 === Time Elapsed: 1.83 s ===
+
+=== 23:21:23.312 === Time Elapsed: 2.50 s ===
+
+=== 23:21:28.611 === Time Elapsed: 2.33 s ===
+
+=== 23:21:33.375 === Time Elapsed: 1.86 s ===
+
+=== 23:21:38.332 === Time Elapsed: 1.93 s ===
+
+=== 23:21:42.683 === Time Elapsed: 1.59 s ===
+
+=== 23:21:47.130 === Time Elapsed: 1.75 s ===
+
+=== 23:21:51.705 === Time Elapsed: 1.93 s ===
+
+=== 23:21:56.968 === Time Elapsed: 2.01 s ===
+
+=== 23:22:01.364 === Time Elapsed: 1.70 s ===
+
+=== 23:22:06.706 === Time Elapsed: 2.14 s ===
+
+=== 23:22:12.152 === Time Elapsed: 2.53 s ===
+
+=== 23:22:17.373 === Time Elapsed: 2.19 s ===
+
+=== 23:22:22.560 === Time Elapsed: 1.94 s ===
+
+=== 23:22:27.757 === Time Elapsed: 2.12 s ===
+
+=== 23:22:33.531 === Time Elapsed: 2.21 s ===
+
+=== 23:22:38.912 === Time Elapsed: 1.87 s ===
+
+=== 23:22:44.535 === Time Elapsed: 2.55 s ===
+
+=== 23:22:50.011 === Time Elapsed: 2.10 s ===
+
+=== 23:25:42.604 === Time Elapsed: 1.73 s ===
+
+=== 23:25:46.415 === Time Elapsed: 1.44 s ===
+
+=== 23:25:50.504 === Time Elapsed: 1.72 s ===
+
+=== 23:26:31.277 === Time Elapsed: 3.26 s ===
+
+=== 23:26:34.402 === Time Elapsed: 2.74 s ===
+
+=== 23:26:40.063 === Time Elapsed: 2.28 s ===
+
+=== 23:26:46.560 === Time Elapsed: 2.03 s ===
+

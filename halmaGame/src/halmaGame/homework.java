@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
 	private static int[][] campLocations = {
 			{0,1},{0,2},{0,3},{0,4},{0,5},
@@ -26,9 +26,6 @@ public class homework {
 		String colorOpponent;
 		float timeRemaining;
 		char[][] board = new char[16][16];
-		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
-		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
-		ArrayList<int[]> insideCamp = new ArrayList<int[]>();
 		int eval_value;
 		int currentX;
 		int currentY;
@@ -43,11 +40,14 @@ public class homework {
 		int jumpStartX;
 		int jumpStartY;
 		char moveMode;
-		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		int minionExamined;
 		int depthSearched;
 		int v;
 		State child;
+		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
+		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
+		ArrayList<int[]> insideCamp = new ArrayList<int[]>();
+		ArrayList<int[]> jumped = new ArrayList<int[]>();
 		ArrayList<int[]> path = new ArrayList<int[]>();
 
 		@SuppressWarnings("unchecked")
@@ -74,6 +74,16 @@ public class homework {
 			int jumpedSize = jumped.size();
 			for (int i = 0; i < jumpedSize; i++) {
 				cloned.jumped.set(i, cloned.jumped.get(i).clone());
+			}
+			cloned.path = (ArrayList<int[]>) cloned.path.clone();
+			int pathSize = path.size();
+			for (int i = 0; i < pathSize; i++) {
+				cloned.path.set(i, cloned.path.get(i).clone());
+			}
+			cloned.insideCamp = (ArrayList<int[]>) cloned.insideCamp.clone();
+			int campSize = insideCamp.size();
+			for (int i = 0; i < campSize; i++) {
+				cloned.insideCamp.set(i, cloned.insideCamp.get(i).clone());
 			}
 			return cloned;
 		}
@@ -235,9 +245,9 @@ public class homework {
 	private static ArrayList<State> actions(State state, boolean needCampCheck) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
-		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
-		int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
-		if (whichPlayer == "WHITE") {
+		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 }, {1,-1},{-1,1} };
+		int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 }, {1,-1},{-1,1}  };
+		if (state.colorUPlay.equals("WHITE")) {
 			directions = directionWHITE;
 		} else {
 			directions = directionBLACK;
@@ -446,9 +456,9 @@ public class homework {
 		if (state.jumpX == -100 && state.jumpY == -100) {
 			int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 },
 					{ -1, -1 } };
-			int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 } };
-			int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 } };
-			if (whichPlayer == "WHITE") {
+			int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 },{1,-1},{-1,1} };
+			int[][] directionBLACK = { { 1, 0 }, { 1, 1 }, { 0, 1 },{1,-1},{-1,1}  };
+			if (state.colorUPlay.equals("WHITE")) {
 				directions = directionWHITE;
 			} else {
 				directions = directionBLACK;
