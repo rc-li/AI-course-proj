@@ -9,8 +9,16 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
+	private static int[][] campLocations = {
+			{0,1},{0,2},{0,3},{0,4},{0,5},
+			{1,1},{1,2},{1,3},{1,4},{1,5},
+			{1,1},{1,2},{1,3},{1,4},
+			{2,1},{2,2},{2,3},
+			{3,1},{3,2},
+			{4,1},{4,2},
+	};
 
 	static class State implements Cloneable {
 		String gameMode;
@@ -168,7 +176,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MIN_VALUE;
-		ArrayList<State> states = actions(state);
+		ArrayList<State> states = actions(state, true);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = minValue(nextState, a, b);
@@ -199,7 +207,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MAX_VALUE;
-		ArrayList<State> states = actions(state);
+		ArrayList<State> states = actions(state, true);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = maxValue(nextState, a, b);
@@ -224,7 +232,7 @@ public class homework {
 		return null;
 	}
 
-	private static ArrayList<State> actions(State state) throws CloneNotSupportedException {
+	private static ArrayList<State> actions(State state, boolean needCampCheck) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
 //		int[][] directions;
@@ -235,8 +243,39 @@ public class homework {
 //		} else {
 //			directions = directionBLACK;
 //		}
+		
+//		check if there is still minion in camp
+		boolean campEmpty = true;
+		if (needCampCheck) {
+			for (int[] minion : state.yourMinions) {
+				for (int[] camp : campLocations) {
+					if (minion[0] == camp[0] && minion[1] == camp[1]) {
+						campEmpty = false;
+						break;
+					}
+				}
+				if (campEmpty == false) {
+					break;
+				}
+			}
+		}
+		
+		boolean skipMinion = true;
 		for (int i = 0; i < 19; i++) {
 			int[] minion = state.yourMinions.get(i);
+			
+			if (needCampCheck && campEmpty == false) {
+				for (int[] camp : campLocations) {
+					if (minion[0] == camp[0] && minion[1] == camp[1]) {
+						skipMinion = false;
+						break;
+					}
+				}
+				if (skipMinion) {
+					continue;
+				}
+			}
+			
 			state.minionExamined = i;
 			for (int[] direction : directions) {
 				int currentX = minion[0];
@@ -298,8 +337,12 @@ public class homework {
 				}
 //				($$$) i can actually use try catch to do this condition, if it saves time
 				jump(state, jumpX, jumpY, states);
+				
 
 			}
+		}
+		if (states.isEmpty()) {
+			states = actions(state, false);
 		}
 //		System.out.println("minion " + counter + " completed!");
 		return states;
@@ -357,7 +400,7 @@ public class homework {
 				jump(newState, -100, -100, states);
 			}
 		}
-//		insdie the recursive jump call
+//		inside the recursive jump call
 		if (state.jumpX == -100 && state.jumpY == -100) {
 			int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 },
 					{ -1, -1 } };
