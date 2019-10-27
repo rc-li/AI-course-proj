@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { 
 			{ 0,0 }, { 1,0 }, { 2,0 }, { 3,0 }, { 4,0 }, 
@@ -352,18 +352,18 @@ public class homework {
 						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
-								System.out.println("can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
+//								System.out.println("can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
 							}
 						}
 						else if (needMoveAway) {
 							if (awayMove) {
 								states.add(newState);
-								System.out.println("can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
+//								System.out.println("can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
 							}
 						}
 						else {
 							states.add(newState);
-							System.out.println("can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
+//							System.out.println("can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY);
 						}
 					}
 				}
@@ -470,18 +470,18 @@ public class homework {
 				if (campEmpty == false && needMoveAway == false) {
 					if (crossingBorder) {
 						states.add(newState);
-						System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//						System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 					}
 				}
 				else if (needMoveAway) {
 					if (awayMove) {
 						states.add(newState);
-						System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//						System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 					}
 				}
 				else {
 					states.add(newState);
-					System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//					System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 				}
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
@@ -595,18 +595,18 @@ public class homework {
 						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
-								System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//								System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 							}
 						}
 						else if (needMoveAway) {
 							if (awayMove) {
 								states.add(newState);
-								System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//								System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 							}
 						}
 						else {
 							states.add(newState);
-							System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
+//							System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY);
 						}
 
 //						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
