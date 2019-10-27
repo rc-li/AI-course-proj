@@ -170,7 +170,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MIN_VALUE;
-		ArrayList<State> states = actions(state, true);
+		ArrayList<State> states = actions(state, true, false);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = minValue(nextState, a, b);
@@ -201,7 +201,7 @@ public class homework {
 			return state;
 		}
 		state.v = Integer.MAX_VALUE;
-		ArrayList<State> states = actions(state, true);
+		ArrayList<State> states = actions(state, true, false);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = maxValue(nextState, a, b);
@@ -226,7 +226,7 @@ public class homework {
 		return null;
 	}
 
-	private static ArrayList<State> actions(State state, boolean needCampCheck) throws CloneNotSupportedException {
+	private static ArrayList<State> actions(State state, boolean needCampCheck, boolean needMoveAway) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
 		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 1 } };
@@ -246,7 +246,7 @@ public class homework {
 		else if (state.colorUPlay.equals("BLACK")) {
 			yourCamp = blackCampLocations;
 		}
-		if (needCampCheck) {
+		if (needCampCheck && !needMoveAway) {
 			for (int[] minion : state.yourMinions) {
 				for (int[] camp : yourCamp) {
 					if (minion[0] == camp[0] && minion[1] == camp[1]) {
@@ -308,6 +308,21 @@ public class homework {
 							crossingBorder = true;
 						}
 
+//						check if it's a move-away move
+						boolean awayMove = false;
+						if (needMoveAway) {
+							if (state.colorUPlay.equals("WHITE")) {
+								if (neighborX + neighborX - currentX - currentY < 0) {
+									awayMove = true;
+								}
+							}
+							else if (state.colorUPlay.equals("BLACK")) {
+								if (neighborX + neighborX - currentX - currentY > 0) {
+									awayMove = true;
+								}
+							}
+						}
+						
 //						update eval
 						if (state.colorUPlay.equals(whichPlayer)) {
 							if (state.colorUPlay.equals("WHITE")) {
@@ -330,23 +345,43 @@ public class homework {
 						ArrayList<int[]> temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						if (campEmpty == false) {
+						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
-								System.out.println("can move from "+currentX+","+currentY+" to "+neighborX+","+neighborY + " with eval value " + newState.eval_value);
+								System.out.println("can E cross border from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 							}
-						} else {
+						}
+						else if (needMoveAway) {
+							if (awayMove) {
+								states.add(newState);
+								System.out.println("can E move away from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
+							}
+						}
+						else {
 							states.add(newState);
+							System.out.println("can E outside from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 						}
 					}
 				}
 //				($$$) i can actually use try catch to do this condition, if it saves time
-				jump(state, jumpX, jumpY, states, campEmpty, yourCamp);
+				jump(state, jumpX, jumpY, states, campEmpty, yourCamp, needMoveAway);
 
 			}
 		}
+		/*
+		 * by default, needCampCheck is set to true, and actions() will check camp
+		 * emptyness then only add crossing move if camp is not empty. 
+		 * if no crossing border states are found, set needMoveAway to true, so that program
+		 * checks if it's an away move
+		 */
+		if (states.isEmpty() && needMoveAway == false) {
+			states = actions(state, needCampCheck, true);
+		}
+		/*
+		 * if there is no move-away, then set both to false and perform whole board search
+		 */		
 		if (states.isEmpty()) {
-			states = actions(state, false);
+			states = actions(state, false, false);
 		}
 //		System.out.println("minion " + counter + " completed!");
 		return states;
@@ -354,7 +389,7 @@ public class homework {
 
 //	($$$) here jumpx and jumpY were passed as duplicate
 //	($$$) i can actually make jump into a subclass of state
-	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states, boolean campEmpty, int[][] yourCamp)
+	private static void jump(State state, int jumpX, int jumpY, ArrayList<State> states, boolean campEmpty, int[][] yourCamp, boolean needMoveAway)
 			throws CloneNotSupportedException {
 //		spawning states of of jumping from where we 'E'ed in actions()
 		int currentX = state.currentX;
@@ -370,8 +405,8 @@ public class homework {
 				newState.board[currentY][currentX] = '.';
 				int[] yourNewMinion = { jumpX, jumpY };
 				newState.yourMinions.set(minionExamined, yourNewMinion);
-//				check if it's a crossing border move
 				
+//				check if it's a crossing border move
 				boolean startInCamp = false;
 				for (int[] camp : yourCamp) {
 					if (currentX == camp[0] && currentY == camp[1]) {
@@ -390,6 +425,22 @@ public class homework {
 				if (startInCamp && endOutCamp) {
 					crossingBorder = true;
 				}
+				
+//				check if it's an away move
+				boolean awayMove = false;
+				if (needMoveAway) {
+					if (state.colorUPlay.equals("WHITE")) {
+						if (jumpX + jumpY - currentX - currentY < 0) {
+							awayMove = true;
+						}
+					}
+					else if (state.colorUPlay.equals("BLACK")) {
+						if (jumpX + jumpY - currentX - currentY > 0) {
+							awayMove = true;
+						}
+					}
+				}
+				
 				if (state.colorUPlay.equals(whichPlayer)) {
 					if (state.colorUPlay.equals("WHITE")) {
 						newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY));
@@ -412,12 +463,21 @@ public class homework {
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
-				if (campEmpty == false) {
+				if (campEmpty == false && needMoveAway == false) {
 					if (crossingBorder) {
 						states.add(newState);
+						System.out.println("can J cross border from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 					}
-				} else {
+				}
+				else if (needMoveAway) {
+					if (awayMove) {
+						states.add(newState);
+						System.out.println("can J move away from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
+					}
+				}
+				else {
 					states.add(newState);
+					System.out.println("can J outside play from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 				}
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
@@ -425,7 +485,7 @@ public class homework {
 //				jumps++;
 
 //				jump(newState, jumpX, jumpY, states);
-				jump(newState, -100, -100, states, campEmpty, yourCamp);
+				jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 			}
 		}
 //		insdie the recursive jump call
@@ -498,8 +558,21 @@ public class homework {
 						if (startInCamp && endOutCamp) {
 							crossingBorder = true;
 						}
-//						newState.previousX = currentX;
-//						newState.previousY = currentY;
+						
+//						check if it's an away move
+						boolean awayMove = false;
+						if (needMoveAway) {
+							if (state.colorUPlay.equals("WHITE")) {
+								if (jumpX + jumpY - currentX - currentY < 0) {
+									awayMove = true;
+								}
+							}
+							else if (state.colorUPlay.equals("BLACK")) {
+								if (jumpX + jumpY - currentX - currentY > 0) {
+									awayMove = true;
+								}
+							}
+						}
 
 //						update currentX is necessary for next recursive call of jump()
 						newState.currentX = jumpX;
@@ -515,19 +588,28 @@ public class homework {
 						temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						if (campEmpty == false) {
+						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
+								System.out.println("can J cross border from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 							}
-						} else {
+						}
+						else if (needMoveAway) {
+							if (awayMove) {
+								states.add(newState);
+								System.out.println("can J move away from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
+							}
+						}
+						else {
 							states.add(newState);
+							System.out.println("can J outside play from " + currentX + "," + currentY + " to " + jumpX + "," + jumpY);
 						}
 
 //						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
 //								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 //						jumps++;
 
-						jump(newState, -100, -100, states, campEmpty, yourCamp);
+						jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 					}
 				}
 

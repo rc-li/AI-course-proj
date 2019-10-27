@@ -182,3 +182,1157 @@ Output:
 
 === 23:26:44.107 === Time Elapsed: 3.62 s ===
 
+=== 19:33:48.863 === Time Elapsed: 1.65 s ===
+can E cross border from 14,11 to 12,11
+can E cross border from 14,11 to 12,9
+can E cross border from 14,11 to 14,9
+can E cross border from 14,11 to 16,9
+can J cross border from 15,11 to 13,11
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,12 to 11,12
+can E cross border from 13,12 to 11,10
+can E cross border from 13,12 to 13,10
+can J cross border from 13,12 to 15,10
+can J cross border from 14,12 to 12,12
+can E cross border from 14,12 to 12,10
+can J cross border from 14,12 to 14,10
+can J cross border from 15,12 to 13,10
+can J cross border from 15,12 to 15,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 13,13 to 13,11
+can J cross border from 14,13 to 12,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:09.615 === Time Elapsed: 1.40 s ===
+can E cross border from 14,11 to 12,11
+can E cross border from 14,11 to 12,9
+can E cross border from 14,11 to 14,9
+can E cross border from 14,11 to 16,9
+can J cross border from 15,11 to 13,11
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,12 to 11,12
+can E cross border from 13,12 to 11,10
+can E cross border from 13,12 to 13,10
+can J cross border from 13,12 to 15,10
+can J cross border from 14,12 to 12,12
+can E cross border from 14,12 to 12,10
+can J cross border from 14,12 to 14,10
+can J cross border from 15,12 to 13,10
+can J cross border from 15,12 to 15,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 13,13 to 13,11
+can J cross border from 14,13 to 12,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:13.899 === Time Elapsed: 1.82 s ===
+can E cross border from 14,11 to 12,11
+can J cross border from 14,11 to 12,9
+can E cross border from 14,11 to 14,9
+can E cross border from 14,11 to 16,9
+can J cross border from 15,11 to 13,11
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,12 to 11,12
+can E cross border from 13,12 to 11,10
+can E cross border from 13,12 to 13,10
+can J cross border from 13,12 to 15,10
+can J cross border from 14,12 to 12,12
+can E cross border from 14,12 to 12,10
+can J cross border from 14,12 to 14,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 13,13 to 13,11
+can J cross border from 14,13 to 12,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:17.870 === Time Elapsed: 1.41 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,12 to 11,12
+can E cross border from 13,12 to 11,10
+can E cross border from 13,12 to 13,10
+can J cross border from 14,12 to 12,12
+can E cross border from 14,12 to 12,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 13,13 to 13,11
+can J cross border from 14,13 to 12,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:21.800 === Time Elapsed: 1.50 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,12 to 11,12
+can J cross border from 13,12 to 11,10
+can E cross border from 13,12 to 13,10
+can J cross border from 14,12 to 12,12
+can E cross border from 14,12 to 12,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 13,13 to 13,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:25.510 === Time Elapsed: 1.39 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 14,12 to 12,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can J cross border from 15,13 to 13,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:29.374 === Time Elapsed: 1.50 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can J cross border from 14,12 to 12,10
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:33.415 === Time Elapsed: 1.58 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 12,13 to 10,13
+can E cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 13,14 to 11,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:37.333 === Time Elapsed: 1.51 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 12,13 to 10,13
+can J cross border from 12,13 to 10,11
+can E cross border from 12,13 to 12,11
+can J cross border from 12,13 to 10,15
+can J cross border from 13,13 to 11,13
+can E cross border from 13,13 to 11,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 12,14 to 12,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:41.218 === Time Elapsed: 1.55 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 13,13 to 11,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can J cross border from 14,14 to 12,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:45.044 === Time Elapsed: 1.44 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can J cross border from 13,13 to 11,11
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:48.961 === Time Elapsed: 1.51 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 11,14 to 9,14
+can E cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 12,15 to 10,15
+can J cross border from 12,15 to 10,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:52.662 === Time Elapsed: 1.41 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 11,14 to 9,14
+can J cross border from 11,14 to 9,12
+can E cross border from 11,14 to 11,12
+can E cross border from 11,14 to 9,16
+can J cross border from 12,14 to 10,14
+can E cross border from 12,14 to 10,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 11,15 to 11,13
+can J cross border from 13,15 to 11,13
+
+=== 19:34:56.573 === Time Elapsed: 1.58 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 12,14 to 10,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+can J cross border from 13,15 to 11,13
+
+=== 19:35:00.282 === Time Elapsed: 1.46 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can J cross border from 12,14 to 10,12
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+
+=== 19:35:04.050 === Time Elapsed: 1.45 s ===
+can E cross border from 15,11 to 13,9
+can E cross border from 15,11 to 15,9
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+
+=== 19:35:07.706 === Time Elapsed: 1.35 s ===
+can E cross border from 11,15 to 9,15
+can E cross border from 11,15 to 9,13
+
+=== 19:35:11.718 === Time Elapsed: 1.57 s ===
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can J move away from 12,10 to 12,8
+can J move away from 13,10 to 11,8
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 13,11 to 11,9
+can J move away from 13,11 to 13,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:15.584 === Time Elapsed: 1.60 s ===
+can J move away from 12,9 to 10,7
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can J move away from 12,10 to 12,8
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:19.305 === Time Elapsed: 1.43 s ===
+can J move away from 11,8 to 9,6
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:23.256 === Time Elapsed: 1.54 s ===
+can J move away from 10,7 to 8,5
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:28.161 === Time Elapsed: 2.49 s ===
+can J move away from 9,6 to 7,4
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:33.392 === Time Elapsed: 1.81 s ===
+can J move away from 8,5 to 6,3
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:37.261 === Time Elapsed: 1.48 s ===
+can J move away from 7,4 to 5,2
+can E move away from 11,10 to 9,10
+can E move away from 11,10 to 9,8
+can J move away from 12,10 to 10,10
+can E move away from 10,11 to 8,11
+can E move away from 10,11 to 8,9
+can E move away from 10,11 to 10,9
+can J move away from 11,11 to 9,11
+can E move away from 11,11 to 9,9
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 10,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,10
+can E move away from 9,12 to 9,10
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,10
+can J move away from 10,12 to 10,10
+can E move away from 10,12 to 8,14
+can J move away from 11,12 to 9,10
+can J move away from 12,12 to 10,10
+can E move away from 10,13 to 8,13
+can J move away from 10,13 to 8,11
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can J move away from 11,13 to 9,11
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:35:41.123 === Time Elapsed: 1.49 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:35:45.029 === Time Elapsed: 1.50 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:35:49.646 === Time Elapsed: 2.09 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:35:53.990 === Time Elapsed: 1.94 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:35:59.011 === Time Elapsed: 2.29 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:04.248 === Time Elapsed: 1.55 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:08.117 === Time Elapsed: 1.47 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:12.083 === Time Elapsed: 1.52 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:15.863 === Time Elapsed: 1.48 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:19.982 === Time Elapsed: 1.77 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:23.951 === Time Elapsed: 1.59 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:27.761 === Time Elapsed: 1.50 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:32.448 === Time Elapsed: 1.86 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:36.335 === Time Elapsed: 1.46 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:40.290 === Time Elapsed: 1.62 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:44.273 === Time Elapsed: 1.52 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:48.251 === Time Elapsed: 1.54 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:36:52.239 === Time Elapsed: 1.55 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:36:56.275 === Time Elapsed: 1.60 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:00.341 === Time Elapsed: 1.68 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:04.380 === Time Elapsed: 1.59 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:08.248 === Time Elapsed: 1.47 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:12.128 === Time Elapsed: 1.47 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:16.180 === Time Elapsed: 1.61 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:20.140 === Time Elapsed: 1.66 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:24.012 === Time Elapsed: 1.44 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:27.876 === Time Elapsed: 1.57 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:31.825 === Time Elapsed: 1.53 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:35.868 === Time Elapsed: 1.57 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:40.018 === Time Elapsed: 1.70 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:44.787 === Time Elapsed: 1.92 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:49.045 === Time Elapsed: 1.70 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:37:53.161 === Time Elapsed: 1.62 s ===
+can J cross border from 4,1 to 6,1
+
+=== 19:37:57.489 === Time Elapsed: 1.68 s ===
+can J cross border from 4,1 to 6,3
+
+=== 19:38:01.894 === Time Elapsed: 1.82 s ===
+can J move away from 6,3 to 4,1
+can J move away from 6,3 to 6,1
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:05.868 === Time Elapsed: 1.54 s ===
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can J move away from 12,11 to 12,9
+can J move away from 13,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:09.874 === Time Elapsed: 1.57 s ===
+can J move away from 11,10 to 11,8
+can J move away from 12,10 to 10,8
+can J move away from 14,10 to 14,8
+can J move away from 12,11 to 12,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:13.851 === Time Elapsed: 1.53 s ===
+can J move away from 10,8 to 8,8
+can J move away from 11,9 to 9,7
+can J move away from 11,10 to 11,8
+can J move away from 14,10 to 14,8
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can J move away from 12,12 to 12,10
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:17.760 === Time Elapsed: 1.55 s ===
+can J move away from 10,8 to 8,8
+can J move away from 10,8 to 8,6
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can J move away from 12,12 to 12,10
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:21.810 === Time Elapsed: 1.55 s ===
+can J move away from 9,7 to 7,5
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can J move away from 12,12 to 12,10
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:25.820 === Time Elapsed: 1.58 s ===
+can J move away from 8,6 to 6,4
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can J move away from 12,12 to 12,10
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:29.795 === Time Elapsed: 1.54 s ===
+can J move away from 7,5 to 5,3
+can J move away from 14,10 to 14,8
+can J move away from 11,11 to 11,9
+can E move away from 9,12 to 7,12
+can E move away from 9,12 to 7,14
+can J move away from 10,12 to 8,12
+can E move away from 10,12 to 8,14
+can J move away from 12,12 to 12,10
+can E move away from 10,13 to 8,13
+can E move away from 10,13 to 8,15
+can J move away from 11,13 to 9,13
+can E move away from 10,14 to 8,14
+can E move away from 10,14 to 8,12
+can E move away from 10,14 to 8,16
+can E move away from 15,14 to 13,14
+can E move away from 15,14 to 13,12
+can E move away from 14,15 to 12,15
+can E move away from 14,15 to 12,13
+can E move away from 14,15 to 14,13
+can J move away from 15,15 to 13,15
+can E move away from 15,15 to 13,13
+can J move away from 15,15 to 15,13
+
+=== 19:38:33.625 === Time Elapsed: 1.45 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:38:37.563 === Time Elapsed: 1.55 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:38:41.557 === Time Elapsed: 1.63 s ===
+can J cross border from 4,2 to 6,2
+can J cross border from 4,2 to 4,4
+
+=== 19:38:45.601 === Time Elapsed: 1.60 s ===
+can J cross border from 4,2 to 6,4
+can J cross border from 4,2 to 4,4
+
+=== 19:38:49.527 === Time Elapsed: 1.65 s ===
+can J cross border from 4,2 to 6,2
+can J cross border from 4,2 to 6,4
+
+=== 19:38:53.502 === Time Elapsed: 1.54 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:38:57.442 === Time Elapsed: 1.52 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:01.514 === Time Elapsed: 1.62 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:05.621 === Time Elapsed: 1.71 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:09.487 === Time Elapsed: 1.47 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:13.506 === Time Elapsed: 1.56 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:17.397 === Time Elapsed: 1.51 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:21.484 === Time Elapsed: 1.60 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:25.536 === Time Elapsed: 1.70 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:29.411 === Time Elapsed: 1.50 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:33.448 === Time Elapsed: 1.59 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:37.467 === Time Elapsed: 1.57 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:41.415 === Time Elapsed: 1.57 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:45.457 === Time Elapsed: 1.63 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:49.610 === Time Elapsed: 1.66 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:39:53.652 === Time Elapsed: 1.61 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:39:57.727 === Time Elapsed: 1.62 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:40:01.772 === Time Elapsed: 1.57 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:40:05.678 === Time Elapsed: 1.51 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:40:09.807 === Time Elapsed: 1.59 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:40:13.872 === Time Elapsed: 1.57 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:40:17.787 === Time Elapsed: 1.55 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:40:21.724 === Time Elapsed: 1.57 s ===
+can J cross border from 4,2 to 6,4
+
+=== 19:40:25.932 === Time Elapsed: 1.69 s ===
+can J cross border from 4,2 to 6,2
+
+=== 19:40:29.809 === Time Elapsed: 1.27 s ===
+can J cross border from 4,2 to 6,4
+
+=== 20:04:28.943 === Time Elapsed: 1.76 s ===
+can J cross border from 3,2 to 5,0
+can J cross border from 3,1 to 5,1
+
+=== 20:04:33.168 === Time Elapsed: 1.64 s ===
+can J cross border from 3,1 to 5,1
+
+=== 20:04:37.053 === Time Elapsed: 1.43 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:04:40.836 === Time Elapsed: 1.49 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:04:45.080 === Time Elapsed: 1.94 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:04:49.157 === Time Elapsed: 1.69 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:04:53.793 === Time Elapsed: 2.16 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:04:58.427 === Time Elapsed: 2.06 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:05:00.636 === Time Elapsed: 2.10 s ===
+can E move away from 11,8 to 13,8
+can E move away from 11,8 to 13,10
+can E move away from 11,8 to 11,10
+can E move away from 11,8 to 13,6
+can E move away from 15,8 to 13,10
+can E move away from 8,9 to 10,9
+can E move away from 8,9 to 10,7
+can E move away from 10,9 to 12,9
+can J move away from 10,10 to 12,10
+can E move away from 10,10 to 12,8
+can J move away from 8,11 to 8,13
+can J move away from 9,11 to 9,13
+can J move away from 14,11 to 14,13
+can E move away from 14,11 to 12,13
+can E move away from 14,12 to 14,14
+can E move away from 15,12 to 13,14
+
+=== 20:05:03.210 === Time Elapsed: 2.19 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:05:07.574 === Time Elapsed: 1.89 s ===
+can E move away from 15,8 to 13,10
+can E move away from 8,9 to 10,9
+can E move away from 8,9 to 10,7
+can E move away from 10,9 to 12,9
+can E move away from 10,9 to 12,7
+can J move away from 10,10 to 12,10
+can E move away from 10,10 to 12,8
+can E move away from 13,10 to 13,12
+can E move away from 13,10 to 15,8
+can J move away from 8,11 to 8,13
+can J move away from 9,11 to 9,13
+can J move away from 14,11 to 14,13
+can E move away from 14,11 to 12,13
+can E move away from 14,12 to 14,14
+can E move away from 15,12 to 13,14
+
+=== 20:05:09.673 === Time Elapsed: 1.67 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:05:14.139 === Time Elapsed: 1.76 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:05:18.582 === Time Elapsed: 1.92 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:05:22.611 === Time Elapsed: 1.71 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
+=== 20:05:26.915 === Time Elapsed: 1.88 s ===
+can J cross border from 3,1 to 5,3
+can J cross border from 3,2 to 5,0
+
+=== 20:05:31.434 === Time Elapsed: 1.78 s ===
+can J cross border from 3,2 to 5,2
+can J cross border from 3,1 to 5,3
+
