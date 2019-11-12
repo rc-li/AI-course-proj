@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -86,8 +86,6 @@ public class homework {
 		State state = readInput();
 		State output = abSearch(state);
 		output(output);
-//		System.out.println("jumped " + jumps + " times");
-//		System.out.println("hw2 terminated");
 	}
 
 	private static State readInput() throws FileNotFoundException {
@@ -348,16 +346,16 @@ public class homework {
 						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
-								System.out.println("can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + i + " can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 							}
 						} else if (needMoveAway) {
 							if (awayMove) {
 								states.add(newState);
-								System.out.println("can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + i + " can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 							}
 						} else {
 							states.add(newState);
-							System.out.println("can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+							System.out.println("minion " + i + " can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 						}
 					}
 				}
@@ -469,16 +467,16 @@ public class homework {
 				if (campEmpty == false && needMoveAway == false) {
 					if (crossingBorder) {
 						states.add(newState);
-						System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+						System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 					}
 				} else if (needMoveAway) {
 					if (awayMove) {
 						states.add(newState);
-						System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+						System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 					}
 				} else {
 					states.add(newState);
-					System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+					System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 				}
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
@@ -486,6 +484,9 @@ public class homework {
 //				jumps++;
 
 //				jump(newState, jumpX, jumpY, states);
+				
+				newState.colorOpponent = state.colorOpponent;
+				newState.colorUPlay = state.colorUPlay;
 				jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 			}
 		}
@@ -547,14 +548,14 @@ public class homework {
 
 //						check if it's a crossing border move
 						boolean startInCamp = false;
-						for (int[] camp : blackCampLocations) {
+						for (int[] camp : yourCamp) {
 							if (state.jumpStartX == camp[0] && state.jumpStartY == camp[1]) {
 								startInCamp = true;
 								break;
 							}
 						}
 						boolean endOutCamp = true;
-						for (int[] camp : blackCampLocations) {
+						for (int[] camp : yourCamp) {
 							if (jumpX == camp[0] && jumpY == camp[1]) {
 								endOutCamp = false;
 								break;
@@ -596,22 +597,24 @@ public class homework {
 						if (campEmpty == false && needMoveAway == false) {
 							if (crossingBorder) {
 								states.add(newState);
-								System.out.println("can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 							}
 						} else if (needMoveAway) {
 							if (awayMove) {
 								states.add(newState);
-								System.out.println("can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 							}
 						} else {
 							states.add(newState);
-							System.out.println("can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+							System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 						}
 
 //						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
 //								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 //						jumps++;
 
+						newState.colorOpponent = state.colorOpponent;
+						newState.colorUPlay = state.colorUPlay;
 						jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 					}
 				}
