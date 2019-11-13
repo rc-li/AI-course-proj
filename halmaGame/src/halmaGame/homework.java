@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 1;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -34,8 +34,6 @@ public class homework {
 		int neighborY;
 		int jumpX;
 		int jumpY;
-		int previousDestX;
-		int previousDestY;
 		int jumpStartX;
 		int jumpStartY;
 		char moveMode;
@@ -140,7 +138,7 @@ public class homework {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
 		PrintWriter printer = new PrintWriter(file);
 		ArrayList<int[]> jumped = state.child.jumped;
-		int[] lastPair = { state.child.previousDestX, state.child.previousDestY };
+		int[] lastPair = { state.child.currentX, state.child.currentY};
 		jumped.add(lastPair);
 		int jumpedSize = jumped.size();
 		for (int i = 0; i < jumpedSize - 1; i++) {
@@ -325,14 +323,17 @@ public class homework {
 						if (state.colorUPlay.equals(whichPlayer)) {
 							if (state.colorUPlay.equals("WHITE")) {
 								newState.eval_value = state.eval_value
-										- ((neighborX + neighborY) - (currentX + currentY)) + oriDist - diagLineDist;
+										- ((neighborX + neighborY) - (currentX + currentY));
 							} else if (state.colorUPlay.equals("BLACK")) {
 								newState.eval_value = state.eval_value
-										+ ((neighborX + neighborY) - (currentX + currentY)) + oriDist - diagLineDist;
+										+ ((neighborX + neighborY) - (currentX + currentY));
 							}
 						}
-						newState.previousDestX = neighborX;
-						newState.previousDestY = neighborY;
+						newState.currentX = neighborX;
+						newState.currentY = neighborY;
+						if (true) {
+							System.out.println("\n minion " + i + " currentX is " + currentX + " currentY is "+ currentY);
+						}
 						newState.depthSearched++;
 						newState.moveMode = 'E';
 //						expand neibor need to add it to jumped too
@@ -443,14 +444,12 @@ public class homework {
 				if (state.colorUPlay.equals(whichPlayer)) {
 					if (state.colorUPlay.equals("WHITE")) {
 						newState.eval_value = state.eval_value
-								- ((jumpX + jumpY) - (currentX + currentY)) + oriDist - diagLineDist;
+								- ((jumpX + jumpY) - (currentX + currentY));
 					} else if (state.colorUPlay.equals("BLACK")) {
 						newState.eval_value = state.eval_value
-								+ ((jumpX + jumpY) - (currentX + currentY)) + oriDist - diagLineDist;
+								+ ((jumpX + jumpY) - (currentX + currentY));
 					}
 				}
-				newState.previousDestX = jumpX;
-				newState.previousDestY = jumpY;
 				newState.currentX = jumpX;
 				newState.currentY = jumpY;
 				newState.jumpX = -100;
@@ -501,9 +500,9 @@ public class homework {
 			} else {
 				directions = directionBLACK;
 			}
-			String t = state.colorUPlay;
-			state.colorUPlay = state.colorOpponent;
-			state.colorOpponent = t;
+//			String t = state.colorUPlay;
+//			state.colorUPlay = state.colorOpponent;
+//			state.colorOpponent = t;
 
 //			did i forget to switch the minions back?
 			ArrayList<int[]> temp = state.yourMinions;
@@ -540,9 +539,9 @@ public class homework {
 						double oriDist = Math.abs(jumpX - jumpY) / Math.sqrt(2);
 						if (state.colorUPlay.equals(whichPlayer)) {
 							if (state.colorUPlay.equals("WHITE")) {
-								newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY)) + oriDist - diagLineDist;
+								newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY));
 							} else if (state.colorUPlay.equals("BLACK")) {
-								newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY)) + oriDist - diagLineDist;
+								newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 							}
 						}
 
@@ -583,8 +582,6 @@ public class homework {
 //						update currentX is necessary for next recursive call of jump()
 						newState.currentX = jumpX;
 						newState.currentY = jumpY;
-						newState.previousDestX = jumpX;
-						newState.previousDestY = jumpY;
 						newState.moveMode = 'J';
 						newState.depthSearched++;
 						int[] previousLocation = { currentX, currentY };
