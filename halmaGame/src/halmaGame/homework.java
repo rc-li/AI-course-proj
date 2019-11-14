@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 1;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -26,7 +26,6 @@ public class homework {
 		String colorUPlay;
 		String colorOpponent;
 		float timeRemaining;
-		char[][] board = new char[16][16];
 		double eval_value;
 		int currentX;
 		int currentY;
@@ -41,6 +40,7 @@ public class homework {
 		int depthSearched;
 		double v;
 		State child;
+		char[][] board = new char[16][16];
 		ArrayList<int[]> yourMinions = new ArrayList<int[]>();
 		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
 		ArrayList<int[]> insideCamp = new ArrayList<int[]>();
@@ -160,6 +160,7 @@ public class homework {
 	}
 
 	private static State maxValue(State state, Double a, Double b) throws CloneNotSupportedException {
+		System.out.println("*** MaxValue is playing " + state.colorUPlay);
 		if (state.depthSearched >= searchDepth) {
 			state.v = state.eval_value;
 			return state;
@@ -191,6 +192,7 @@ public class homework {
 	}
 
 	private static State minValue(State state, Double a, Double b) throws CloneNotSupportedException {
+		System.out.println("*** MinValue is playing " + state.colorUPlay);
 		if (state.depthSearched >= searchDepth) {
 			state.v = state.eval_value;
 			return state;
@@ -541,9 +543,10 @@ public class homework {
 
 //				jump(newState, jumpX, jumpY, states);
 				
-				newState.colorOpponent = state.colorOpponent;
-				newState.colorUPlay = state.colorUPlay;
-				jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
+				State passState = (State) newState.clone();
+				passState.colorOpponent = state.colorOpponent;
+				passState.colorUPlay = state.colorUPlay;
+				jump(passState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 			}
 		}
 //		insdie the recursive jump call
@@ -699,9 +702,10 @@ public class homework {
 //								+ currentY + " to " + jumpX + "," + jumpY + " with eval value " + newState.eval_value);
 //						jumps++;
 
-						newState.colorOpponent = state.colorOpponent;
-						newState.colorUPlay = state.colorUPlay;
-						jump(newState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
+						State passState = (State) newState.clone();
+						passState.colorOpponent = state.colorOpponent;
+						passState.colorUPlay = state.colorUPlay;
+						jump(passState, -100, -100, states, campEmpty, yourCamp, needMoveAway);
 					}
 				}
 
