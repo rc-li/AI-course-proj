@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -236,10 +236,13 @@ public class homework {
 //		check if there is still minion in camp
 		boolean campEmpty = true;
 		int[][] yourCamp = null;
+		int[][] opponentCamp = null;
 		if (state.colorUPlay.equals("WHITE")) {
 			yourCamp = whiteCampLocations;
+			opponentCamp = blackCampLocations;
 		} else if (state.colorUPlay.equals("BLACK")) {
 			yourCamp = blackCampLocations;
+			opponentCamp = whiteCampLocations;
 		}
 		if (needCampCheck && !needMoveAway) {
 			for (int[] minion : state.yourMinions) {
@@ -302,6 +305,26 @@ public class homework {
 						if (startInCamp && endOutCamp) {
 							crossingBorder = true;
 						}
+						
+//						check if it's an escape move(moving out of the opponent camp)
+						boolean startInOpponentCamp = false;
+						for (int[] camp: opponentCamp) {
+							if (currentX == camp[0] && currentY == camp[1]) {
+								startInOpponentCamp = true;
+								break;
+							}
+						}
+						boolean endOutOpponentCamp = true;
+						for (int[] camp : opponentCamp) {
+							if (neighborX == camp[0] && neighborY == camp[1]) {
+								endOutOpponentCamp = false;
+								break;
+							}
+						}
+						boolean escapeMove = false;
+						if (startInOpponentCamp && endOutOpponentCamp) {
+							escapeMove = true;
+						}
 
 //						check if it's a move-away move
 						boolean awayMove = false;
@@ -344,19 +367,21 @@ public class homework {
 						ArrayList<int[]> temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						if (campEmpty == false && needMoveAway == false) {
-							if (crossingBorder) {
+						if (!escapeMove) {
+							if (campEmpty == false && needMoveAway == false) {
+								if (crossingBorder) {
+									states.add(newState);
+									System.out.println("minion " + i + " can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+								}
+							} else if (needMoveAway) {
+								if (awayMove) {
+									states.add(newState);
+									System.out.println("minion " + i + " can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+								}
+							} else {
 								states.add(newState);
-								System.out.println("minion " + i + " can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + i + " can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 							}
-						} else if (needMoveAway) {
-							if (awayMove) {
-								states.add(newState);
-								System.out.println("minion " + i + " can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
-							}
-						} else {
-							states.add(newState);
-							System.out.println("minion " + i + " can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 						}
 					}
 				}
@@ -437,6 +462,35 @@ public class homework {
 						}
 					}
 				}
+				
+//				determine your camp
+				int[][] opponentCamp = null;
+				if (yourCamp == whiteCampLocations) {
+					opponentCamp = blackCampLocations;
+				}
+				else {
+					opponentCamp = whiteCampLocations;
+				}
+				
+//				check if it's an escape move(moving out of the opponent camp)
+				boolean startInOpponentCamp = false;
+				for (int[] camp: opponentCamp) {
+					if (currentX == camp[0] && currentY == camp[1]) {
+						startInOpponentCamp = true;
+						break;
+					}
+				}
+				boolean endOutOpponentCamp = true;
+				for (int[] camp : opponentCamp) {
+					if (jumpX == camp[0] && jumpY == camp[1]) {
+						endOutOpponentCamp = false;
+						break;
+					}
+				}
+				boolean escapeMove = false;
+				if (startInOpponentCamp && endOutOpponentCamp) {
+					escapeMove = true;
+				}
 
 //				update eval
 				double diagLineDist = Math.abs(jumpX - jumpY) / Math.sqrt(2);
@@ -463,19 +517,22 @@ public class homework {
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
-				if (campEmpty == false && needMoveAway == false) {
-					if (crossingBorder) {
+				
+				if (!escapeMove) {
+					if (campEmpty == false && needMoveAway == false) {
+						if (crossingBorder) {
+							states.add(newState);
+							System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+						}
+					} else if (needMoveAway) {
+						if (awayMove) {
+							states.add(newState);
+							System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+						}
+					} else {
 						states.add(newState);
-						System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+						System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 					}
-				} else if (needMoveAway) {
-					if (awayMove) {
-						states.add(newState);
-						System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
-					}
-				} else {
-					states.add(newState);
-					System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 				}
 
 //				System.out.println("minion " + state.minionExamined + " can jump from " + currentX + "," + currentY
@@ -578,6 +635,35 @@ public class homework {
 								}
 							}
 						}
+						
+//						determine your camp
+						int[][] opponentCamp = null;
+						if (yourCamp == whiteCampLocations) {
+							opponentCamp = blackCampLocations;
+						}
+						else {
+							opponentCamp = whiteCampLocations;
+						}
+						
+//						check if it's an escape move(moving out of the opponent camp)
+						boolean startInOpponentCamp = false;
+						for (int[] camp: opponentCamp) {
+							if (currentX == camp[0] && currentY == camp[1]) {
+								startInOpponentCamp = true;
+								break;
+							}
+						}
+						boolean endOutOpponentCamp = true;
+						for (int[] camp : opponentCamp) {
+							if (jumpX == camp[0] && jumpY == camp[1]) {
+								endOutOpponentCamp = false;
+								break;
+							}
+						}
+						boolean escapeMove = false;
+						if (startInOpponentCamp && endOutOpponentCamp) {
+							escapeMove = true;
+						}
 
 //						update currentX is necessary for next recursive call of jump()
 						newState.currentX = jumpX;
@@ -591,19 +677,22 @@ public class homework {
 						temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						if (campEmpty == false && needMoveAway == false) {
-							if (crossingBorder) {
+						
+						if (!escapeMove) {
+							if (campEmpty == false && needMoveAway == false) {
+								if (crossingBorder) {
+									states.add(newState);
+									System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+								}
+							} else if (needMoveAway) {
+								if (awayMove) {
+									states.add(newState);
+									System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+								}
+							} else {
 								states.add(newState);
-								System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+								System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 							}
-						} else if (needMoveAway) {
-							if (awayMove) {
-								states.add(newState);
-								System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
-							}
-						} else {
-							states.add(newState);
-							System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 						}
 
 //						System.out.println("minion " + state.minionExamined + " can jump from " + currentX + ","
