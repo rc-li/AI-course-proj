@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 3;
+	private static int searchDepth = 1;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -45,6 +45,7 @@ public class homework {
 		ArrayList<int[]> opponentMinions = new ArrayList<int[]>();
 		ArrayList<int[]> insideCamp = new ArrayList<int[]>();
 		ArrayList<int[]> jumped = new ArrayList<int[]>();
+		ArrayList<int[]> path = new ArrayList<int[]>();
 
 		@SuppressWarnings("unchecked")
 		@Override
@@ -70,6 +71,11 @@ public class homework {
 			int jumpedSize = jumped.size();
 			for (int i = 0; i < jumpedSize; i++) {
 				cloned.jumped.set(i, cloned.jumped.get(i).clone());
+			}
+			cloned.path = (ArrayList<int[]>) cloned.path.clone();
+			int pathSize = path.size();
+			for (int i = 0; i < pathSize; i++) {
+				cloned.path.set(i, cloned.path.get(i).clone());
 			}
 			cloned.insideCamp = (ArrayList<int[]>) cloned.insideCamp.clone();
 			int campSize = insideCamp.size();
@@ -137,12 +143,12 @@ public class homework {
 	private static void output(State state) throws FileNotFoundException {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
 		PrintWriter printer = new PrintWriter(file);
-		ArrayList<int[]> jumped = state.child.jumped;
-		int[] lastPair = { state.child.currentX, state.child.currentY};
-		jumped.add(lastPair);
+		ArrayList<int[]> jumped = state.child.path;
+//		int[] lastPair = { state.child.currentX, state.child.currentY};
+//		jumped.add(lastPair);
 		int jumpedSize = jumped.size();
 		for (int i = 0; i < jumpedSize - 1; i++) {
-			if (i < jumpedSize - 2) {
+			if (i < jumpedSize - 1) {
 				printer.write(state.child.moveMode + " " + jumped.get(i)[0] + "," + jumped.get(i)[1] + " "
 						+ jumped.get(i + 1)[0] + "," + jumped.get(i + 1)[1] + "\n");
 			} else {
@@ -160,13 +166,13 @@ public class homework {
 	}
 
 	private static State maxValue(State state, Double a, Double b) throws CloneNotSupportedException {
-		System.out.println("*** MaxValue is playing " + state.colorUPlay);
+//		System.out.println("*** MaxValue is playing " + state.colorUPlay);
 		if (state.depthSearched >= searchDepth) {
 			state.v = state.eval_value;
 			return state;
 		}
 		state.v = Integer.MIN_VALUE;
-		ArrayList<State> states = actions(state, true, false);
+		ArrayList<State> states = actions(state, true, false, false);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = minValue(nextState, a, b);
@@ -192,13 +198,13 @@ public class homework {
 	}
 
 	private static State minValue(State state, Double a, Double b) throws CloneNotSupportedException {
-		System.out.println("*** MinValue is playing " + state.colorUPlay);
+//		System.out.println("*** MinValue is playing " + state.colorUPlay);
 		if (state.depthSearched >= searchDepth) {
 			state.v = state.eval_value;
 			return state;
 		}
 		state.v = Integer.MAX_VALUE;
-		ArrayList<State> states = actions(state, true, false);
+		ArrayList<State> states = actions(state, true, false, false);
 		for (int i = 0; i < states.size(); i++) {
 			State nextState = states.get(i);
 			State retState = maxValue(nextState, a, b);
@@ -223,7 +229,7 @@ public class homework {
 		return null;
 	}
 
-	private static ArrayList<State> actions(State state, boolean needCampCheck, boolean needMoveAway)
+	private static ArrayList<State> actions(State state, boolean needCampCheck, boolean needMoveAway, boolean outOfCampSearch)
 			throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
@@ -278,7 +284,10 @@ public class homework {
 				state.jumpY = state.currentY + direction[1] * 2;
 				state.jumpStartX = currentX;
 				state.jumpStartY = currentY;
+				state.jumped = new ArrayList<int[]>();
+				
 
+				
 				if (0 <= neighborX && neighborX < 16 && 0 <= neighborY && neighborY < 16) {
 					char neighbor = state.board[neighborY][neighborX];
 					if (neighbor == '.') {
@@ -361,9 +370,14 @@ public class homework {
 						}
 						newState.depthSearched++;
 						newState.moveMode = 'E';
-//						expand neibor need to add it to jumped too
-						int[] previousLocation = { currentX, currentY };
-						newState.jumped.add(previousLocation);
+						int[] newLocation = { neighborX, neighborY };
+						int[] currentLocation = {currentX,currentY};
+						if (newState.depthSearched == 1) {
+							newState.path.add(currentLocation);
+							newState.path.add(newLocation);
+						}
+						newState.jumped.add(currentLocation);
+						newState.jumped.add(newLocation);
 						newState.colorUPlay = state.colorOpponent;
 						newState.colorOpponent = state.colorUPlay;
 						ArrayList<int[]> temp = newState.yourMinions;
@@ -399,14 +413,21 @@ public class homework {
 		 * it's an away move
 		 */
 		if (states.isEmpty() && needMoveAway == false) {
-			states = actions(state, needCampCheck, true);
+			states = actions(state, needCampCheck, true, outOfCampSearch);
 		}
 		/*
 		 * if there is no move-away, then set both to false and perform whole board
 		 * search
 		 */
-		if (states.isEmpty()) {
-			states = actions(state, false, false);
+		if (states.isEmpty() && outOfCampSearch == false) {
+			outOfCampSearch = true;
+			states = actions(state, false, false, outOfCampSearch);
+			if (states.isEmpty()) {
+				State ret = new State();
+				ret.eval_value = state.eval_value;
+				ret.depthSearched = Integer.MAX_VALUE;
+				states.add(ret);
+			}
 		}
 //		System.out.println("minion " + counter + " completed!");
 		return states;
@@ -514,8 +535,14 @@ public class homework {
 				newState.depthSearched++;
 				newState.colorUPlay = state.colorOpponent;
 				newState.colorOpponent = state.colorUPlay;
-				int[] previousLocation = { currentX, currentY };
-				newState.jumped.add(previousLocation);
+				int[] newLocation = { jumpX, jumpY };
+				int[] currentLocation = {currentX, currentY};
+				if (newState.depthSearched == 1) {
+					newState.path.add(currentLocation);
+					newState.path.add(newLocation);
+				}
+				newState.jumped.add(currentLocation);
+				newState.jumped.add(newLocation);
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
@@ -672,9 +699,11 @@ public class homework {
 						newState.currentX = jumpX;
 						newState.currentY = jumpY;
 						newState.moveMode = 'J';
-						newState.depthSearched++;
-						int[] previousLocation = { currentX, currentY };
-						newState.jumped.add(previousLocation);
+						int[] newLocation = { jumpX, jumpY };
+						if (newState.depthSearched == 1) {
+							newState.path.add(newLocation);
+						}
+						newState.jumped.add(newLocation);
 						newState.colorUPlay = state.colorOpponent;
 						newState.colorOpponent = state.colorUPlay;
 						temp = newState.yourMinions;
