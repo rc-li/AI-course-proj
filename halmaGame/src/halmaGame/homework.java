@@ -1,5 +1,6 @@
 package halmaGame;
 
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -86,11 +87,134 @@ public class homework {
 		}
 	}
 
+	static class Scan {
+		ArrayList<int[]> blocks = new ArrayList<int[]>();
+		ArrayList<int[]> insiders = new ArrayList<int[]>();
+		ArrayList<int[]> outsiders = new ArrayList<int[]>();
+	}
+	
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
-		State output = abSearch(state);
-		output(output);
+		Scan scan = lateGameScan(state);
+		if (scan.outsiders.size() > 2) {
+			State output = abSearch(state);
+			output(output);
+		}
+		else {
+			int[][] move = lateGameMove(state, scan);
+			File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
+			PrintWriter printer = new PrintWriter(file);
+			printer.write("E " + move[0][0] + "," + move[0][1] + " " + move[1][0] + "," + move[1][1]);
+			printer.close();
+		}
 	}
+	
+	private static int[][] lateGameMove(State state, Scan scan) {
+//			pick the minion and the block to move
+		int[] pickMinion = scan.outsiders.get(0);
+		int[] pickBlock = scan.blocks.get(0);
+		double minDistance = Point.distance(pickMinion[0], pickMinion[1], pickBlock[0], pickBlock[1]);
+		double distance;
+		int[] block = new int[2];
+		for (int i = 0; i < scan.blocks.size(); i++) {
+			block = scan.blocks.get(i);
+			distance = Point.distance(pickMinion[0], pickMinion[1], block[0], block[1]);
+			if (distance < minDistance) {
+				pickBlock = block;
+			}
+		}
+//			determine direction to move the block
+		int[] direction = new int[2];
+		if (pickMinion[0] - pickBlock[0] < 0) {
+			direction[0] = -1;
+		}
+		else if (pickMinion[0] - pickBlock[0] > 0) {
+			direction[0] = 1;
+		}
+		else {
+			direction[0] = 0;
+		}
+		
+		if (pickMinion[1] - pickBlock[1] < 0) {
+			direction[1] = -1;
+		}
+		else if (pickMinion[1] - pickBlock[1] > 0) {
+			direction[1] = 1;
+		}
+		else {
+			direction[1] = 0;
+		}
+		
+		int[] pieceToMove = {pickBlock[0] + direction[0], pickBlock[1] + direction[1]};
+		
+//			check if pieceToMove is inside the camp
+		boolean isInside = false;
+		if (state.colorUPlay.equals("WHITE")) {
+			for (int[] camp : blackCampLocations) {
+				if (Arrays.equals(camp, pieceToMove)) {
+					isInside = true;
+					break;
+				}
+			}
+		}
+		else if (state.colorUPlay.equals("BLACK")) {
+			for (int[] camp : whiteCampLocations) {
+				if (Arrays.equals(camp,pieceToMove)) {
+					isInside = true;
+					break;
+				}
+			}
+		}
+		
+		
+//		if pieceToMove is inside the camp, return the block move
+		if (isInside) {
+			int[][] ret = {{pickBlock[0] + direction[0], pickBlock[1] + direction[1]}, {pickBlock[0], pickBlock[1]}};
+			return ret;
+		}
+		else {
+			int[][] ret = {{pickMinion[0],pickMinion[1]},{pickMinion[0]-direction[0],pickMinion[1]-direction[1]}};
+			return ret;
+		}
+	}
+	
+	private static Scan lateGameScan(State state){
+		Scan s = new Scan();
+		if (state.colorUPlay.equals("WHITE")) {
+			for (int[] camp : blackCampLocations) {
+				if (state.board[camp[1]][camp[0]] == '.') {
+					s.blocks.add(camp);
+				}
+				else if (state.board[camp[1]][camp[0]] == 'W') {
+					s.insiders.add(camp);
+				}
+			}
+		}
+		else if (state.colorUPlay.equals("BLACK")) {
+			for (int[] camp : whiteCampLocations) {
+				if (state.board[camp[1]][camp[0]] == '.') {
+					s.blocks.add(camp);
+				}
+				else if (state.board[camp[1]][camp[0]] == 'B') {
+					s.insiders.add(camp);
+				}
+			}
+		}
+		for (int[] minion : state.yourMinions) {
+			boolean isInside = false;
+			for (int[] camp : s.insiders) {
+				if (Arrays.equals(camp, minion)) {
+					isInside = true;
+					break;
+				}
+			}
+			if (!isInside) {
+				s.outsiders.add(minion);
+			}
+		}
+		return s;
+	}
+	
 
 	private static State readInput() throws FileNotFoundException {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\input.txt");
