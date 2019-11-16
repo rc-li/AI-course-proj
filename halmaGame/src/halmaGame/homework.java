@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 5;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -21,7 +21,7 @@ public class homework {
 			{ 11, 15 }, { 12, 15 }, { 13, 15 }, { 14, 15 }, { 15, 15 } };
 
 	private static DecimalFormat df = new DecimalFormat("#.##");
-	
+
 	static class State implements Cloneable {
 		String gameMode;
 		String colorUPlay;
@@ -92,32 +92,32 @@ public class homework {
 		ArrayList<int[]> insiders = new ArrayList<int[]>();
 		ArrayList<int[]> outsiders = new ArrayList<int[]>();
 	}
-	
+
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
 		Scan scan = lateGameScan(state);
 		if (scan.outsiders.size() > 4) {
 			State output = abSearch(state);
 			output(output);
-		}
-		else {
+		} else {
 			int[][] move = lateGameMove(state, scan);
-			File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
+			File file = new File(
+					"C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\output.txt");
 			PrintWriter printer = new PrintWriter(file);
 			printer.write("E " + move[0][0] + "," + move[0][1] + " " + move[1][0] + "," + move[1][1]);
 			printer.close();
 		}
 	}
-	
+
 	private static int[][] lateGameMove(State state, Scan scan) {
-//			pick the minion and the block to move
+//		pick the minion and the block to move
 		int[] pickMinion = scan.outsiders.get(0);
 		int[] pickBlock = scan.blocks.get(0);
 		double minDistance = Point.distance(pickMinion[0], pickMinion[1], pickBlock[0], pickBlock[1]);
 		double distance;
 		int[] block = new int[2];
 		int[] minion = new int[2];
-		
+
 		for (int i = 0; i < scan.outsiders.size(); i++) {
 			minion = scan.outsiders.get(i);
 			for (int i1 = 0; i1 < scan.blocks.size(); i1++) {
@@ -129,81 +129,108 @@ public class homework {
 					minDistance = distance;
 				}
 			}
-			
+
 		}
-//			determine direction to move the block
+//		determine direction to move the block
 		int[] direction = new int[2];
 		if (pickMinion[0] - pickBlock[0] < 0) {
 			direction[0] = -1;
-		}
-		else if (pickMinion[0] - pickBlock[0] > 0) {
+		} else if (pickMinion[0] - pickBlock[0] > 0) {
 			direction[0] = 1;
-		}
-		else {
+		} else {
 			direction[0] = 0;
 		}
-		
+
 		if (pickMinion[1] - pickBlock[1] < 0) {
 			direction[1] = -1;
-		}
-		else if (pickMinion[1] - pickBlock[1] > 0) {
+		} else if (pickMinion[1] - pickBlock[1] > 0) {
 			direction[1] = 1;
-		}
-		else {
+		} else {
 			direction[1] = 0;
 		}
-		
-		int[] pieceToMove = {pickBlock[0] + direction[0], pickBlock[1] + direction[1]};
-		
-//			check if pieceToMove is inside the camp
+
+		int[] pieceToMove = { pickBlock[0] + direction[0], pickBlock[1] + direction[1] };
+		ArrayList<int[]> potentialFurthurMoves = new ArrayList<int[]>();
+		int[] potentialRightMove = { pickBlock[0] + 1, pickBlock[1] };
+		int[] potentialDownMove = { pickBlock[0], pickBlock[1] + 1 };
+		int[] potentialLeftMove = { pickBlock[0] - 1, pickBlock[1] };
+		int[] potentialUPMove = { pickBlock[0], pickBlock[1] - 1 };
+		potentialFurthurMoves.add(potentialRightMove);
+		potentialFurthurMoves.add(potentialDownMove);
+		potentialFurthurMoves.add(potentialLeftMove);
+		potentialFurthurMoves.add(potentialUPMove);
+
+//		check if pieceToMove, potentialRIght and potentialDOwn are inside the camp
 		boolean isInside = false;
+		boolean rightInside = false;
+		boolean downInside = false;
+		boolean leftInside = false;
+		boolean upInside = false;
 		if (state.colorUPlay.equals("WHITE")) {
 			for (int[] camp : blackCampLocations) {
 				if (Arrays.equals(camp, pieceToMove)) {
 					isInside = true;
-					break;
+				} else if (Arrays.equals(camp, potentialRightMove)) {
+					rightInside = true;
+				} else if (Arrays.equals(camp, potentialDownMove)) {
+					downInside = true;
 				}
 			}
-		}
-		else if (state.colorUPlay.equals("BLACK")) {
+		} else if (state.colorUPlay.equals("BLACK")) {
 			for (int[] camp : whiteCampLocations) {
-				if (Arrays.equals(camp,pieceToMove)) {
+				if (Arrays.equals(camp, pieceToMove)) {
 					isInside = true;
-					break;
+				} else if (Arrays.equals(camp, potentialLeftMove)) {
+					leftInside = true;
+				} else if (Arrays.equals(camp, potentialUPMove)) {
+					upInside = true;
 				}
 			}
 		}
-		
-		
-//		if pieceToMove is inside the camp, return the block move
+
+//	if pieceToMove is inside the camp, return the block move
 		if (isInside) {
-			int[][] ret = {{pickBlock[0] + direction[0], pickBlock[1] + direction[1]}, {pickBlock[0], pickBlock[1]}};
+			int[][] ret = { { pickBlock[0] + direction[0], pickBlock[1] + direction[1] },
+					{ pickBlock[0], pickBlock[1] } };
 			return ret;
 		}
+//	if pieceToMove is not inside the camp (the block reached margin), then check if the block is at the four golden spot
+		else if (rightInside) {
+			int[][] ret = { { pickBlock[0] + 1, pickBlock[1] }, { pickBlock[0], pickBlock[1] } };
+			return ret;
+		} else if (downInside) {
+			int[][] ret = { { pickBlock[0], pickBlock[1] + 1 }, { pickBlock[0], pickBlock[1] } };
+			return ret;
+		} else if (leftInside) {
+			int[][] ret = { { pickBlock[0] - 1, pickBlock[1] }, { pickBlock[0], pickBlock[1] } };
+			return ret;
+		} else if (upInside) {
+			int[][] ret = { { pickBlock[0], pickBlock[1] - 1 }, { pickBlock[0], pickBlock[1] } };
+			return ret;
+		}
+//	if block is already at golden spot, then pull the minion closer, until in
 		else {
-			int[][] ret = {{pickMinion[0],pickMinion[1]},{pickMinion[0]-direction[0],pickMinion[1]-direction[1]}};
+			int[][] ret = { { pickMinion[0], pickMinion[1] },
+					{ pickMinion[0] - direction[0], pickMinion[1] - direction[1] } };
 			return ret;
 		}
 	}
-	
-	private static Scan lateGameScan(State state){
+
+	private static Scan lateGameScan(State state) {
 		Scan s = new Scan();
 		if (state.colorUPlay.equals("WHITE")) {
 			for (int[] camp : blackCampLocations) {
 				if (state.board[camp[1]][camp[0]] == '.') {
 					s.blocks.add(camp);
-				}
-				else if (state.board[camp[1]][camp[0]] == 'W') {
+				} else if (state.board[camp[1]][camp[0]] == 'W') {
 					s.insiders.add(camp);
 				}
 			}
-		}
-		else if (state.colorUPlay.equals("BLACK")) {
+		} else if (state.colorUPlay.equals("BLACK")) {
 			for (int[] camp : whiteCampLocations) {
 				if (state.board[camp[1]][camp[0]] == '.') {
 					s.blocks.add(camp);
-				}
-				else if (state.board[camp[1]][camp[0]] == 'B') {
+				} else if (state.board[camp[1]][camp[0]] == 'B') {
 					s.insiders.add(camp);
 				}
 			}
@@ -222,7 +249,6 @@ public class homework {
 		}
 		return s;
 	}
-	
 
 	private static State readInput() throws FileNotFoundException {
 		File file = new File("C:\\Users\\Ruicheng\\Documents\\GitHub\\CSCI-561-updated\\halmaGame\\src\\input.txt");
@@ -361,8 +387,8 @@ public class homework {
 		return null;
 	}
 
-	private static ArrayList<State> actions(State state, boolean needCampCheck, boolean needMoveAway, boolean outOfCampSearch)
-			throws CloneNotSupportedException {
+	private static ArrayList<State> actions(State state, boolean needCampCheck, boolean needMoveAway,
+			boolean outOfCampSearch) throws CloneNotSupportedException {
 		ArrayList<State> states = new ArrayList<homework.State>();
 		int[][] directions = { { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, 1 }, { 0, -1 }, { -1, 1 }, { -1, 0 }, { -1, -1 } };
 		int[][] directionWHITE = { { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 1 } };
@@ -417,9 +443,7 @@ public class homework {
 				state.jumpStartX = currentX;
 				state.jumpStartY = currentY;
 				state.jumped = new ArrayList<int[]>();
-				
 
-				
 				if (0 <= neighborX && neighborX < 16 && 0 <= neighborY && neighborY < 16) {
 					char neighbor = state.board[neighborY][neighborX];
 					if (neighbor == '.') {
@@ -448,10 +472,10 @@ public class homework {
 						if (startInCamp && endOutCamp) {
 							crossingBorder = true;
 						}
-						
+
 //						check if it's an escape move(moving out of the opponent camp)
 						boolean startInOpponentCamp = false;
-						for (int[] camp: opponentCamp) {
+						for (int[] camp : opponentCamp) {
 							if (currentX == camp[0] && currentY == camp[1]) {
 								startInOpponentCamp = true;
 								break;
@@ -503,7 +527,7 @@ public class homework {
 						newState.depthSearched++;
 						newState.moveMode = 'E';
 						int[] newLocation = { neighborX, neighborY };
-						int[] currentLocation = {currentX,currentY};
+						int[] currentLocation = { currentX, currentY };
 						if (newState.depthSearched == 1) {
 							newState.path.add(currentLocation);
 							newState.path.add(newLocation);
@@ -617,19 +641,18 @@ public class homework {
 						}
 					}
 				}
-				
+
 //				determine your camp
 				int[][] opponentCamp = null;
 				if (yourCamp == whiteCampLocations) {
 					opponentCamp = blackCampLocations;
-				}
-				else {
+				} else {
 					opponentCamp = whiteCampLocations;
 				}
-				
+
 //				check if it's an escape move(moving out of the opponent camp)
 				boolean startInOpponentCamp = false;
-				for (int[] camp: opponentCamp) {
+				for (int[] camp : opponentCamp) {
 					if (currentX == camp[0] && currentY == camp[1]) {
 						startInOpponentCamp = true;
 						break;
@@ -652,11 +675,9 @@ public class homework {
 				double oriDist = Math.abs(currentX - currentY) / Math.sqrt(2);
 				if (state.colorUPlay.equals(whichPlayer)) {
 					if (state.colorUPlay.equals("WHITE")) {
-						newState.eval_value = state.eval_value
-								- ((jumpX + jumpY) - (currentX + currentY));
+						newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY));
 					} else if (state.colorUPlay.equals("BLACK")) {
-						newState.eval_value = state.eval_value
-								+ ((jumpX + jumpY) - (currentX + currentY));
+						newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
 					}
 				}
 				newState.currentX = jumpX;
@@ -668,7 +689,7 @@ public class homework {
 				newState.colorUPlay = state.colorOpponent;
 				newState.colorOpponent = state.colorUPlay;
 				int[] newLocation = { jumpX, jumpY };
-				int[] currentLocation = {currentX, currentY};
+				int[] currentLocation = { currentX, currentY };
 				if (newState.depthSearched == 1) {
 					newState.path.add(currentLocation);
 					newState.path.add(newLocation);
@@ -678,7 +699,7 @@ public class homework {
 				ArrayList<int[]> temp = newState.yourMinions;
 				newState.yourMinions = newState.opponentMinions;
 				newState.opponentMinions = temp;
-				
+
 				if (!escapeMove) {
 					if (campEmpty == false && needMoveAway == false) {
 						if (crossingBorder) {
@@ -701,7 +722,7 @@ public class homework {
 //				jumps++;
 
 //				jump(newState, jumpX, jumpY, states);
-				
+
 				State passState = (State) newState.clone();
 				passState.colorOpponent = state.colorOpponent;
 				passState.colorUPlay = state.colorUPlay;
@@ -797,19 +818,18 @@ public class homework {
 								}
 							}
 						}
-						
+
 //						determine your camp
 						int[][] opponentCamp = null;
 						if (yourCamp == whiteCampLocations) {
 							opponentCamp = blackCampLocations;
-						}
-						else {
+						} else {
 							opponentCamp = whiteCampLocations;
 						}
-						
+
 //						check if it's an escape move(moving out of the opponent camp)
 						boolean startInOpponentCamp = false;
-						for (int[] camp: opponentCamp) {
+						for (int[] camp : opponentCamp) {
 							if (currentX == camp[0] && currentY == camp[1]) {
 								startInOpponentCamp = true;
 								break;
@@ -841,7 +861,7 @@ public class homework {
 						temp = newState.yourMinions;
 						newState.yourMinions = newState.opponentMinions;
 						newState.opponentMinions = temp;
-						
+
 						if (!escapeMove) {
 							if (campEmpty == false && needMoveAway == false) {
 								if (crossingBorder) {
