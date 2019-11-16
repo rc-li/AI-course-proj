@@ -1,0 +1,262 @@
+=== 16:12:56.680 === Time Elapsed: 1.72 s ===
+
+=== 16:13:00.881 === Time Elapsed: 1.87 s ===
+
+=== 16:13:05.585 === Time Elapsed: 2.16 s ===
+
+=== 16:13:27.830 === Time Elapsed: 1.76 s ===
+
+=== 16:13:38.457 === Time Elapsed: 1.89 s ===
+
+=== 16:13:42.360 === Time Elapsed: 1.55 s ===
+
+=== 16:13:46.242 === Time Elapsed: 1.57 s ===
+
+=== 16:13:50.000 === Time Elapsed: 1.42 s ===
+
+=== 16:13:53.757 === Time Elapsed: 1.51 s ===
+
+=== 16:13:57.599 === Time Elapsed: 1.49 s ===
+
+=== 16:14:01.985 === Time Elapsed: 1.82 s ===
+
+=== 16:14:06.715 === Time Elapsed: 2.29 s ===
+
+=== 16:14:10.875 === Time Elapsed: 1.71 s ===
+
+=== 16:14:16.409 === Time Elapsed: 2.03 s ===
+
+=== 16:14:21.572 === Time Elapsed: 2.41 s ===
+
+=== 16:14:27.362 === Time Elapsed: 2.36 s ===
+
+=== 16:14:31.181 === Time Elapsed: 1.46 s ===
+
+=== 16:14:35.028 === Time Elapsed: 1.56 s ===
+
+=== 16:14:38.971 === Time Elapsed: 1.54 s ===
+
+=== 16:14:42.969 === Time Elapsed: 1.55 s ===
+
+=== 16:14:46.935 === Time Elapsed: 1.59 s ===
+
+=== 16:14:50.995 === Time Elapsed: 1.56 s ===
+
+=== 16:14:55.028 === Time Elapsed: 1.62 s ===
+
+=== 16:14:59.066 === Time Elapsed: 1.56 s ===
+
+=== 16:15:02.969 === Time Elapsed: 1.50 s ===
+
+=== 16:15:07.197 === Time Elapsed: 1.69 s ===
+
+=== 16:15:11.253 === Time Elapsed: 1.70 s ===
+
+=== 16:15:15.446 === Time Elapsed: 1.56 s ===
+
+=== 16:15:19.922 === Time Elapsed: 2.05 s ===
+
+=== 16:15:23.811 === Time Elapsed: 1.50 s ===
+
+=== 16:15:28.302 === Time Elapsed: 1.57 s ===
+
+=== 16:15:32.606 === Time Elapsed: 1.59 s ===
+
+=== 16:15:36.355 === Time Elapsed: 1.53 s ===
+
+=== 16:15:41.924 === Time Elapsed: 3.08 s ===
+
+=== 16:15:46.156 === Time Elapsed: 1.58 s ===
+
+=== 16:15:50.037 === Time Elapsed: 1.54 s ===
+
+=== 16:15:53.934 === Time Elapsed: 1.47 s ===
+
+=== 16:15:57.804 === Time Elapsed: 1.49 s ===
+
+=== 16:16:01.583 === Time Elapsed: 1.50 s ===
+
+=== 16:16:05.447 === Time Elapsed: 1.52 s ===
+
+=== 16:16:09.561 === Time Elapsed: 1.75 s ===
+
+=== 16:16:14.685 === Time Elapsed: 1.94 s ===
+
+=== 16:16:18.753 === Time Elapsed: 1.60 s ===
+
+=== 16:16:22.792 === Time Elapsed: 1.56 s ===
+
+=== 16:16:26.618 === Time Elapsed: 1.51 s ===
+
+=== 16:16:30.559 === Time Elapsed: 1.57 s ===
+
+=== 16:16:34.782 === Time Elapsed: 1.88 s ===
+
+=== 16:16:39.145 === Time Elapsed: 1.55 s ===
+
+=== 16:16:43.052 === Time Elapsed: 1.52 s ===
+
+=== 16:16:46.920 === Time Elapsed: 1.52 s ===
+
+=== 16:16:51.009 === Time Elapsed: 1.61 s ===
+
+=== 16:16:54.890 === Time Elapsed: 1.50 s ===
+
+=== 16:16:58.929 === Time Elapsed: 1.65 s ===
+
+=== 16:17:02.774 === Time Elapsed: 1.56 s ===
+
+=== 16:17:06.659 === Time Elapsed: 1.49 s ===
+
+=== 16:17:10.546 === Time Elapsed: 1.59 s ===
+
+=== 16:17:14.302 === Time Elapsed: 1.48 s ===
+
+=== 16:17:18.120 === Time Elapsed: 1.47 s ===
+
+=== 16:17:21.821 === Time Elapsed: 1.42 s ===
+
+=== 16:17:25.587 === Time Elapsed: 1.54 s ===
+
+=== 16:17:29.448 === Time Elapsed: 1.45 s ===
+
+=== 16:17:33.204 === Time Elapsed: 1.43 s ===
+
+=== 16:17:37.502 === Time Elapsed: 1.96 s ===
+
+=== 16:17:41.508 === Time Elapsed: 1.69 s ===
+
+=== 16:17:45.787 === Time Elapsed: 1.74 s ===
+
+=== 16:17:49.460 === Time Elapsed: 1.43 s ===
+
+=== 16:17:53.337 === Time Elapsed: 1.49 s ===
+
+=== 16:17:57.051 === Time Elapsed: 1.45 s ===
+
+=== 16:18:01.041 === Time Elapsed: 1.59 s ===
+
+=== 16:18:04.923 === Time Elapsed: 1.59 s ===
+
+=== 16:18:08.834 === Time Elapsed: 1.52 s ===
+
+=== 16:18:12.772 === Time Elapsed: 1.59 s ===
+
+=== 16:18:16.696 === Time Elapsed: 1.59 s ===
+
+=== 16:18:20.605 === Time Elapsed: 1.49 s ===
+
+=== 16:18:24.394 === Time Elapsed: 1.54 s ===
+
+=== 16:18:28.750 === Time Elapsed: 1.59 s ===
+
+=== 16:18:32.736 === Time Elapsed: 1.53 s ===
+
+=== 16:18:36.657 === Time Elapsed: 1.58 s ===
+
+=== 16:18:40.730 === Time Elapsed: 1.72 s ===
+
+=== 16:18:44.650 === Time Elapsed: 1.63 s ===
+
+=== 16:18:48.403 === Time Elapsed: 1.48 s ===
+
+=== 16:18:52.051 === Time Elapsed: 1.36 s ===
+
+=== 16:18:55.932 === Time Elapsed: 1.57 s ===
+
+=== 16:18:59.573 === Time Elapsed: 1.40 s ===
+
+=== 16:19:03.318 === Time Elapsed: 1.41 s ===
+
+=== 16:19:07.135 === Time Elapsed: 1.56 s ===
+
+=== 16:19:10.860 === Time Elapsed: 1.48 s ===
+
+=== 16:19:15.364 === Time Elapsed: 2.01 s ===
+
+=== 16:19:19.481 === Time Elapsed: 1.55 s ===
+
+=== 16:19:23.395 === Time Elapsed: 1.54 s ===
+
+=== 16:19:27.810 === Time Elapsed: 1.77 s ===
+
+=== 16:19:31.666 === Time Elapsed: 1.50 s ===
+
+=== 16:19:35.806 === Time Elapsed: 1.70 s ===
+
+=== 16:19:39.868 === Time Elapsed: 1.49 s ===
+
+=== 16:19:43.811 === Time Elapsed: 1.42 s ===
+
+=== 16:19:47.652 === Time Elapsed: 1.52 s ===
+
+=== 16:19:51.539 === Time Elapsed: 1.51 s ===
+
+=== 16:19:55.370 === Time Elapsed: 1.54 s ===
+
+=== 16:19:59.286 === Time Elapsed: 1.53 s ===
+
+=== 16:20:03.176 === Time Elapsed: 1.53 s ===
+
+=== 16:20:06.980 === Time Elapsed: 1.46 s ===
+
+=== 16:20:10.881 === Time Elapsed: 1.57 s ===
+
+=== 16:20:14.684 === Time Elapsed: 1.51 s ===
+
+=== 16:20:18.599 === Time Elapsed: 1.49 s ===
+
+=== 16:20:22.475 === Time Elapsed: 1.53 s ===
+
+=== 16:20:26.593 === Time Elapsed: 1.71 s ===
+
+=== 16:20:30.513 === Time Elapsed: 1.55 s ===
+
+=== 16:20:34.216 === Time Elapsed: 1.46 s ===
+
+=== 16:20:37.999 === Time Elapsed: 1.40 s ===
+
+=== 16:20:41.751 === Time Elapsed: 1.53 s ===
+
+=== 16:20:46.008 === Time Elapsed: 1.97 s ===
+
+=== 16:20:49.942 === Time Elapsed: 1.42 s ===
+
+=== 16:20:54.370 === Time Elapsed: 1.98 s ===
+
+=== 16:20:58.195 === Time Elapsed: 1.54 s ===
+
+=== 16:21:02.165 === Time Elapsed: 1.56 s ===
+
+=== 16:21:06.065 === Time Elapsed: 1.55 s ===
+
+=== 16:21:09.956 === Time Elapsed: 1.53 s ===
+
+=== 16:21:13.889 === Time Elapsed: 1.49 s ===
+
+=== 16:21:17.774 === Time Elapsed: 1.56 s ===
+
+=== 16:21:21.721 === Time Elapsed: 1.53 s ===
+
+=== 16:21:25.623 === Time Elapsed: 1.56 s ===
+
+=== 16:21:29.588 === Time Elapsed: 1.59 s ===
+
+=== 16:21:33.469 === Time Elapsed: 1.46 s ===
+
+=== 16:21:37.678 === Time Elapsed: 1.73 s ===
+
+=== 16:21:42.082 === Time Elapsed: 2.06 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.lateGameMove(homework.java:114)
+	at halmaGame.homework.main(homework.java:104)
+
+Output:
+
+

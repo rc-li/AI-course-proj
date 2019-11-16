@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 5;
+	private static int searchDepth = 3;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -154,14 +154,32 @@ public class homework {
 		}
 		
 		int[] pieceToMove = {pickBlock[0] + direction[0], pickBlock[1] + direction[1]};
+		ArrayList<int[]> potentialFurthurMoves = new ArrayList<int[]>();
+		int[] potentialRightMove = {pickBlock[0] + 1, pickBlock[1]};
+		int[] potentialDownMove = {pickBlock[0], pickBlock[1] + 1};
+		int[] potentialLeftMove = {pickBlock[0] - 1, pickBlock[1]};
+		int[] potentialUPMove = {pickBlock[0], pickBlock[1] - 1};
+		potentialFurthurMoves.add(potentialRightMove);
+		potentialFurthurMoves.add(potentialDownMove);
+		potentialFurthurMoves.add(potentialLeftMove);
+		potentialFurthurMoves.add(potentialUPMove);
 		
-//			check if pieceToMove is inside the camp
+//			check if pieceToMove, potentialRIght and potentialDOwn are inside the camp
 		boolean isInside = false;
+		boolean rightInside = false;
+		boolean downInside = false;
+		boolean leftInside = false;
+		boolean upInside = false;
 		if (state.colorUPlay.equals("WHITE")) {
 			for (int[] camp : blackCampLocations) {
 				if (Arrays.equals(camp, pieceToMove)) {
 					isInside = true;
-					break;
+				}
+				else if (Arrays.equals(camp, potentialRightMove)) {
+					rightInside = true;
+				}
+				else if (Arrays.equals(camp, potentialDownMove)) {
+					downInside = true;
 				}
 			}
 		}
@@ -169,17 +187,39 @@ public class homework {
 			for (int[] camp : whiteCampLocations) {
 				if (Arrays.equals(camp,pieceToMove)) {
 					isInside = true;
-					break;
+				}
+				else if (Arrays.equals(camp,potentialLeftMove)) {
+					leftInside = true;
+				}
+				else if (Arrays.equals(camp,potentialUPMove)) {
+					upInside = true;
 				}
 			}
 		}
-		
 		
 //		if pieceToMove is inside the camp, return the block move
 		if (isInside) {
 			int[][] ret = {{pickBlock[0] + direction[0], pickBlock[1] + direction[1]}, {pickBlock[0], pickBlock[1]}};
 			return ret;
 		}
+//		if pieceToMove is not inside the camp (the block reached margin), then check if the block is at the four golden spot
+		else if (rightInside) {
+			int[][] ret = {{pickBlock[0] + 1, pickBlock[1]}, {pickBlock[0], pickBlock[1]}};
+			return ret;
+		}
+		else if (downInside) {
+			int[][] ret = {{pickBlock[0], pickBlock[1] + 1}, {pickBlock[0], pickBlock[1]}};
+			return ret;
+		}
+		else if (leftInside) {
+			int[][] ret = {{pickBlock[0] - 1, pickBlock[1]}, {pickBlock[0], pickBlock[1]}};
+			return ret;
+		}
+		else if (upInside) {
+			int[][] ret = {{pickBlock[0], pickBlock[1] - 1}, {pickBlock[0],pickBlock[1]}};
+			return ret;
+		}
+//		if block is already at golden spot, then pull the minion closer, until in
 		else {
 			int[][] ret = {{pickMinion[0],pickMinion[1]},{pickMinion[0]-direction[0],pickMinion[1]-direction[1]}};
 			return ret;
@@ -337,21 +377,27 @@ public class homework {
 		}
 		state.v = Integer.MAX_VALUE;
 		ArrayList<State> states = actions(state, true, false, false);
-		for (int i = 0; i < states.size(); i++) {
-			State nextState = states.get(i);
-			State retState = maxValue(nextState, a, b);
-			double retV = retState.v;
-			state.v = Math.min(state.v, retV);
-			if (state.v <= a) {
-				for (State state2 : states) {
-					if (state2.v == state.v) {
-						state.child = state2;
-						return state;
-					}
+		State minState = states.get(0);
+		double minEval = minState.eval_value;
+		for (State s : states) {
+			if (s.eval_value < minEval) {
+				minState = s;
+				minEval = s.eval_value;
+			}
+		}
+		State nextState = minState;
+		State retState = maxValue(nextState, a, b);
+		double retV = retState.v;
+		state.v = Math.min(state.v, retV);
+		if (state.v <= a) {
+			for (State state2 : states) {
+				if (state2.v == state.v) {
+					state.child = state2;
+					return state;
 				}
 			}
-			b = Math.min(b, state.v);
 		}
+		b = Math.min(b, state.v);
 		for (State state2 : states) {
 			if (state2.v == state.v) {
 				state.child = state2;
@@ -493,6 +539,15 @@ public class homework {
 							} else if (state.colorUPlay.equals("BLACK")) {
 								newState.eval_value = state.eval_value
 										+ ((neighborX + neighborY) - (currentX + currentY));
+							}
+						}
+						else {
+							if (state.colorUPlay.equals("WHITE")) {
+								newState.eval_value = state.eval_value
+										+ ((neighborX + neighborY) - (currentX + currentY));
+							} else if (state.colorUPlay.equals("BLACK")) {
+								newState.eval_value = state.eval_value
+										- ((neighborX + neighborY) - (currentX + currentY));
 							}
 						}
 						newState.currentX = neighborX;
@@ -659,6 +714,15 @@ public class homework {
 								+ ((jumpX + jumpY) - (currentX + currentY));
 					}
 				}
+				else {
+					if (state.colorUPlay.equals("WHITE")) {
+						newState.eval_value = state.eval_value
+								+ ((neighborX + neighborY) - (currentX + currentY));
+					} else if (state.colorUPlay.equals("BLACK")) {
+						newState.eval_value = state.eval_value
+								- ((neighborX + neighborY) - (currentX + currentY));
+					}
+				}
 				newState.currentX = jumpX;
 				newState.currentY = jumpY;
 				newState.jumpX = -100;
@@ -761,6 +825,15 @@ public class homework {
 								newState.eval_value = state.eval_value - ((jumpX + jumpY) - (currentX + currentY));
 							} else if (state.colorUPlay.equals("BLACK")) {
 								newState.eval_value = state.eval_value + ((jumpX + jumpY) - (currentX + currentY));
+							}
+						}
+						else {
+							if (state.colorUPlay.equals("WHITE")) {
+								newState.eval_value = state.eval_value
+										+ ((neighborX + neighborY) - (currentX + currentY));
+							} else if (state.colorUPlay.equals("BLACK")) {
+								newState.eval_value = state.eval_value
+										- ((neighborX + neighborY) - (currentX + currentY));
 							}
 						}
 
