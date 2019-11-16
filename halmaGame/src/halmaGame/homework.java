@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class homework {
 	private static int jumps = 0;
-	private static int searchDepth = 1;
+	private static int searchDepth = 5;
 	private static String whichPlayer;
 	private static int[][] blackCampLocations = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 0, 1 }, { 1, 1 },
 			{ 2, 1 }, { 3, 1 }, { 4, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 0, 3 }, { 1, 3 }, { 2, 3 },
@@ -96,7 +96,7 @@ public class homework {
 	public static void main(String args[]) throws FileNotFoundException, CloneNotSupportedException {
 		State state = readInput();
 		Scan scan = lateGameScan(state);
-		if (scan.outsiders.size() > 2) {
+		if (scan.outsiders.size() > 4) {
 			State output = abSearch(state);
 			output(output);
 		}
@@ -116,12 +116,20 @@ public class homework {
 		double minDistance = Point.distance(pickMinion[0], pickMinion[1], pickBlock[0], pickBlock[1]);
 		double distance;
 		int[] block = new int[2];
-		for (int i = 0; i < scan.blocks.size(); i++) {
-			block = scan.blocks.get(i);
-			distance = Point.distance(pickMinion[0], pickMinion[1], block[0], block[1]);
-			if (distance < minDistance) {
-				pickBlock = block;
+		int[] minion = new int[2];
+		
+		for (int i = 0; i < scan.outsiders.size(); i++) {
+			minion = scan.outsiders.get(i);
+			for (int i1 = 0; i1 < scan.blocks.size(); i1++) {
+				block = scan.blocks.get(i1);
+				distance = Point.distance(minion[0], minion[1], block[0], block[1]);
+				if (distance < minDistance) {
+					pickBlock = block;
+					pickMinion = minion;
+					minDistance = distance;
+				}
 			}
+			
 		}
 //			determine direction to move the block
 		int[] direction = new int[2];
@@ -490,7 +498,7 @@ public class homework {
 						newState.currentX = neighborX;
 						newState.currentY = neighborY;
 						if (true) {
-							System.out.println("\n minion " + i + " currentX is " + currentX + " currentY is "+ currentY);
+//							System.out.println("\n minion " + i + " currentX is " + currentX + " currentY is "+ currentY);
 						}
 						newState.depthSearched++;
 						newState.moveMode = 'E';
@@ -511,16 +519,16 @@ public class homework {
 							if (campEmpty == false && needMoveAway == false) {
 								if (crossingBorder) {
 									states.add(newState);
-									System.out.println("minion " + i + " can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+//									System.out.println("minion " + i + " can E cross border from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 								}
 							} else if (needMoveAway) {
 								if (awayMove) {
 									states.add(newState);
-									System.out.println("minion " + i + " can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+//									System.out.println("minion " + i + " can E move away from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 								}
 							} else {
 								states.add(newState);
-								System.out.println("minion " + i + " can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
+//								System.out.println("minion " + i + " can E outside from " + currentX + "," + currentY + " to " + neighborX + "," + neighborY + " with eval value " + df.format(newState.eval_value));
 							}
 						}
 					}
@@ -675,16 +683,16 @@ public class homework {
 					if (campEmpty == false && needMoveAway == false) {
 						if (crossingBorder) {
 							states.add(newState);
-							System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//							System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 						}
 					} else if (needMoveAway) {
 						if (awayMove) {
 							states.add(newState);
-							System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//							System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 						}
 					} else {
 						states.add(newState);
-						System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//						System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 					}
 				}
 
@@ -838,16 +846,16 @@ public class homework {
 							if (campEmpty == false && needMoveAway == false) {
 								if (crossingBorder) {
 									states.add(newState);
-									System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//									System.out.println("minion " + state.minionExamined + " can J cross border from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 								}
 							} else if (needMoveAway) {
 								if (awayMove) {
 									states.add(newState);
-									System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//									System.out.println("minion " + state.minionExamined + " can J move away from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 								}
 							} else {
 								states.add(newState);
-								System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
+//								System.out.println("minion " + state.minionExamined + " can J outside play from " + state.jumpStartX + "," + state.jumpStartY + " to " + jumpX + "," + jumpY + " with eval value " + df.format(newState.eval_value));
 							}
 						}
 
