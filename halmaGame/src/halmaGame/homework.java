@@ -195,16 +195,16 @@ public class homework {
 			return ret;
 		}
 //	if pieceToMove is not inside the camp (the block reached margin), then check if the block is at the four golden spot
-		else if (rightInside) {
+		else if (rightInside && state.board[pickBlock[1]][pickBlock[0]+1] != '.') {
 			int[][] ret = { { pickBlock[0] + 1, pickBlock[1] }, { pickBlock[0], pickBlock[1] } };
 			return ret;
-		} else if (downInside) {
+		} else if (downInside && state.board[pickBlock[1]+1][pickBlock[0]] != '.') {
 			int[][] ret = { { pickBlock[0], pickBlock[1] + 1 }, { pickBlock[0], pickBlock[1] } };
 			return ret;
-		} else if (leftInside) {
+		} else if (leftInside && state.board[pickBlock[1]][pickBlock[0]-1] != '.') {
 			int[][] ret = { { pickBlock[0] - 1, pickBlock[1] }, { pickBlock[0], pickBlock[1] } };
 			return ret;
-		} else if (upInside) {
+		} else if (upInside && state.board[pickBlock[1]-1][pickBlock[0]] != '.') {
 			int[][] ret = { { pickBlock[0], pickBlock[1] - 1 }, { pickBlock[0], pickBlock[1] } };
 			return ret;
 		}
