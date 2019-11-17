@@ -1942,3 +1942,171 @@ Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of b
 Output:
 
 
+=== 19:36:45.066 === Time Elapsed: 2.56 s ===
+
+=== 19:36:49.408 === Time Elapsed: 1.78 s ===
+
+=== 19:36:55.142 === Time Elapsed: 1.81 s ===
+
+=== 19:37:00.736 === Time Elapsed: 2.92 s ===
+
+=== 19:37:05.056 === Time Elapsed: 1.68 s ===
+
+=== 19:37:09.218 === Time Elapsed: 1.72 s ===
+
+=== 19:37:13.553 === Time Elapsed: 1.69 s ===
+
+=== 19:37:18.374 === Time Elapsed: 2.23 s ===
+
+=== 19:37:23.096 === Time Elapsed: 1.97 s ===
+
+=== 19:37:27.752 === Time Elapsed: 1.85 s ===
+
+=== 19:37:32.938 === Time Elapsed: 2.11 s ===
+
+=== 19:37:38.002 === Time Elapsed: 2.32 s ===
+
+=== 19:37:42.813 === Time Elapsed: 2.17 s ===
+
+=== 19:37:47.251 === Time Elapsed: 1.70 s ===
+
+=== 19:37:52.326 === Time Elapsed: 2.31 s ===
+
+=== 19:37:56.599 === Time Elapsed: 1.80 s ===
+
+=== 19:38:02.165 === Time Elapsed: 2.94 s ===
+
+=== 19:38:08.044 === Time Elapsed: 2.59 s ===
+
+=== 19:38:13.457 === Time Elapsed: 1.87 s ===
+
+=== 19:38:18.025 === Time Elapsed: 2.08 s ===
+
+=== 19:38:22.533 === Time Elapsed: 1.92 s ===
+
+=== 19:38:27.610 === Time Elapsed: 2.40 s ===
+
+=== 19:38:32.584 === Time Elapsed: 2.16 s ===
+
+=== 19:38:37.440 === Time Elapsed: 1.94 s ===
+
+=== 19:38:42.135 === Time Elapsed: 1.91 s ===
+
+=== 19:38:46.720 === Time Elapsed: 1.89 s ===
+
+=== 19:38:51.440 === Time Elapsed: 2.00 s ===
+
+=== 19:38:56.101 === Time Elapsed: 1.94 s ===
+
+=== 19:39:00.621 === Time Elapsed: 1.88 s ===
+
+=== 19:39:05.113 === Time Elapsed: 1.88 s ===
+
+=== 19:39:09.416 === Time Elapsed: 1.76 s ===
+
+=== 19:39:13.607 === Time Elapsed: 1.65 s ===
+
+=== 19:39:18.073 === Time Elapsed: 1.98 s ===
+
+=== 19:39:24.159 === Time Elapsed: 3.03 s ===
+
+=== 19:39:32.073 === Time Elapsed: 3.83 s ===
+
+=== 19:39:39.025 === Time Elapsed: 2.97 s ===
+
+=== 19:39:43.517 === Time Elapsed: 1.97 s ===
+
+=== 19:39:49.115 === Time Elapsed: 2.19 s ===
+
+=== 19:39:55.003 === Time Elapsed: 2.44 s ===
+
+=== 19:39:59.911 === Time Elapsed: 1.83 s ===
+
+=== 19:40:04.776 === Time Elapsed: 1.98 s ===
+
+=== 19:40:10.566 === Time Elapsed: 2.23 s ===
+
+=== 19:40:15.322 === Time Elapsed: 1.78 s ===
+
+=== 19:40:19.828 === Time Elapsed: 1.72 s ===
+
+=== 19:40:24.743 === Time Elapsed: 2.02 s ===
+
+=== 19:40:28.985 === Time Elapsed: 1.68 s ===
+
+=== 19:40:33.669 === Time Elapsed: 1.97 s ===
+
+=== 19:40:39.332 === Time Elapsed: 2.18 s ===
+
+=== 19:40:43.794 === Time Elapsed: 1.96 s ===
+
+=== 19:40:49.101 === Time Elapsed: 2.45 s ===
+
+=== 19:40:53.648 === Time Elapsed: 1.81 s ===
+
+=== 19:40:58.089 === Time Elapsed: 1.97 s ===
+
+=== 19:41:03.166 === Time Elapsed: 2.06 s ===
+
+=== 19:41:08.369 === Time Elapsed: 1.72 s ===
+
+=== 19:41:13.361 === Time Elapsed: 2.43 s ===
+
+=== 19:41:17.947 === Time Elapsed: 1.80 s ===
+
+=== 19:41:22.774 === Time Elapsed: 2.09 s ===
+
+=== 19:41:26.932 === Time Elapsed: 1.59 s ===
+
+=== 19:41:30.996 === Time Elapsed: 1.57 s ===
+
+=== 19:41:35.104 === Time Elapsed: 1.67 s ===
+
+=== 19:41:39.670 === Time Elapsed: 1.60 s ===
+
+=== 19:41:44.118 === Time Elapsed: 1.80 s ===
+
+=== 19:41:48.408 === Time Elapsed: 1.61 s ===
+
+=== 19:42:12.242 === Time Elapsed: 1.52 s ===
+
+=== 19:42:16.245 === Time Elapsed: 1.47 s ===
+
+=== 19:42:20.153 === Time Elapsed: 1.53 s ===
+
+=== 19:42:24.194 === Time Elapsed: 1.45 s ===
+
+=== 19:42:28.262 === Time Elapsed: 1.64 s ===
+
+=== 19:42:32.275 === Time Elapsed: 1.52 s ===
+
+=== 19:42:37.352 === Time Elapsed: 1.97 s ===
+
+=== 19:42:42.025 === Time Elapsed: 1.87 s ===
+
+=== 19:42:46.349 === Time Elapsed: 1.88 s ===
+
+=== 19:42:50.992 === Time Elapsed: 1.99 s ===
+
+=== 19:42:55.072 === Time Elapsed: 1.71 s ===
+
+=== 19:42:59.391 === Time Elapsed: 1.61 s ===
+
+=== 19:43:10.302 === Time Elapsed: 1.82 s ===
+
+=== 19:43:14.558 === Time Elapsed: 1.69 s ===
+
+=== 19:43:18.637 === Time Elapsed: 1.47 s ===
+Error:
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.get(ArrayList.java:458)
+	at halmaGame.homework.lateGameMove(homework.java:114)
+	at halmaGame.homework.main(homework.java:104)
+
+Output:
+
+
